@@ -1,0 +1,36 @@
+{% block title %}
+    The Experience Machine
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    If given the option, would you choose to plug into an experience machine that could provide you with an entirely
+    immersive, simulated reality where you can experience any desirable scenario, despite not being real?
+    Keep in mind that while plugged in, you would never be aware that you are in the experience machine and would
+    believe that the simulated reality is real.
+</p>
+<p>
+    Suppose there was an experience machine that would give you <i>any</i> experience you desired (eating good food,
+    having a successful career, making meaningful connections, etc.).
+    While in the machine, you would not know that you are in it; you would think that what you are experiencing is
+    actually happening.
+</p>
+
+{{ formfields }}
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

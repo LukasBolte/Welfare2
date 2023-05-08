@@ -1,0 +1,39 @@
+{% block title %}
+    Which books and bonus should Frank get?
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    Next, you make several choices again involving Frank’s bonus, filling in a table like the one
+    below.
+    For each row, we ask you to choose between the left and right options.
+</p>
+
+[screenshot table]
+<p>
+    We assume that once you choose the right option for one row, you will choose the right option for all rows below.
+    You will only need to choose the row in which you switch from preferring the left option to preferring the right
+    option.
+    You can also choose the left or right option in all rows.
+</p>
+<p>
+    Once you’re confident you understand how the table works, continue to give your answers.
+</p>
+
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

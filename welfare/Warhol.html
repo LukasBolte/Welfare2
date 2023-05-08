@@ -1,0 +1,36 @@
+{% block title %}
+    Andy Warhol
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    Hundreds of Andy Warhol fakes, and one original drawing worth $20k, sold for $250 each.
+    An art collective purchased an original Warhol drawing and copied it 999 times.
+    The copies are carefully created so that not even their creators can tell them apart from the original drawing.
+    They then mixed the original together with the copies and sold the 1000 drawings.
+</p>
+
+<p>Please watch the video (1min 1sec) the art collective made.</p>
+
+[video]
+
+<p>You can read more about this story <a href="https://moforgeries.org/" target="_blank">here</a>.</p>
+
+{{ formfields }}
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

@@ -8,35 +8,36 @@
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
 
-<p>
-    On this page, the options involve Frank’s bonus.
-</p>
+        <div class="col-md-12 text-center">
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Review Instructions
+</button>
+    </div>
+
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Case 1: In this case, we WILL NOT tell Frank whether the books he got are the ones with
-    the original or fake notes</h5>
+    <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Frank whether the books he got are the
+ones with the original or fake notes</h5>
 <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-      {{ formfield "ES_learn2" }}
+      {{ formfield "ES_learn3" }}
 
-      {{ formfield "ES_wtp2" }}
+      <p>Please tell us which option you prefer by clicking the table below.</p>
+      [table]
   </div>
 </div>
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Case 2: In this case, we WILL tell Frank whether the books he got are the ones with
-    the original or fake notes</h5>
+    <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Frank whether the books he got are the
+ones with the original or fake notes</h5>
 <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-      {{ formfield "Trad_learn2" }}
+      {{ formfield "ES_learn3" }}
 
-      {{ formfield "Trad_wtp2" }}
+      <p>Please tell us which option you prefer by clicking the table below.</p>
+      [table]
   </div>
 </div>
-
-<p>
-    When you are ready, click "Next."
-</p>
 
 
 

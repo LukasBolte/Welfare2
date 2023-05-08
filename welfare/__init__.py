@@ -59,6 +59,10 @@ def learn():
                                      'original handwritten notes or the fake ones?'
                                )
 
+def why():
+    return models.LongStringField(blank=True,
+                                  label="Why? Answer in approximately 1-2 sentences.")
+
 
 class Player(BasePlayer):
     ES_wtp = make_field(1)
@@ -69,6 +73,37 @@ class Player(BasePlayer):
     Trad_wtp2 = make_field(2)
     ES_learn2 = learn()
     Trad_learn2 = learn()
+    ES_wtp3 = models.IntegerField(blank=True)
+    Trad_wtp3 = models.IntegerField(blank=True)
+    ES_learn3 = learn()
+    Trad_learn3 = learn()
+    experience = models.BooleanField(blank=True,
+                                     label="<strong>Would you go into the machine?</strong>",
+                                     choices=[
+                                         [True, 'Yes'],
+                                         [False, 'No.']
+                                     ],
+                                     )
+    experienceWhy = why()
+    arkansas = models.BooleanField(blank=True,
+                                   label="<strong>Does the government raising taxes to provide financial relief make "
+                                         "John better or worse off?</strong>",
+                                   choices=[
+                                       [True, 'Better Off'],
+                                       [False, 'Worse Off.']
+                                   ],
+                                   )
+    arkansasWhy = why()
+    warhol = models.BooleanField(blank=True,
+                                 label="<strong> Someone got the original Andy Warhol drawing without knowing about it."
+                                       " Is this person better off by getting the original one instead of a copy?"
+                                       "</strong>",
+                                 choices=[
+                                     [True, 'Yes'],
+                                     [False, 'No.']
+                                 ],
+                                 )
+    warholWhy = why()
     cq1 = models.IntegerField(blank=True,
                               choices=[
                                   [1, 'Two economics books, either the two with the original handwritten notes by the '
@@ -176,6 +211,29 @@ class Cases2(Page):
     form_fields = ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
 
 
+class Cases3Explain(Page):
+    pass
+
+
+class Cases3(Page):
+    form_model = 'player'
+    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3']
+
+
+class Experience(Page):
+    form_model = 'player'
+    form_fields = ['experience', 'experienceWhy']
+
+
+class Arkansas(Page):
+    form_model = 'player'
+    form_fields = ['arkansas', 'arkansasWhy']
+
+
+class Warhol(Page):
+    form_model = 'player'
+    form_fields = ['warhol', 'warholWhy']
+
 
 
 page_sequence = [
@@ -186,5 +244,10 @@ page_sequence = [
     CQ,
     PostCQs,
     Cases,
-    Cases2
+    Cases2,
+    Cases3Explain,
+    Cases3,
+    Experience,
+    Arkansas,
+    Warhol
 ]

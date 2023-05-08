@@ -1,0 +1,31 @@
+{% block title %}
+    Flood in Arkansas
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    A small town in Arkansas experiences massive flooding, leaving many families homeless.
+    To provide financial relief to the impacted families, the government raises taxes, including a $100 levy on John.
+    In general, John dislikes paying taxes, but he would gladly contribute $100 to the relief effort if he knew about
+    the flood.
+    However, he never learns about it.
+</p>
+
+{{ formfields }}
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
