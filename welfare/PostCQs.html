@@ -1,0 +1,47 @@
+{% block title %}
+Well Done!
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    On the next pages, we will ask you we will ask you twelve questions to determine which books Frank gets.
+</p>
+<p>
+    For example, one of them will be: <i>which book do you prefer Frank to receive? The ones with the original or fake
+    notes?</i>
+    There are other questions where we add a bonus to one of the options.
+    You can click on this button to see all questions [questions in button].
+</p>
+<p>
+    We will randomly pick one of the questions and implement whatever option you choose.
+    This means that any question can be the one that determines what Frank gets so please answer
+    them carefully.
+</p>
+
+<!--    <p>-->
+<!--    In this study, you will make several decisions.-->
+<!--        One decision will be randomly chosen to count towards your bonus payoff.-->
+<!--    </p>-->
+
+<p>
+    When you are ready, click "Next."
+</p>
+
+
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

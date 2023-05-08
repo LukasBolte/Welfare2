@@ -26,11 +26,103 @@ class Group(BaseGroup):
     pass
 
 
+def make_field(case):
+    if case == 1:
+        label = '<strong>Which book do you prefer Frank to receive in this case?</strong>'
+        choices = [
+            [1, 'Original notes.'],
+            [2, 'Fake notes.'],
+            [3, 'I am indifferent']
+        ]
+    else:
+        label = '<strong>Which book and bonus do you prefer Frank to receive in this case?</strong>'
+        choices = [
+            [1, 'Original notes.'],
+            [2, 'Fake notes + $1.'],
+            [3, 'I am indifferent']
+        ]
+    return models.IntegerField(blank=True,
+                               choices=choices,
+                               widget=widgets.RadioSelectHorizontal,
+                               label=label
+                               )
+
+
+def learn():
+    return models.IntegerField(blank=True,
+                               choices=[
+                                   [1, 'Yes, they will learn.'],
+                                   [2, 'No, they will not learn.'],
+                               ],
+                               widget=widgets.RadioSelectHorizontal,
+                               label='In this case, will Frank ever learn whether they have the books with the '
+                                     'original handwritten notes or the fake ones?'
+                               )
+
+
 class Player(BasePlayer):
-    pass
+    ES_wtp = make_field(1)
+    Trad_wtp = make_field(1)
+    ES_learn = learn()
+    Trad_learn = learn()
+    ES_wtp2 = make_field(2)
+    Trad_wtp2 = make_field(2)
+    ES_learn2 = learn()
+    Trad_learn2 = learn()
+    cq1 = models.IntegerField(blank=True,
+                              choices=[
+                                  [1, 'Two economics books, either the two with the original handwritten notes by the '
+                                      'famous authors or the two with the fake ones'],
+                                  [2, 'One book with original handwritten notes and one with fake ones.'],
+                                  [3, 'Nothing.']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='<strong>What will Frank receive?</strong>'
+                              )
+    cq2 = models.IntegerField(blank=True,
+                              choices=[
+                                  [1, 'Yes'],
+                                  [2, 'No.']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='<strong>Does Frank love economics?</strong>'
+                              )
+    cq3 = models.IntegerField(blank=True,
+                              choices=[
+                                  [1, 'We will keep them for ourselves.'],
+                                  [2, 'We will return them to Professor Roth and Milgrom.'],
+                                  [3, 'We will destroy them.']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='<strong>What happens to the books we don’t give to Frank?'
+                                    '</strong>'
+                              )
+    cq4 = models.IntegerField(blank=True,
+                              choices=[
+                                  [1, 'Yes'],
+                                  [2, 'No.']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='<strong>s it possible to say which book has a fake note?</strong>'
+                              )
+    cq5 = models.IntegerField(blank=True,
+                              choices=[
+                                  [1, 'Only which books Frank receives.'],
+                                  [2, 'Only Frank’s surprise bonus.'],
+                                  [3, 'They determine which books Frank receives and his surprise bonus.']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='<strong>What do your answers determine?</strong>'
+                              )
+    for j in range(1, 6):
+        locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
+    del j
 
 
-##################################################################### PAGES ###########################################
+###############################################  FUNCTIONS   ###########################################################
+
+
+######################################################  PAGES   ########################################################
 class Welcome(Page):
     pass
 
@@ -39,8 +131,60 @@ class Consent(Page):
     pass
 
 
+class Instructions(Page):
+    pass
+
+
+class EconomicsFan(Page):
+    pass
+
+
+class CQ(Page):
+    form_model = 'player'
+    form_fields = ['cq1', 'cq2', 'cq3', 'cq4', 'cq5']
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            solutions = dict(cq1=1,
+                             cq2=1,
+                             cq3=2,
+                             cq4=2,
+                             cq5=3
+                             )
+            error_messages = dict()
+            for field_name in solutions:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please, answer the question.'
+                elif values[field_name] != solutions[field_name]:
+                    error_messages[field_name] = 'Please, correct your answer!'
+                    name = 'player.' + str(field_name) + '_mistakes'
+                    exec("%s += 1" % name)
+            return error_messages
+
+
+class PostCQs(Page):
+    pass
+
+
+class Cases(Page):
+    form_model = 'player'
+    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn']
+
+class Cases2(Page):
+    form_model = 'player'
+    form_fields = ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
+
+
+
 
 page_sequence = [
     Welcome,
-    Consent
+    Consent,
+    Instructions,
+    EconomicsFan,
+    CQ,
+    PostCQs,
+    Cases,
+    Cases2
 ]
