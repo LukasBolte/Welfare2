@@ -1,0 +1,45 @@
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block content %}
+
+{{ if session.config.development }}
+    <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
+{{ endif }}
+
+<p>
+    You are invited to participate in a <b>research study</b> run by Stanford University.
+</p>
+
+<p>
+    Most participants complete this study in <b>{{ C.MIN_TIME }} to {{ C.MAX_TIME }} minutes</b>.
+    If you do not complete the study, or if it times out on you, we will not be able to pay you.
+</p>
+
+<p>
+    If you complete the study, you will receive a <b>{{ session.config.participation_fee }}
+    payment</b>.
+<!--    You may earn an additional <b>bonus</b> of up to {{ C.MAX_BONUS }} as determined in the study.-->
+</p>
+
+<p>
+    On the next page, you will see a consent form.
+    Please review it carefully before deciding whether you want to participate in this study.
+</p>
+
+<p>
+    When ready, click "Next" to read the consent form.
+</p>
+
+<button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
