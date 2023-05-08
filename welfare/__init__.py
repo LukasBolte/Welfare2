@@ -39,8 +39,17 @@ class Consent(Page):
     pass
 
 
+class Instructions(Page):
+    pass
+
+
+class EconomicsFan(Page):
+    pass
+
+
 
 page_sequence = [
     Welcome,
-    Consent
+    Consent,
+    Instructions
 ]
