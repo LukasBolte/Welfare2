@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-control" content="no-cache">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <! –– include CSS ––>
+  <style>
+		.orange{
+		  background-color: #FFCF9E;
+	  	}
+	  	.darkorange{
+		  background-color: orange;
+	  	}
+	</style>
+</head>
+<body>
+
+
+<! –– include the next lines in your page ––> 
+<div id="altruism_game"></div>
+<div id="hidden_fields_altruism_game"></div>
+<! –– END: inclusion ––>
+
+<button id="id_next_button" type="button" class="btn btn-primary" style="display:none">Continue</button>
+
+<! –– include the next 3 scripts ––> 
+<script>
+	var charityHeader="Donation for Make-A-Wish Foundation";
+	var selfHeader="Bonus Payment for You";
+	var charityPayout=200;
+	var stepSize=25;
+	var varname="altruismGame"; //variable name on oTree 
+</script>
+<script src="altruism.js"></script>
+<! –– END script inclusion ––> 
+</body>
