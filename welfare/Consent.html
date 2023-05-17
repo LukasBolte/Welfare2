@@ -1,4 +1,7 @@
-{{ block title }}Consent{{ endblock }}
+{{ block title }}
+Consent
+{{ endblock }}
+
 {{ block content }}
 
 {{ if session.config.development }}
@@ -10,23 +13,19 @@
         You are asked to take part in a research study.
     </li>
     <li>
-        If you choose to be in the study, you will answer questions that will help us learn more about what
-        factors influence individual decisions and behavior.
+        If you choose to be in the study, you will answer questions that will help us learn more about what factors influence individual decisions and behavior. 
     </li>
       <li>
         Most participants complete this study in {{ C.MIN_TIME }} to {{ C.MAX_TIME }} minutes.
     </li>
     <li>
         If you successfully complete the study, you will receive a {{ session.config.participation_fee }} payment.
-<!--        You may earn an additional bonus as determined in the study.-->
     </li>
     <li>
-        All payments and procedures will be implemented in exactly the manner they are described in the study
-        instructions and on the Prolific platform.
+        All payments and procedures will be implemented in exactly the manner they are described in the study instructions and on the Prolific platform.
     </li>
     <li>
-        You may stop the study at any time, but you will only get paid the full amount if you successfully complete the
-        study.
+        You may stop the study at any time, but you will only get paid the full amount if you successfully complete the study.
     </li>
     <li>
         The study is de-identified, and no one will be able to link your answers back to you.
@@ -36,22 +35,15 @@
         We cannot and do not promise or guarantee that you will receive any benefits from participating in this study.
     </li>
     <li>
-        Questions, Concerns, or Complaints: If you have any questions, concerns or complaints about this research study,
-        its procedures, risks and benefits, contact Gonzalo Arrieta,
-        <a href="mailto:garrieta@stanford.edu" target="_top">garrieta@stanford.edu</a>, or
-        Muriel Niederle, <a href="mailto:niederle@stanford.edu" target="_top">niederle@stanford.edu</a>.
+        Questions, Concerns, or Complaints: If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, contact Gonzalo Arrieta, <a href="mailto:garrieta@stanford.edu" target="_top">garrieta@stanford.edu</a>, or Muriel Niederle, <a href="mailto:niederle@stanford.edu" target="_top">niederle@stanford.edu</a>.
     </li>
     <li>
         This study runs under IRB protocol 44866.
     </li>
     <li>
-        If you have questions about your rights as a research participant or are not satisfied with how this research is
-        being conducted, you may contact the Stanford University IRB at <a
-            href="mailto:irb2-manager@lists.stanford.edu" target="_top">irb2-manager@lists.stanford.edu</a> to speak to
-        someone independent of the research team.
+        If you have questions about your rights as a research participant or are not satisfied with how this research is being conducted, you may contact the Stanford University IRB at <a href="mailto:irb2-manager@lists.stanford.edu" target="_top">irb2-manager@lists.stanford.edu</a> to speak to someone independent of the research team.
     </li>
 </ul>
-
 <p>
     Being in this study is voluntary.
     Please exit the webpage if you do not want to participate.
@@ -64,16 +56,6 @@
 <button type="button" class="btn btn1 btn-primary" onclick="proceed()">Yes, I Agree</button>
 <button style="float: right" class="btn btn-primary btn-large" disabled id="id_next_button">Next</button>
 
-
-<script>
-function proceed(){
-	y = document.getElementById("id_next_button")
-	y.removeAttribute("disabled");
-	}
-</script>
-
-
-
 {% endblock %}
 
 {% block styles %}
@@ -81,5 +63,10 @@ function proceed(){
 {% endblock %}
 
 {% block scripts %}
-
+<script>
+    function proceed(){
+        y = document.getElementById("id_next_button")
+        y.removeAttribute("disabled");
+    }
+</script>
 {% endblock %}
