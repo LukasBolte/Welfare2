@@ -1,5 +1,5 @@
 {% block title %}
-The economics-fan
+We are giving a present to someone!
 {% endblock %}
 
 {% block content %}
@@ -8,42 +8,76 @@ The economics-fan
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
 
-<p>
-    The questions we will ask you to answer are going to involve another person.
-    We call him Frank to preserve anonymity.
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="book-container">
+                <div class="text-center">Here are the two books</div>
+            
+                <img src="{% static 'img/Discovering.jpg' %}"  alt="Book 1" class="img-fluid book-image">
+                <img src="{% static 'img/Discovering.jpg' %}" alt="Book 2" class="img-fluid book-image">
+            </div>
+        <p>
+            The questions we will ask you to answer involve another person. His name is Frank.
+        </p>
+        
+        <p>
+            Frank loves economics, and we are going to give him a present!
+        </p>
+        
+        <p>
+            He is going to get two books by two Nobel laureates in economics—Professors
+            <a href="https://en.wikipedia.org/wiki/Alvin_E._Roth" target="_blank">Alvin Roth</a> and
+            <a href="https://en.wikipedia.org/wiki/Paul_Milgrom" target="_blank">Paul Milgrom</a> (you can click each of their
+            names to open their Wikipedia page).
+            Professors Roth and Milgrom are professors at our university and have agreed to help with the study.
+        </p>
 
-<p>
-    Frank loves economics, and we are going to give him a present!
-</p>
+        <p>
+          Frank has already read some of their work and told us he has great admiration for them.
+        </p>
 
-<p>
-    He is going to get two books by two Nobel laureates in economics—Professors
-    <a href="https://en.wikipedia.org/wiki/Alvin_E._Roth" target="_blank">Alvin Roth</a> and
-    <a href="https://en.wikipedia.org/wiki/Paul_Milgrom" target="_blank">Paul Milgrom</a> (you can click each of their
-    names to open their Wikipedia page).
-    Professors Roth and Milgrom are professors at our university and have agreed to help with the study.
-</p>
+        <p>
+          The two books come with handwritten notes. But here is the twist! We have two copies of each of these books. One where the notes are from the famous authors themselves (Profs. Roth and Milgrom) and one where the notes are fake, written by someone excellent at copying handwriting.
+        </p>
 
-<p>
-    Here are the two books:
-</p>
-[Pictures of the cover of the two books: who gets what and why + Discovering prices]
+        <p>
+          The fake versions of the handwritten notes are indistinguishable from the original ones. Professors Roth and Milgrom themselves could not tell which is which!
+        </p>
 
-<p>
-    Frank has already read some of their work and told us he has great admiration for them.
-</p>
-<p>
-    The two books come with handwritten notes.
-    But here is the twist! We have two copies of each of these books.
-    One where the notes are from the famous authors themselves (Profs. Roth and Milgrom) and one where the notes are
-    fake, written by someone excellent at copying handwriting.
-</p>
+        <div class="video-container">
+            <div class="text-center">Here is a video of the professors writing the notes</div>
+        
+            <img src="{% static 'img/Discovering.jpg' %}"  alt="Book 1" class="img-fluid book-image">
+            <img src="{% static 'img/Discovering.jpg' %}" alt="Book 2" class="img-fluid book-image">
+        </div>
+        <p>
+          Frank will receive two books, either the two with the original handwritten notes or the two with the fake ones. We will return the two books that we do not give to Frank back to Professors Roth and Milgrom. They will never know whether the books they get have the fake or the original notes in them.
+        </p>
 
+        <p>
+          In addition to the books, Frank may also receive a surprise bonus. The answers you give will determine: - which two books (original or fake) he receives - the surprise bonus.
+        </p>
+
+        <p>
+            When you are ready, click "Next."
+        </p>
+        
+        
+        <button style="float: right" class="btn btn-primary btn-large">Next</button>
+        
+      </div>
+      
+      
+      </div>
+    </div>
+  </div>
+
+<!-- 
 <p>
     The fake versions of the handwritten notes are indistinguishable from the original ones.
     Professors Roth and Milgrom themselves could not tell which is which!
-</p>
+</p> --> 
 
 <!--[Pictures of the two handwritten notes, so 2x2 pictures with ‘original’ and ‘fake’ headers +-->
 <!--GIF (video/picture of them signing, equivalent with copier)-->
@@ -55,7 +89,7 @@ The economics-fan
 <!--We buy 6 copies and have them handwritten two copies each, and then we decide what to do.-->
 <!--Plan A is to copy ourselves and Plan B.]-->
 
-<p>
+<!-- <p>
     Frank will receive two books, either the two with the original handwritten notes or the two with the fake ones.
     We will return the two books that we do not give to Frank back to Professors Roth and Milgrom.
     They will never know whether the books they get have the fake or the original notes in them.
@@ -64,17 +98,41 @@ The economics-fan
     In addition to the books, Frank may also receive a surprise bonus.
     The answers you give will determine: - which two books (original or fake) he receives - the surprise bonus
 </p>
-
-<p>
-    When you are ready, click "Next."
-</p>
-
-
-<button style="float: right" class="btn btn-primary btn-large">Next</button>
+ -->
 
 {% endblock %}
 
 {% block styles %}
+
+<style>
+
+    .container {
+      padding: 0; /* Remove padding */
+    }
+    .video-container {
+        float: left;
+        width: 50%;
+        margin: 0px 10px 10px 0;
+        
+    }
+    .book-container {
+        float: right;
+        width: 35%;
+        margin: 0 0 10px 10px;
+    }
+    .book-image {
+      width: 49%; /* Adjust image width */
+      /* float: right; */
+      padding: 0 0 10px 10px;
+    }
+
+    /* @media (max-width: 767px) {
+      .text-content {
+        margin-top: 20px;
+      } */
+    /* } */
+</style>
+
 
 {% endblock %}
 
