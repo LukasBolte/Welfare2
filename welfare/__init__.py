@@ -28,17 +28,17 @@ class Group(BaseGroup):
 
 def make_field(case):
     if case == 1:
-        label = '<strong>Which book do you prefer Frank to receive in this case?</strong>'
+        label = '<strong>Which books do you prefer Frank to receive in this case?</strong>'
         choices = [
-            [1, 'Original notes.'],
-            [2, 'Fake notes.'],
+            [1, 'Original notes'],
+            [2, 'Fake notes'],
             [3, 'I am indifferent']
         ]
     else:
         label = '<strong>Which book and bonus do you prefer Frank to receive in this case?</strong>'
         choices = [
-            [1, 'Original notes.'],
-            [2, 'Fake notes + $1.'],
+            [1, 'Original notes'],
+            [2, 'Fake notes + $1'],
             [3, 'I am indifferent']
         ]
     return models.IntegerField(blank=True,
@@ -51,8 +51,8 @@ def make_field(case):
 def learn():
     return models.IntegerField(blank=True,
                                choices=[
-                                   [1, 'Yes, they will learn.'],
-                                   [2, 'No, they will not learn.'],
+                                   [1, 'Yes, they will learn'],
+                                   [2, 'No, they will not learn'],
                                ],
                                widget=widgets.RadioSelectHorizontal,
                                label='In this case, will Frank ever learn whether they have the books with the '
@@ -81,7 +81,7 @@ class Player(BasePlayer):
                                      label="<strong>Would you go into the machine?</strong>",
                                      choices=[
                                          [True, 'Yes'],
-                                         [False, 'No.']
+                                         [False, 'No']
                                      ],
                                      )
     experienceWhy = why()
@@ -90,7 +90,7 @@ class Player(BasePlayer):
                                          "John better or worse off?</strong>",
                                    choices=[
                                        [True, 'Better Off'],
-                                       [False, 'Worse Off.']
+                                       [False, 'Worse Off']
                                    ],
                                    )
     arkansasWhy = why()
@@ -100,7 +100,7 @@ class Player(BasePlayer):
                                        "</strong>",
                                  choices=[
                                      [True, 'Yes'],
-                                     [False, 'No.']
+                                     [False, 'No']
                                  ],
                                  )
     warholWhy = why()
@@ -108,8 +108,8 @@ class Player(BasePlayer):
                               choices=[
                                   [1, 'Two economics books, either the two with the original handwritten notes by the '
                                       'famous authors or the two with the fake ones'],
-                                  [2, 'One book with original handwritten notes and one with fake ones.'],
-                                  [3, 'Nothing.']
+                                  [2, 'One book with original handwritten notes and one with fake ones'],
+                                  [3, 'Nothing']
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What will Frank receive?</strong>'
@@ -117,16 +117,16 @@ class Player(BasePlayer):
     cq2 = models.IntegerField(blank=True,
                               choices=[
                                   [1, 'Yes'],
-                                  [2, 'No.']
+                                  [2, 'No']
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>Does Frank love economics?</strong>'
                               )
     cq3 = models.IntegerField(blank=True,
                               choices=[
-                                  [1, 'We will keep them for ourselves.'],
-                                  [2, 'We will return them to Professor Roth and Milgrom.'],
-                                  [3, 'We will destroy them.']
+                                  [1, 'We will keep them for ourselves'],
+                                  [2, 'We will return them to Professor Roth and Milgrom'],
+                                  [3, 'We will destroy them']
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What happens to the books we don’t give to Frank?'
@@ -135,20 +135,21 @@ class Player(BasePlayer):
     cq4 = models.IntegerField(blank=True,
                               choices=[
                                   [1, 'Yes'],
-                                  [2, 'No.']
+                                  [2, 'No']
                               ],
                               widget=widgets.RadioSelect,
-                              label='<strong>s it possible to say which book has a fake note?</strong>'
+                              label='<strong>Is it possible to say which book has a fake note?</strong>'
                               )
     cq5 = models.IntegerField(blank=True,
                               choices=[
-                                  [1, 'Only which books Frank receives.'],
-                                  [2, 'Only Frank’s surprise bonus.'],
-                                  [3, 'They determine which books Frank receives and his surprise bonus.']
+                                  [1, 'Only which books Frank receives'],
+                                  [2, 'Only Frank’s surprise bonus'],
+                                  [3, 'They determine which books Frank receives and his surprise bonus']
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What do your answers determine?</strong>'
                               )
+    
     for j in range(1, 6):
         locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
     del j
@@ -190,7 +191,7 @@ class CQ(Page):
             error_messages = dict()
             for field_name in solutions:
                 if values[field_name] is None:
-                    error_messages[field_name] = 'Please, answer the question.'
+                    error_messages[field_name] = 'Please, answer the question'
                 elif values[field_name] != solutions[field_name]:
                     error_messages[field_name] = 'Please, correct your answer!'
                     name = 'player.' + str(field_name) + '_mistakes'

@@ -9,30 +9,45 @@ Well Done!
 {{ endif }}
 
 <p>
-    On the next pages, we will ask you we will ask you twelve questions to determine which books Frank gets.
+    On the next pages, we will ask you we will ask you twelve questions to determine which books Alex gets.
 </p>
 <p>
-    For example, one of them will be: <i>which book do you prefer Frank to receive? The ones with the original or fake
-    notes?</i>
+    For example, one of them will be: <i>which books do you prefer Alex to receive? The ones with the original or fake notes?</i>
     There are other questions where we add a bonus to one of the options.
-    You can click on this button to see all questions [questions in button].
-</p>
-<p>
-    We will randomly pick one of the questions and implement whatever option you choose.
-    This means that any question can be the one that determines what Frank gets so please answer
-    them carefully.
+    You can click on this button to see all questions:  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+        Questions
+      </button>
 </p>
 
-<!--    <p>-->
-<!--    In this study, you will make several decisions.-->
-<!--        One decision will be randomly chosen to count towards your bonus payoff.-->
-<!--    </p>-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">List of questions</h5>
+            </div>
+            <div class="modal-body">
+                <p>Which books do you prefer Alex to receive?</p>
+                <ol id="modalList">
+                    <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+                    <li>...the ones with the original or fake notes?</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    We will randomly pick one of the questions and implement whatever option you choose.
+    This means that any question can be the one that determines what Alex gets so please answer
+    them carefully.
+</p>
 
 <p>
     When you are ready, click "Next."
 </p>
-
-
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
@@ -40,8 +55,45 @@ Well Done!
 
 {% block styles %}
 
+<style>
+.bold {
+    font-weight: bold;
+  }
+</style>
+
 {% endblock %}
 
 {% block scripts %}
+
+<script>
+// Function to generate rows in the modal based on an input list of dollar values
+
+function generateModalRows(dollarValues) {
+      var modalList = document.getElementById("modalList");
+
+
+      // Loop through the dollar values and create list items for each value
+      for (var i = 0; i < dollarValues.length; i++) {
+        var boldPlus = document.createElement("span");
+        boldPlus.className = "bold";
+        boldPlus.textContent = "and $";
+        boldPlus.textContent += dollarValues[i];
+
+        var listItem = document.createElement("li");
+        listItem.innerHTML = "...the ones with the original notes or the ones with fake notes ";
+        listItem.appendChild(boldPlus.cloneNode(true));
+        listItem.innerHTML += "?";
+        modalList.appendChild(listItem);
+      }
+    }
+
+    // Call the generateModalRows function with the input list
+    var dollarValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+    generateModalRows(dollarValues);
+
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 {% endblock %}

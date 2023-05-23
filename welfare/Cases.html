@@ -1,5 +1,5 @@
 {% block title %}
-    Which books should Frank get?
+    Which books should Alex get?
 {% endblock %}
 
 {% block content %}
@@ -7,50 +7,78 @@
 {{ if session.config.development }}
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
-        <div class="col-md-12 text-center">
-<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
- Review Instructions????????????????????????
-</button>
-    </div>
+        
+<div class="col-md-12 text-center">
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Review Instructions????????????????????????
+  </button>
+</div>
 
 <p>
-    There is one more detail:
-    We might or might not tell Frank whether the two books he gets are the ones with the original or fake notes.
+    There is one more important detail:
+    We might or might not tell Alex whether the two books he gets are the ones with the original or fake notes.
     We ask you to make your choices for each case.
-    We will then choose randomly whether to tell Frank or not and implement your answers for that
-    case.
-    So choose carefully because your decisions can determine what Frank gets!
+    We will then choose randomly whether to tell Alex and implement your answers for that case.
+    So choose carefully because your decisions can determine what Alex gets!
 </p>
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Case 1</h5>
-    <h6 class="card-subtitle mb-2 text-muted">In this case, we WILL NOT tell Frank whether the books he got are the ones with
-    the original or fake notes</h6>
-      {{ formfield "ES_learn" }}
-
-      {{ formfield "ES_wtp" }}
+    <h5 class="card-title">Case: we WILL NOT tell Alex whether the books he got are the ones with
+      the original or fake notes</h5>
+    <div class="card-text">
+      It is important that you understand which case we are in. Please answer the question below.
+      <div style="text-align: center;">
+        <br>
+        {{ formfield "ES_learn" }}
+      </div>
+      <br>
+      Okay, now you make the actual decision. Please decide which books Alex gets.
+      <div style="text-align: center;">
+        <br>
+        <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+          {{ formfield "ES_wtp" }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<br>
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Case 2</h5>
-    <h6 class="card-subtitle mb-2 text-muted">In this case, we WILL tell Frank whether the books he got are the ones with
-    the original or fake notes</h6>
-      {{ formfield "Trad_learn" }}
-
-      {{ formfield "Trad_wtp" }}
+    <h5 class="card-title">Case: we WILL tell Alex whether the books he got are the ones with the original or fake notes</h5>
+    <div class="card-text">
+      It is important that you understand which case we are in. Please answer the question below.
+      <div style="text-align: center;">
+        <br>
+        {{ formfield "Trad_learn" }}
+      </div>
+      <br>
+      Okay, now you make the actual decision. Please decide which books Alex gets.
+      <div style="text-align: center;">
+        <br>
+        <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+          {{ formfield "Trad_wtp" }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-
+<br>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
 {% endblock %}
 
 {% block styles %}
+
+<style>
+  .card-body {
+    padding-bottom: 0 ;
+    }
+</style>
 
 {% endblock %}
 
