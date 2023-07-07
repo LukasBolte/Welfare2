@@ -28,14 +28,14 @@ class Group(BaseGroup):
 
 def make_field(case):
     if case == 1:
-        label = '<strong>Which books do you prefer Frank to receive in this case?</strong>'
+        label = '<strong>Which books do you prefer Alex to receive in this case?</strong>'
         choices = [
             [1, 'Original notes'],
             [2, 'Fake notes'],
             [3, 'I am indifferent']
         ]
     else:
-        label = '<strong>Which book and bonus do you prefer Frank to receive in this case?</strong>'
+        label = '<strong>Which book and bonus do you prefer Alex to receive in this case?</strong>'
         choices = [
             [1, 'Original notes'],
             [2, 'Fake notes + $1'],
@@ -55,7 +55,7 @@ def learn():
                                    [2, 'No, they will not learn'],
                                ],
                                widget=widgets.RadioSelectHorizontal,
-                               label='In this case, will Frank ever learn whether they have the books with the '
+                               label='In this case, will Alex ever learn whether they have the books with the '
                                      'original handwritten notes or the fake ones?'
                                )
 
@@ -112,7 +112,7 @@ class Player(BasePlayer):
                                   [3, 'Nothing']
                               ],
                               widget=widgets.RadioSelect,
-                              label='<strong>What will Frank receive?</strong>'
+                              label='<strong>What will Alex receive?</strong>'
                               )
     cq2 = models.IntegerField(blank=True,
                               choices=[
@@ -120,7 +120,7 @@ class Player(BasePlayer):
                                   [2, 'No']
                               ],
                               widget=widgets.RadioSelect,
-                              label='<strong>Does Frank love economics?</strong>'
+                              label='<strong>Does Alex love economics?</strong>'
                               )
     cq3 = models.IntegerField(blank=True,
                               choices=[
@@ -129,7 +129,7 @@ class Player(BasePlayer):
                                   [3, 'We will destroy them']
                               ],
                               widget=widgets.RadioSelect,
-                              label='<strong>What happens to the books we don’t give to Frank?'
+                              label='<strong>What happens to the books we don’t give to Alex?'
                                     '</strong>'
                               )
     cq4 = models.IntegerField(blank=True,
@@ -142,9 +142,9 @@ class Player(BasePlayer):
                               )
     cq5 = models.IntegerField(blank=True,
                               choices=[
-                                  [1, 'Only which books Frank receives'],
-                                  [2, 'Only Frank’s surprise bonus'],
-                                  [3, 'They determine which books Frank receives and his surprise bonus']
+                                  [1, 'Only which books Alex receives'],
+                                  [2, 'Only Alex’s surprise bonus'],
+                                  [3, 'They determine which books Alex receives and his surprise bonus']
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What do your answers determine?</strong>'
