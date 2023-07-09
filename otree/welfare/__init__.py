@@ -16,6 +16,8 @@ class C(BaseConstants):
     BONUS_PER_CORRECT_TASK_PART1 = cu(0.15)
     OUTSIDE_OPTION = cu(2.2)
     # MAX_BONUS = cu(4.5)
+    PRE_VIDEO = 'welfare/Review-pre-vid.html'
+    POST_VIDEO = 'welfare/Review-post-vid.html'
 
 
 class Subsession(BaseSubsession):
