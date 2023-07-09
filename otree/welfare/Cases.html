@@ -9,17 +9,12 @@
 {{ endif }}
         
 <div class="col-md-12 text-center">
-  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Review Instructions????????????????????????
+  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Review Instructions
   </button>
 </div>
-
-<p>
-    There is one more important detail:
-    We might or might not tell Alex whether the two books he gets are the ones with the original or fake notes.
-    We ask you to make your choices for each case.
-    We will then choose randomly whether to tell Alex and implement your answers for that case.
-    So choose carefully because your decisions can determine what Alex gets!
-</p>
+<br>
+{{ include C.DETAIL }}
 
 <div class="card">
   <div class="card-body">
@@ -69,6 +64,25 @@
 <br>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Review Instructions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          {{ include C.PRE_VIDEO }}
+                {{ include C.POST_VIDEO }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
 

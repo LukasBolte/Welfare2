@@ -18,6 +18,7 @@ class C(BaseConstants):
     # MAX_BONUS = cu(4.5)
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
+    DETAIL = 'welfare/Review-detail.html'
 
 
 class Subsession(BaseSubsession):
@@ -151,7 +152,30 @@ class Player(BasePlayer):
                               widget=widgets.RadioSelect,
                               label='<strong>What do your answers determine?</strong>'
                               )
-    
+    feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
+    feedbackDifficulty = models.IntegerField(label="How difficult were the instructions? Please answer on a scale of 1 "
+                                                   "to 10 with 10 being the most difficult",
+                                             blank=True,
+                                             choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                                             widget=widgets.RadioSelectHorizontal)
+    feedbackUnderstanding = models.IntegerField(label="How well did you understand what you were asked to do?"
+                                                      " Please answer on a scale of 1 to 10 with 10 being the case when"
+                                                      " you understood perfectly",
+                                                blank=True,
+                                                choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                                                widget=widgets.RadioSelectHorizontal)
+    feedbackSatisfied = models.IntegerField(label="How satisfied are you with this study overall?"
+                                                  " Please answer on a scale of 1 to 10 with 10 being the most "
+                                                  "satisfied",
+                                            blank=True,
+                                            choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                                            widget=widgets.RadioSelectHorizontal)
+    feedbackPay = models.IntegerField(label="How appropriate do you think the payment for this study is relative to "
+                                            "other ones on Prolific? Please answer on a scale of 1 to 10 with 10 being "
+                                            "the most appropriate",
+                                      blank=True,
+                                      choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                                      widget=widgets.RadioSelectHorizontal)
     for j in range(1, 6):
         locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
     del j
@@ -223,6 +247,9 @@ class Cases3(Page):
     form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3']
 
 
+class PostMPL(Page):
+    pass
+
 class Experience(Page):
     form_model = 'player'
     form_fields = ['experience', 'experienceWhy']
@@ -238,6 +265,18 @@ class Warhol(Page):
     form_fields = ['warhol', 'warholWhy']
 
 
+class End(Page):
+    form_model = 'player'
+    form_fields = ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.participant.finished = True
+
+
+class Redirect(Page):
+    pass
+
 
 page_sequence = [
     Welcome,
@@ -250,7 +289,10 @@ page_sequence = [
     Cases2,
     Cases3Explain,
     Cases3,
+    PostMPL,
     Experience,
     Arkansas,
-    Warhol
+    Warhol,
+    End,
+    Redirect
 ]
