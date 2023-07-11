@@ -15,7 +15,7 @@
     </div>
 <br>
 
-<div class="card">
+<div class="card" id="ES_id">
   <div class="card-body">
     <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
 ones with the original or fake notes</h5>
@@ -30,7 +30,8 @@ ones with the original or fake notes</h5>
   </div>
 </div>
 
-<div class="card">
+
+<div class="card" id="Trad_id">
   <div class="card-body">
     <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
 ones with the original or fake notes</h5>
@@ -98,12 +99,21 @@ ones with the original or fake notes</h5>
 		rightHeader:"Original notes and ...",
 		leftBonus:[5,10,15,20,25,30,35,40,45,50],
 		rightBonus:[0,0,0,0,0,0,0,0,0,0],
-		varname:"wtp_1", //variable name on oTree 
+		varname:"ES_wtp3", //variable name on oTree  ES_wtp3', '',
 		root:"wtp_elicitation_1",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_1"
 	}
 
+  ES_strict = JSON.parse("{{participant.ES_strict}}")
+  Trad_strict = JSON.parse("{{participant.Trad_strict}}")
+
+  if (ES_strict==false) {
+    document.getElementById("ES_id").style.display = "none"
+  }
 	
+  if (Trad_strict==false) {
+    document.getElementById("Trad_id").style.display = "none"
+  }
 
 	wtp_1 =new drawWTP(parameters);
 	parameters={
@@ -111,10 +121,11 @@ ones with the original or fake notes</h5>
 		rightHeader:"Original notes and ...",
 		leftBonus:[0,0,0,0,0,0,0,0,0,0],
 		rightBonus:[5,10,15,20,25,30,35,40,45,50],
-		varname:"wtp_2", //variable name on oTree 
+		varname:"Trad_wtp3", //variable name on oTree 
 		root:"wtp_elicitation_2",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_2"
 	}
+ 
 	wtp_2 =new drawWTP(parameters);
 </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 import random
+import json
 
 from otree.api import *
 
@@ -52,7 +53,7 @@ def make_field(case):
 
 
 def learn():
-    return models.IntegerField(blank=True,
+    return models.IntegerField(
                                choices=[
                                    [1, 'Yes, they will learn'],
                                    [2, 'No, they will not learn'],
@@ -262,6 +263,25 @@ class Cases3Explain(Page):
 class Cases3(Page):
     form_model = 'player'
     form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3']
+
+    @staticmethod
+    def vars_for_template(player):
+        player.participant.ES_strict = json.dumps(True)
+        player.participant.Trad_strict = json.dumps(True)
+        pass 
+    
+    def before_next_page(player, timeout_happened):
+        print('xxxxxxxxx')
+        print('xxxxxxxxx')
+        print('xxxxxxxxx')
+        print('Before Next Page Prints:')
+        print('xxxxxxxxx')
+        print('xxxxxxxxx')
+        print('xxxxxxxxx')
+        print(player.ES_wtp3)
+
+        myError
+    
 
 
 class PostMPL(Page):
