@@ -22,8 +22,11 @@ ones with the original or fake notes</h5>
 <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
       {{ formfield "ES_learn3" }}
 
-      <p>Please tell us which option you prefer by clicking the table below.</p>
-      [table]
+      <p>Please tell us which option you prefer by clicking the table below.</p> 
+
+      <div id="wtp_elicitation_1"></div>
+      <div id="hidden_fields_wtp_elicitation_1"></div>
+
   </div>
 </div>
 
@@ -35,10 +38,10 @@ ones with the original or fake notes</h5>
       {{ formfield "ES_learn3" }}
 
       <p>Please tell us which option you prefer by clicking the table below.</p>
-      [table]
+      <div id="wtp_elicitation_2"></div>
+      <div id="hidden_fields_wtp_elicitation_2"></div>
   </div>
 </div>
-
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
@@ -66,8 +69,52 @@ ones with the original or fake notes</h5>
 
 {% block styles %}
 
+
+
+<style>
+  .orange{
+    background-color: #FFCF9E !important;
+    }
+  .darkorange{
+    background-color: orange !important;
+    }
+</style>
 {% endblock %}
 
 {% block scripts %}
 
+<script src="{% static 'wtp.js' %}"></script>
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
+
+
+
+<script>
+	parameters={
+		leftHeader:"Fake notes and ...",
+		rightHeader:"Original notes and ...",
+		leftBonus:[5,10,15,20,25,30,35,40,45,50],
+		rightBonus:[0,0,0,0,0,0,0,0,0,0],
+		varname:"wtp_1", //variable name on oTree 
+		root:"wtp_elicitation_1",
+		hidden_fields_name:"hidden_fields_wtp_elicitation_1"
+	}
+
+	
+
+	wtp_1 =new drawWTP(parameters);
+	parameters={
+		leftHeader:"Fake notes and ...",
+		rightHeader:"Original notes and ...",
+		leftBonus:[0,0,0,0,0,0,0,0,0,0],
+		rightBonus:[5,10,15,20,25,30,35,40,45,50],
+		varname:"wtp_2", //variable name on oTree 
+		root:"wtp_elicitation_2",
+		hidden_fields_name:"hidden_fields_wtp_elicitation_2"
+	}
+	wtp_2 =new drawWTP(parameters);
+</script>
 {% endblock %}
