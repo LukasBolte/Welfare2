@@ -179,7 +179,8 @@ class Player(BasePlayer):
     for j in range(1, 6):
         locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
     del j
-
+    ES_learn = models.IntegerField(blank=True, initial=0)
+    Trad_learn = models.IntegerField(blank=True, initial=0)
 
 ###############################################  FUNCTIONS   ###########################################################
 
@@ -232,6 +233,22 @@ class PostCQs(Page):
 class Cases(Page):
     form_model = 'player'
     form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn']
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            solutions = dict(ES_learn=2,
+                             Trad_learn=1
+                             )
+            error_messages = dict()
+            for field_name in solutions:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please, answer the question'
+                elif values[field_name] != solutions[field_name]:
+                    error_messages[field_name] = 'Please, correct your answer!'
+                    name = 'player.' + str(field_name) + '_mistakes'
+                    exec("%s += 1" % name)
+            return error_messages
 
 class Cases2(Page):
     form_model = 'player'
