@@ -29,31 +29,29 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
-
-def make_field(case):
-    if case == 1:
-        label = '<strong>Which books do you prefer Alex to receive in this case?</strong>'
-        choices = [
-            [1, 'Original notes'],
-            [2, 'Fake notes'],
-            [3, 'I am indifferent']
-        ]
-    else:
-        label = '<strong>Which book and bonus do you prefer Alex to receive in this case?</strong>'
-        choices = [
-            [1, 'Original notes'],
-            [2, 'Fake notes + $1'],
-            [3, 'I am indifferent']
-        ]
-    return models.IntegerField(blank=True,
-                               choices=choices,
-                               widget=widgets.RadioSelectHorizontal,
-                               label=label
-                               )
-
+# def make_field(case):
+#     if case == 1:
+#         label = '<strong>Which books do you prefer Alex to receive in this case?</strong>'
+#         choices = [
+#             [1, 'Original notes'],
+#             [2, 'Fake notes'],
+#             [3, 'I am indifferent']
+#         ]
+#     else:
+#         label = '<strong>Which book and bonus do you prefer Alex to receive in this case?</strong>'
+#         choices = [
+#             [1, 'Original notes'],
+#             [2, 'Fake notes + $1'],
+#             [3, 'I am indifferent']
+#         ]
+#     return models.IntegerField(blank=True,
+#                                choices=choices,
+#                                widget=widgets.RadioSelectHorizontal,
+#                                label=label
+#                                )
 
 def learn():
-    return models.IntegerField(
+    return models.IntegerField(blank=True,
                                choices=[
                                    [1, 'Yes, they will learn'],
                                    [2, 'No, they will not learn'],
@@ -69,12 +67,32 @@ def why():
 
 
 class Player(BasePlayer):
-    ES_wtp = make_field(1)
-    Trad_wtp = make_field(1)
+    ES_wtp = models.IntegerField(blank=True,
+                                 widget=widgets.RadioSelectHorizontal,
+                                 label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
+                                 choices=[
+                                     [1, 'Original notes'],
+                                     [2, 'Fake notes'],
+                                     [3, 'I am indifferent']
+                                 ])
+    Trad_wtp = models.IntegerField(blank=True,
+                                   widget=widgets.RadioSelectHorizontal,
+                                   label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
+                                   choices=[
+                                       [1, 'Original notes'],
+                                       [2, 'Fake notes'],
+                                       [3, 'I am indifferent']
+                                   ])
     ES_learn = learn()
     Trad_learn = learn()
-    ES_wtp2 = make_field(2)
-    Trad_wtp2 = make_field(2)
+    ES_wtp2 = models.IntegerField(blank=True,
+                                   widget=widgets.RadioSelectHorizontal,
+                                   label='<strong>Which books do you prefer Alex to receive in this case?</strong>'
+                                  )
+    Trad_wtp2 = models.IntegerField(blank=True,
+                                    widget=widgets.RadioSelectHorizontal,
+                                    label='<strong>Which books do you prefer Alex to receive in this case?</strong>'
+                                    )
     ES_learn2 = learn()
     Trad_learn2 = learn()
     ES_wtp3 = models.StringField()
@@ -151,8 +169,7 @@ class Player(BasePlayer):
                                   [3, 'They determine which books Alex receives and his surprise bonus']
                               ],
                               widget=widgets.RadioSelect,
-                              label='<strong>What do your answers determine?</strong>'
-                              )
+                              label='<strong>What do your answers determine?</strong>')
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How difficult were the instructions? Please answer on a scale of 1 "
                                                    "to 10 with 10 being the most difficult",
@@ -180,12 +197,38 @@ class Player(BasePlayer):
     for j in range(1, 6):
         locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
     del j
-    ES_learn = models.IntegerField(blank=True, initial=0)
-    Trad_learn = models.IntegerField(blank=True, initial=0)
-
+    ES_learn_mistakes = models.IntegerField(blank=True, initial=0)
+    Trad_learn_mistakes = models.IntegerField(blank=True, initial=0)
+    ES_learn2_mistakes = models.IntegerField(blank=True, initial=0)
+    Trad_learn2_mistakes = models.IntegerField(blank=True, initial=0)
+    ES_learn3_mistakes = models.IntegerField(blank=True, initial=0)
+    Trad_learn3_mistakes = models.IntegerField(blank=True, initial=0)
+    review = models.BooleanField(blank=True,
+                                 label='Do the statements above accurately reflect what you intended to answer?',
+                                 choices=[
+                                     [True, 'Yes'],
+                                     [False, 'No, I want to change my answers']
+                                 ])
 ###############################################  FUNCTIONS   ###########################################################
 
+def ES_wtp2_choices(player):
+    if player.ES_wtp == 1:
+        choices = [[1, 'Original notes'],
+                   [2, 'Fake notes + $1']]
+    else:
+        choices = [[1, 'Original notes + $1'],
+                   [2, 'Fake notes']]
+    # random.shuffle(choices)
+    return choices
 
+def Trad_wtp2_choices(player):
+    if player.Trad_wtp == 1:
+        choices = [[1, 'Original notes'],
+                   [2, 'Fake notes + $1']]
+    else:
+        choices = [[1, 'Original notes + $1'],
+                   [2, 'Fake notes']]
+    return choices
 ######################################################  PAGES   ########################################################
 class Welcome(Page):
     pass
@@ -253,11 +296,42 @@ class Cases(Page):
 
 class Cases2(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
+
+    @staticmethod
+    def get_form_fields(player):
+        if player.Trad_wtp == 3:
+            return ['ES_wtp2', 'ES_learn2']
+        elif player.ES_wtp == 3:
+            return ['Trad_wtp2', 'Trad_learn2']
+        else:
+            return ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            solutions = dict(ES_learn2=2,
+                             Trad_learn2=1
+                             )
+            error_messages = dict()
+            for field_name in solutions:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please, answer the question'
+                elif values[field_name] != solutions[field_name]:
+                    error_messages[field_name] = 'Please, correct your answer!'
+                    name = 'player.' + str(field_name) + '_mistakes'
+                    exec("%s += 1" % name)
+            return error_messages
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return not (player.ES_wtp == 3 and player.Trad_wtp == 3)  # if indifferent in both skip this page
 
 
 class Cases3Explain(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return (player.ES_wtp == 1 and player.ES_wtp2 == 1) or (player.Trad_wtp == 1 and player.Trad_wtp2 == 1)
+        #  the above says we only show this page for those who have always preferred Original in either case.
 
 
 class Cases3(Page):
@@ -265,14 +339,41 @@ class Cases3(Page):
     form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3']
 
     @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            solutions = dict(ES_learn3=2,
+                             Trad_learn3=1
+                             )
+            error_messages = dict()
+            for field_name in solutions:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please, answer the question'
+                elif values[field_name] != solutions[field_name]:
+                    error_messages[field_name] = 'Please, correct your answer!'
+                    name = 'player.' + str(field_name) + '_mistakes'
+                    exec("%s += 1" % name)
+            return error_messages
+
+    @staticmethod
     def vars_for_template(player):
         player.participant.ES_strict = json.dumps(True)
         player.participant.Trad_strict = json.dumps(True)
-        pass 
+        pass
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return (player.ES_wtp == 1 and player.ES_wtp2 == 1) or (player.Trad_wtp == 1 and player.Trad_wtp2 == 1)
+        #  the above says we only show this page for those who have always preferred Original in either case.
+
+
+class ReviewStatements(Page):
+    form_model = 'player'
+    form_fields = ['review']
 
 
 class PostMPL(Page):
     pass
+
 
 class Experience(Page):
     form_model = 'player'
