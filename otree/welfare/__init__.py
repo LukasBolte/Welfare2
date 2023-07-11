@@ -77,8 +77,8 @@ class Player(BasePlayer):
     Trad_wtp2 = make_field(2)
     ES_learn2 = learn()
     Trad_learn2 = learn()
-    ES_wtp3 = models.IntegerField(blank=True)
-    Trad_wtp3 = models.IntegerField(blank=True)
+    ES_wtp3 = models.StringField()
+    Trad_wtp3 = models.StringField()
     ES_learn3 = learn()
     Trad_learn3 = learn()
     experience = models.BooleanField(blank=True,
@@ -269,19 +269,6 @@ class Cases3(Page):
         player.participant.ES_strict = json.dumps(True)
         player.participant.Trad_strict = json.dumps(True)
         pass 
-    
-    def before_next_page(player, timeout_happened):
-        print('xxxxxxxxx')
-        print('xxxxxxxxx')
-        print('xxxxxxxxx')
-        print('Before Next Page Prints:')
-        print('xxxxxxxxx')
-        print('xxxxxxxxx')
-        print('xxxxxxxxx')
-        print(player.ES_wtp3)
-
-        myError
-    
 
 
 class PostMPL(Page):

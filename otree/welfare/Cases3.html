@@ -26,6 +26,7 @@ ones with the original or fake notes</h5>
 
       <div id="wtp_elicitation_1"></div>
       <div id="hidden_fields_wtp_elicitation_1"></div>
+      {{ formfield_errors 'ES_wtp3' }}
 
   </div>
 </div>
@@ -36,11 +37,12 @@ ones with the original or fake notes</h5>
     <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
 ones with the original or fake notes</h5>
 <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-      {{ formfield "ES_learn3" }}
+      {{ formfield "Trad_learn3" }}
 
       <p>Please tell us which option you prefer by clicking the table below.</p>
       <div id="wtp_elicitation_2"></div>
       <div id="hidden_fields_wtp_elicitation_2"></div>
+      {{ formfield_errors 'Trad_wtp3' }}
   </div>
 </div>
 
@@ -64,6 +66,12 @@ ones with the original or fake notes</h5>
     </div>
   </div>
 </div>
+
+<button class="otree-btn-next btn btn-primary" id="true_next_button" style="display:none" >Next</button>
+
+{{ formfield_errors 'Trad_learn3' }}
+
+{{ formfield_errors 'ES_learn3' }}
 
 
 {% endblock %}
@@ -95,6 +103,7 @@ ones with the original or fake notes</h5>
 
 <script>
 	parameters={
+    playerID : "{{participant.code}}",
 		leftHeader:"Fake notes and ...",
 		rightHeader:"Original notes and ...",
 		leftBonus:[5,10,15,20,25,30,35,40,45,50],
@@ -117,6 +126,7 @@ ones with the original or fake notes</h5>
 
 	wtp_1 =new drawWTP(parameters);
 	parameters={
+    playerID : "{{participant.code}}",
 		leftHeader:"Fake notes and ...",
 		rightHeader:"Original notes and ...",
 		leftBonus:[0,0,0,0,0,0,0,0,0,0],

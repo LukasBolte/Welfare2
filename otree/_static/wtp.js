@@ -8,7 +8,7 @@ function drawWTP(parameters){
     this.varname=parameters.varname
     this.root=parameters.root
     this.hidden_fields_name=parameters.hidden_fields_name
-
+    this.playerID=parameters.playerID
     this.tdList={};
     this.selectedCutoff;
     this.cutoffHistory=[];
@@ -90,8 +90,6 @@ function drawWTP(parameters){
     this.highlight = function(cutoff,color){
         var choiceFrags=cutoff.split(':');
         var cutoffNum=parseFloat(choiceFrags[1]);
-        console.log(this.tdList)
-        console.log(cutoffNum)
         for(var c in this.tdList){
             var cf=parseFloat(c);
             $(this.tdList[c][0]).removeClass("orange");
@@ -146,7 +144,10 @@ function drawWTP(parameters){
         this.selectedCutoff=cutoff;
         this.highlight(cutoff,"darkorange");
         //save data in hidden field
-        document.getElementById(this.varname).value=JSON.stringify({"history":this.cutoffHistory,"cutoff":this.selectedCutoff});     
+        document.getElementById(this.varname).value=JSON.stringify({"history":this.cutoffHistory,"cutoff":this.selectedCutoff});   
+        
+        var keyName=this.playerID+":"+this.root+":"+this.varname;
+        localStorage.setItem(keyName,JSON.stringify({"history":this.cutoffHistory,"cutoff":this.selectedCutoff}));
         console.log(document.getElementById(this.varname).value);  
         //make the oTree next button appear if present
         setTimeout(this.showNext,2000);
@@ -162,6 +163,22 @@ function drawWTP(parameters){
     }
 
 
+
+    //// starting
+    //storage functions
+    this.load=function(){
+        var keyName=this.playerID+":"+this.root+":"+this.varname;
+        var savedValue=localStorage.getItem(keyName); 
+        //console.log(savedValue);
+        if (savedValue!=undefined){
+            var output=JSON.parse(savedValue);
+            this.selectedCutoff = output["cutoff"]
+            this.cutoffHistory = output["history"]
+            this.highlight(this.selectedCutoff,"darkorange");
+            document.getElementById(this.varname).value=JSON.stringify({"history":this.cutoffHistory,"cutoff":this.selectedCutoff});   
+        }
+    }
+    //// ending
 
 
     var hiddenDiv = document.getElementById(this.hidden_fields_name);
@@ -189,4 +206,6 @@ function drawWTP(parameters){
     this.rightDiv.innerHTML="&nbsp;";
     row.appendChild(this.rightDiv);
     this.drawChoices(midDiv,this.leftHeader,this.rightHeader,this.leftBonus,this.rightBonus);
+
+    this.load();
 }
