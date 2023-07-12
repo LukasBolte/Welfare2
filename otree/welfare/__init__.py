@@ -85,7 +85,8 @@ class Player(BasePlayer):
                                  ])
     Trad_wtp = models.IntegerField(blank=True,
                                    widget=widgets.RadioSelectHorizontal,
-                                   label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
+                                   # label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
+                                   label='Which books do you prefer Alex to receive in this case?',
                                    choices=[  # Do we care about randomizing order of choices?
                                        [1, 'Original notes'],
                                        [2, 'Fake notes'],
@@ -319,6 +320,7 @@ class Cases(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+
 
 class Cases2(Page):
     form_model = 'player'

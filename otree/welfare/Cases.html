@@ -26,14 +26,44 @@
         It is important that you understand which case we are in. Please answer the question below.
         <div style="text-align: center;">
           <br>
-          {{ formfield "Trad_learn" }}
+<!--          {{ formfield "Trad_learn" }}-->
+          {{ formfield_errors 'Trad_learn' }}
+
+          {{ form.Trad_learn.label }}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_learn" id="inlineRadio1" value="1"
+                   onclick="enable()">
+            <label class="form-check-label" for="inlineRadio1">Yes, they will learn</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_learn" id="inlineRadio2" value="2"
+            onclick="enable()">
+            <label class="form-check-label" for="inlineRadio2">No, they will not learn</label>
+          </div>
         </div>
+
         <br>
         Okay, now you make the actual decision. Please decide which books Alex gets.
         <div style="text-align: center;">
           <br>
-          <div style="display: inline-block; background-color: lightblue; padding: 10px;">
-            {{ formfield "Trad_wtp" }}
+          <div class="card-footer text-muted" id="Trad_footer">
+<!--          <div style="display: inline-block; background-color: lightblue; padding: 10px;">-->
+<!--            {{ formfield "Trad_wtp" }}-->
+                      {{ formfield_errors 'Trad_wtp' }}
+
+                     <p> <strong>{{ form.Trad_wtp.label }}</strong></p>
+                      <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp" id="inlineRadio11" value="1" disabled>
+            <label class="form-check-label" for="inlineRadio11">Original notes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp" id="inlineRadio21" value="2" disabled>
+            <label class="form-check-label" for="inlineRadio21">Fake notes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp" id="inlineRadio31" value="3" disabled>
+            <label class="form-check-label" for="inlineRadio31">I am indifferent</label>
+          </div>
           </div>
         </div>
       </div>
@@ -139,12 +169,26 @@
 
 <style>
   .card-body {
-    padding-bottom: 0 ;
+    padding-bottom: 1;
     }
 </style>
 
 {% endblock %}
 
 {% block scripts %}
+<script>
+  document.getElementById('inlineRadio1').value = 1;
+  document.getElementById('inlineRadio2').value = 2;
+  document.getElementById('inlineRadio11').value = 1;
+  document.getElementById('inlineRadio21').value = 2;
+  document.getElementById('inlineRadio31').value = 3;
 
+  function enable() {
+    document.getElementById('inlineRadio11').disabled = false;
+    document.getElementById('inlineRadio21').disabled = false;
+    document.getElementById('inlineRadio31').disabled = false;
+    document.getElementById('Trad_footer').classList.remove('text-muted')
+    document.getElementById('Trad_footer').style.backgroundColor = 'aquamarine';  
+  }
+</script>
 {% endblock %}
