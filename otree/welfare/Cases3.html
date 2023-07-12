@@ -14,37 +14,77 @@
 </button>
     </div>
 <br>
+{{ if participant.switch_order }}
 
-<div class="card" id="ES_id">
-  <div class="card-body">
-    <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
-ones with the original or fake notes</h5>
-<!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-      {{ formfield "ES_learn3" }}
+    <div class="card" id="Trad_id">
+      <div class="card-body">
+        <h5 class="card-title">Case 1: Remember, in this case, we WILL tell Alex whether the books he got are the
+    ones with the original or fake notes</h5>
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "Trad_learn3" }}
 
-      <p>Please tell us which option you prefer by clicking the table below.</p> 
+          <p>Please tell us which option you prefer by clicking the table below.</p>
+          <div id="wtp_elicitation_2"></div>
+          <div id="hidden_fields_wtp_elicitation_2"></div>
+          {{ formfield_errors 'Trad_wtp3' }}
+      </div>
+    </div>
 
-      <div id="wtp_elicitation_1"></div>
-      <div id="hidden_fields_wtp_elicitation_1"></div>
-      {{ formfield_errors 'ES_wtp3' }}
+    <br>
 
-  </div>
-</div>
+    <div class="card" id="ES_id">
+      <div class="card-body">
+        <h5 class="card-title">Case 2: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+    ones with the original or fake notes</h5>
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "ES_learn3" }}
+
+          <p>Please tell us which option you prefer by clicking the table below.</p>
+
+          <div id="wtp_elicitation_1"></div>
+          <div id="hidden_fields_wtp_elicitation_1"></div>
+          {{ formfield_errors 'ES_wtp3' }}
+
+      </div>
+    </div>
+
+{{ else }}
+
+    <div class="card" id="ES_id">
+      <div class="card-body">
+        <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+    ones with the original or fake notes</h5>
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "ES_learn3" }}
+
+          <p>Please tell us which option you prefer by clicking the table below.</p>
+
+          <div id="wtp_elicitation_1"></div>
+          <div id="hidden_fields_wtp_elicitation_1"></div>
+          {{ formfield_errors 'ES_wtp3' }}
+
+      </div>
+    </div>
+
+    <br>
+
+    <div class="card" id="Trad_id">
+      <div class="card-body">
+        <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
+    ones with the original or fake notes</h5>
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "Trad_learn3" }}
+
+          <p>Please tell us which option you prefer by clicking the table below.</p>
+          <div id="wtp_elicitation_2"></div>
+          <div id="hidden_fields_wtp_elicitation_2"></div>
+          {{ formfield_errors 'Trad_wtp3' }}
+      </div>
+    </div>
+
+{{ endif}}
 
 
-<div class="card" id="Trad_id">
-  <div class="card-body">
-    <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
-ones with the original or fake notes</h5>
-<!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-      {{ formfield "Trad_learn3" }}
-
-      <p>Please tell us which option you prefer by clicking the table below.</p>
-      <div id="wtp_elicitation_2"></div>
-      <div id="hidden_fields_wtp_elicitation_2"></div>
-      {{ formfield_errors 'Trad_wtp3' }}
-  </div>
-</div>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 

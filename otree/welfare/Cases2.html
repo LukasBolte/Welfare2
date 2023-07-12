@@ -16,11 +16,54 @@
     On this page, the options involve Alex’s bonus.
 </p>
 
+{{ if participant.switch_order }}
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Case 1: In this case, we WILL tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+          {{ if Trad_wtp != 3 }}
+
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "Trad_learn2" }}
+
+          {{ formfield "Trad_wtp2" }}
+
+          {{ else }}
+    <p>For case 1 we already know how to answer the 12 questions for you.
+    You don't need to do anything else for this case.
+    You will get a chance to review your responses to the questions in Case 2 later in the study.</p>
+          {{ endif }}
+      </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Case 2: In this case, we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+          {{ if ES_wtp != 3 }}
+    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
+          {{ formfield "ES_learn2" }}
+
+          {{ formfield "ES_wtp2" }}
+
+         {{ else }}
+    <p>For case 2 we already know how to answer the 12 questions for you.
+    You don't need to do anything else for this case.
+    You will get a chance to review your responses to the questions in Case 1 later in the study.</p>
+          {{ endif }}
+      </div>
+    </div>
+
+{{ else }}
+
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Case 1: In this case, we WILL NOT tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
-          {{ if player.ES_wtp != 3 }}
+          {{ if ES_wtp != 3 }}
     <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
           {{ formfield "ES_learn2" }}
 
@@ -34,11 +77,13 @@
       </div>
     </div>
 
+    <br>
+
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Case 2: In this case, we WILL tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
-          {{ if player.Trad_wtp != 3 }}
+          {{ if Trad_wtp != 3 }}
 
     <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
           {{ formfield "Trad_learn2" }}
@@ -52,6 +97,9 @@
           {{ endif }}
       </div>
     </div>
+
+{{ endif }}
+
 
 
 

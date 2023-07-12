@@ -1,5 +1,6 @@
 import random
 import json
+import itertools
 
 from otree.api import *
 
@@ -24,6 +25,13 @@ class C(BaseConstants):
 
 class Subsession(BaseSubsession):
     pass
+
+def creating_session(subsession: Subsession):
+    if subsession.round_number == 1:
+        switch_orders = itertools.cycle([True, False])
+        for p in subsession.get_players():
+            p.participant.switch_order = next(switch_orders)
+
 
 
 class Group(BaseGroup):
@@ -70,7 +78,7 @@ class Player(BasePlayer):
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
                                  label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
-                                 choices=[
+                                 choices=[  # Do we care about randomizing order of choices?
                                      [1, 'Original notes'],
                                      [2, 'Fake notes'],
                                      [3, 'I am indifferent']
@@ -78,7 +86,7 @@ class Player(BasePlayer):
     Trad_wtp = models.IntegerField(blank=True,
                                    widget=widgets.RadioSelectHorizontal,
                                    label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
-                                   choices=[
+                                   choices=[  # Do we care about randomizing order of choices?
                                        [1, 'Original notes'],
                                        [2, 'Fake notes'],
                                        [3, 'I am indifferent']
@@ -229,7 +237,25 @@ def Trad_wtp2_choices(player):
         choices = [[1, 'Original notes + $1'],
                    [2, 'Fake notes']]
     return choices
+
+def ES_wtp_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        return 'Please, answer the question.'
+
+def Trad_wtp_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        return 'Please, answer the question.'
+
+def ES_wtp2_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        return 'Please, answer the question.'
+
+def Trad_wtp2_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        return 'Please, answer the question.'
+
 ######################################################  PAGES   ########################################################
+
 class Welcome(Page):
     pass
 
@@ -299,9 +325,11 @@ class Cases2(Page):
 
     @staticmethod
     def get_form_fields(player):
-        if player.Trad_wtp == 3:
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        if Trad_wtp == 3:
             return ['ES_wtp2', 'ES_learn2']
-        elif player.ES_wtp == 3:
+        elif ES_wtp == 3:
             return ['Trad_wtp2', 'Trad_learn2']
         else:
             return ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
@@ -324,13 +352,25 @@ class Cases2(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return not (player.ES_wtp == 3 and player.Trad_wtp == 3)  # if indifferent in both skip this page
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        return not (ES_wtp == 3 and Trad_wtp == 3)  # if indifferent in both skip this page
 
+    @staticmethod
+    def vars_for_template(player: Player):
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        return dict(ES_wtp=ES_wtp,
+                    Trad_wtp=Trad_wtp)
 
 class Cases3Explain(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return (player.ES_wtp == 1 and player.ES_wtp2 == 1) or (player.Trad_wtp == 1 and player.Trad_wtp2 == 1)
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        ES_wtp2 = player.field_maybe_none('ES_wtp2')
+        Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
+        return (ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 
@@ -362,7 +402,11 @@ class Cases3(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return (player.ES_wtp == 1 and player.ES_wtp2 == 1) or (player.Trad_wtp == 1 and player.Trad_wtp2 == 1)
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        ES_wtp2 = player.field_maybe_none('ES_wtp2')
+        Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
+        return (ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 

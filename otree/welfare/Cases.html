@@ -16,50 +16,99 @@
 <br>
 {{ include C.DETAIL }}
 
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the ones with
-      the original or fake notes</h5>
-    <div class="card-text">
-      It is important that you understand which case we are in. Please answer the question below.
-      <div style="text-align: center;">
+{{ if participant.switch_order }}
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes</h5>
+      <div class="card-text">
+        It is important that you understand which case we are in. Please answer the question below.
+        <div style="text-align: center;">
+          <br>
+          {{ formfield "Trad_learn" }}
+        </div>
         <br>
-        {{ formfield "ES_learn" }}
-      </div>
-      <br>
-      Okay, now you make the actual decision. Please decide which books Alex gets.
-      <div style="text-align: center;">
-        <br>
-        <div style="display: inline-block; background-color: lightblue; padding: 10px;">
-          {{ formfield "ES_wtp" }}
+        Okay, now you make the actual decision. Please decide which books Alex gets.
+        <div style="text-align: center;">
+          <br>
+          <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+            {{ formfield "Trad_wtp" }}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<br>
+  <br>
 
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with the original or fake notes</h5>
-    <div class="card-text">
-      It is important that you understand which case we are in. Please answer the question below.
-      <div style="text-align: center;">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+      <div class="card-text">
+        It is important that you understand which case we are in. Please answer the question below.
+        <div style="text-align: center;">
+          <br>
+          {{ formfield "ES_learn" }}
+        </div>
         <br>
-        {{ formfield "Trad_learn" }}
-      </div>
-      <br>
-      Okay, now you make the actual decision. Please decide which books Alex gets.
-      <div style="text-align: center;">
-        <br>
-        <div style="display: inline-block; background-color: lightblue; padding: 10px;">
-          {{ formfield "Trad_wtp" }}
+        Okay, now you make the actual decision. Please decide which books Alex gets.
+        <div style="text-align: center;">
+          <br>
+          <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+            {{ formfield "ES_wtp" }}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+{{ else }}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+      <div class="card-text">
+        It is important that you understand which case we are in. Please answer the question below.
+        <div style="text-align: center;">
+          <br>
+          {{ formfield "ES_learn" }}
+        </div>
+        <br>
+        Okay, now you make the actual decision. Please decide which books Alex gets.
+        <div style="text-align: center;">
+          <br>
+          <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+            {{ formfield "ES_wtp" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with the original or fake notes</h5>
+      <div class="card-text">
+        It is important that you understand which case we are in. Please answer the question below.
+        <div style="text-align: center;">
+          <br>
+          {{ formfield "Trad_learn" }}
+        </div>
+        <br>
+        Okay, now you make the actual decision. Please decide which books Alex gets.
+        <div style="text-align: center;">
+          <br>
+          <div style="display: inline-block; background-color: lightblue; padding: 10px;">
+            {{ formfield "Trad_wtp" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ endif }}
 
 <br>
 
