@@ -144,10 +144,10 @@
 <script>
 	parameters={
     playerID : "{{participant.code}}",
-		leftHeader:"Fake notes and ...",
-		rightHeader:"Original notes and ...",
-		leftBonus:[5,10,15,20,25,30,35,40,45,50],
-		rightBonus:[0,0,0,0,0,0,0,0,0,0],
+		leftHeader:"Original notes and...", 
+		rightHeader:"Fake notes and...",
+		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
+		rightBonus: {{ WTP_VALUES|safe }},
 		varname:"ES_wtp3", //variable name on oTree  ES_wtp3', '',
 		root:"wtp_elicitation_1",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_1"
@@ -167,10 +167,10 @@
 	wtp_1 =new drawWTP(parameters);
 	parameters={
     playerID : "{{participant.code}}",
-		leftHeader:"Fake notes and ...",
-		rightHeader:"Original notes and ...",
-		leftBonus:[0,0,0,0,0,0,0,0,0,0],
-		rightBonus:[5,10,15,20,25,30,35,40,45,50],
+		leftHeader:"Original notes and...", 
+		rightHeader:"Fake notes and...",
+		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
+		rightBonus: {{ WTP_VALUES|safe }},
 		varname:"Trad_wtp3", //variable name on oTree 
 		root:"wtp_elicitation_2",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_2"

@@ -21,6 +21,7 @@ class C(BaseConstants):
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
     DETAIL = 'welfare/Review-detail.html'
+    WTP_VALUES = [5,10,15,20,25,30,35,40,45,50]
 
 
 class Subsession(BaseSubsession):
@@ -108,6 +109,11 @@ class Player(BasePlayer):
     Trad_wtp3 = models.StringField()
     ES_learn3 = learn()
     Trad_learn3 = learn()
+
+    ES_wtp3_bounds = models.StringField()
+
+    Trad_wtp3_bounds = models.StringField()
+    
     experience = models.BooleanField(blank=True,
                                      label="<strong>Would you go into the machine?</strong>",
                                      choices=[
@@ -220,6 +226,24 @@ class Player(BasePlayer):
                                  ])
 ###############################################  FUNCTIONS   ###########################################################
 
+
+def get_wtp_bounds(player, wtp3): 
+    cutoff = json.loads(wtp3)['cutoff']
+    parts = cutoff.split(":")
+    side = parts[0]
+    row = int(parts[1])
+
+    if side == "right":
+        row = row-1
+        side="left"
+
+    WTP_VALUES = [0]+C.WTP_VALUES +[float('inf')]
+
+    WTP_bound = (WTP_VALUES[row+1],WTP_VALUES[row+2])
+    return WTP_bound 
+
+
+
 def ES_wtp2_choices(player):
     if player.ES_wtp == 1:
         choices = [[1, 'Original notes'],
@@ -296,9 +320,15 @@ class CQ(Page):
                     exec("%s += 1" % name)
             return error_messages
 
-
 class PostCQs(Page):
-    pass
+
+    @staticmethod
+    def vars_for_template(player):
+
+        dollarValues = [1] +  C.WTP_VALUES
+        return {
+             'dollarValues':  json.dumps(dollarValues)
+         }
 
 
 class Cases(Page):
@@ -398,9 +428,20 @@ class Cases3(Page):
 
     @staticmethod
     def vars_for_template(player):
-        player.participant.ES_strict = json.dumps(True)
-        player.participant.Trad_strict = json.dumps(True)
-        pass
+        ES_wtp = player.field_maybe_none('ES_wtp')
+        Trad_wtp = player.field_maybe_none('Trad_wtp')
+        ES_wtp2 = player.field_maybe_none('ES_wtp2')
+        Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
+
+        player.participant.ES_strict = json.dumps(ES_wtp == 1 and ES_wtp2 == 1)
+        player.participant.Trad_strict = json.dumps(Trad_wtp == 1 and Trad_wtp2 == 1)
+        
+        zeroes_list = [0] * len(C.WTP_VALUES)
+        return {
+             'WTP_VALUES':  json.dumps(C.WTP_VALUES),
+             'WTP_VALUES_ZEROES':  json.dumps(zeroes_list)
+         }
+        
 
     @staticmethod
     def is_displayed(player: Player):
@@ -420,11 +461,11 @@ class ReviewStatements(Page):
 class PostMPL(Page):
     @staticmethod
     def vars_for_template(player):
+        
+        player.ES_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.ES_wtp3))
+        player.Trad_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.Trad_wtp3))
 
-        cutoff = json.loads(player.ES_wtp3)['cutoff']
-        parts = cutoff.split(":")
-        side = parts[0]
-        row = parts[1]
+        print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
         pass
 
 

@@ -75,6 +75,7 @@ function generateModalRows(dollarValues) {
 
 
       // Loop through the dollar values and create list items for each value
+      var dollarValues = JSON.parse(dollarValues)
       for (var i = 0; i < dollarValues.length; i++) {
         var boldPlus = document.createElement("span");
         boldPlus.className = "bold";
@@ -90,7 +91,7 @@ function generateModalRows(dollarValues) {
     }
 
     // Call the generateModalRows function with the input list
-    var dollarValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+    var dollarValues = {{ dollarValues|safe }}
     generateModalRows(dollarValues);
 
 </script>

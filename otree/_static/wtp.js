@@ -3,8 +3,8 @@
 function drawWTP(parameters){
     this.leftHeader=parameters.leftHeader
     this.rightHeader=parameters.rightHeader
-    this.leftBonus=parameters.leftBonus
-    this.rightBonus=parameters.rightBonus
+    this.leftBonus=JSON.parse(parameters.leftBonus)
+    this.rightBonus=JSON.parse(parameters.rightBonus)
     this.varname=parameters.varname
     this.root=parameters.root
     this.hidden_fields_name=parameters.hidden_fields_name
