@@ -418,7 +418,14 @@ class ReviewStatements(Page):
 
 
 class PostMPL(Page):
-    pass
+    @staticmethod
+    def vars_for_template(player):
+
+        cutoff = json.loads(player.ES_wtp3)['cutoff']
+        parts = cutoff.split(":")
+        side = parts[0]
+        row = parts[1]
+        pass
 
 
 class Experience(Page):
