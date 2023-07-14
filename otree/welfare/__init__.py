@@ -77,7 +77,7 @@ def why():
 class Player(BasePlayer):
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
-                                 label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
+                                 label='Which books do you prefer Alex to receive in this case?',
                                  choices=[  # Do we care about randomizing order of choices?
                                      [1, 'Original notes'],
                                      [2, 'Fake notes'],
