@@ -261,6 +261,11 @@
 </div>
 
 
+<input type="hidden" name="Trad_learn_mistakes" id="Trad_learn_mistakes" />
+<input type="hidden" name="ES_learn_mistakes" id="ES_learn_mistakes" />
+{{ formfield_errors 'Trad_learn_mistakes' }}
+{{ formfield_errors 'ES_learn_mistakes' }}
+
 {% endblock %}
 
 {% block styles %}
@@ -313,6 +318,9 @@
     document.getElementById(footer).classList.remove('text-muted')
     document.getElementById(footer).style.backgroundColor = 'aquamarine';
   }
+
+  document.getElementById('ES_learn_mistakes').value = 0;
+  document.getElementById('Trad_learn_mistakes').value = 0;
   function disable(text, radio1, radio2, radio3, footer, mistake) {
     document.getElementById(text).textContent = 'After correctly answering the question above, you will be enabled ' +
             'to decide which books Alex receives.';
@@ -321,7 +329,7 @@
     document.getElementById(radio3).disabled = true;
     document.getElementById(footer).classList.add('text-muted')
     document.getElementById(footer).style.backgroundColor = null;
-    document.getElementById(mistake).value += 1;
+    document.getElementById(mistake).value = parseInt(document.getElementById(mistake).value) +1;
   }
 </script>
 
