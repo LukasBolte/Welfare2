@@ -12,14 +12,99 @@ Please review your responses
     [provide a summary of overall preferences; 2, 3, 4, 11, 12 or 20 sentences]
 </p> 
 
+<p>Which books do you prefer Alex to receive?</p>
+
+<ol id="modalList">
+    <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+    <li>...the ones with the original or fake notes?</li> -->
+</ol>
+
+<ol id="modalList2">
+    <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+    <li>...the ones with the original or fake notes?</li> -->
+</ol>
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
 {% endblock %}
 
 {% block styles %}
 
+<style>
+    .bold {
+        font-weight: bold;
+      }
+</style>
+
+
 {% endblock %}
 
 {% block scripts %}
 
+<script>
+    // Function to generate rows in the modal based on an input list of dollar values
+    
+    function generateModalRows(myId,dollarValues,row,indifference) {
+        var modalList = document.getElementById(myId);
+    
+        var originalBonuses = [' and $1','']
+        var fakeBonuses = ['','']
+        for (var i = 0; i < dollarValues.length; i++) {
+            originalBonuses.push('')
+            fakeBonuses.push(' and $'+dollarValues[i].toString())
+        };
+        var leftList = []
+        var rightList = []
+        for (var i = 0; i< fakeBonuses.length; i++){
+            leftList.push('I prefer Alex to receive the ones with the original notes'+originalBonuses[i]+' over the ones with the fake notes'+fakeBonuses[i])
+            rightList.push('I prefer Alex to receive the ones with the fake notes'+fakeBonuses[i]+' over the ones with the original notes'+originalBonuses[i])     
+        }
+        var indifferent='I am indifferent between Alex receiving the ones with the original notes or the ones with the fake notes'
+
+         // the participant's preferences are coded in x
+
+        // Loop through the dollar values and create list items for each value
+        var myAnswer = 'left'
+        for (var i = 0; i < originalBonuses.length; i++) {
+
+            if (row<=i) {
+              myAnswer ='right'
+                
+            } 
+            
+            var listItem = document.createElement("li");
+
+            if (i==1 && indifference)  {
+                myAnswer = 'indifference'
+            }
+            
+            if (myAnswer == 'right') {
+                listItem.innerHTML = rightList[i]
+            } else if (myAnswer == 'indifference') {
+                listItem.innerHTML = indifferent
+                myAnswer = 'right';
+            } else {
+                listItem.innerHTML = leftList[i];
+            };
+ 
+            modalList.appendChild(listItem);
+            }
+
+        // var boldPlus = document.createElement("span");
+        // boldPlus.className = "bold";
+        // boldPlus.textContent = "and $";
+        // boldPlus.textContent += dollarValues[i];
+    }
+
+    // Call the generateModalRows function with the input list
+    var dollarValues = {{ dollarValues|safe }}
+    generateModalRows('modalList',dollarValues,{{ row|safe }},{{ indifference|safe }});
+    
+    generateModalRows('modalList2',dollarValues,{{ row2|safe }},{{ indifference2|safe }});
+    
+
+    </script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
 {% endblock %}

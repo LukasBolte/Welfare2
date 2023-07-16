@@ -30,8 +30,8 @@ Well Done!
             <div class="modal-body">
                 <p>Which books do you prefer Alex to receive?</p>
                 <ol id="modalList">
-                    <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
-                    <li>...the ones with the original or fake notes?</li>
+                    <li>...the ones with the original notes <span class='bold'>and $1</span> or fake notes?</li>
+                    <li>...the ones with the original notes or fake notes?</li>
                 </ol>
             </div>
             <div class="modal-footer">
@@ -75,7 +75,6 @@ function generateModalRows(dollarValues) {
 
 
       // Loop through the dollar values and create list items for each value
-      var dollarValues = JSON.parse(dollarValues)
       for (var i = 0; i < dollarValues.length; i++) {
         var boldPlus = document.createElement("span");
         boldPlus.className = "bold";

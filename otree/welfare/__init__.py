@@ -228,6 +228,8 @@ class Player(BasePlayer):
 
 
 def get_wtp_bounds(player, wtp3): 
+    if wtp3==None:
+        return "WTP is None"
     cutoff = json.loads(wtp3)['cutoff']
     parts = cutoff.split(":")
     side = parts[0]
@@ -240,7 +242,7 @@ def get_wtp_bounds(player, wtp3):
     WTP_VALUES = [0]+C.WTP_VALUES +[float('inf')]
 
     WTP_bound = (WTP_VALUES[row+1],WTP_VALUES[row+2])
-    return WTP_bound 
+    return WTP_bound, row-2
 
 
 
@@ -457,16 +459,45 @@ class ReviewStatements(Page):
     form_model = 'player'
     form_fields = ['review']
 
-
-class PostMPL(Page):
     @staticmethod
     def vars_for_template(player):
         
-        player.ES_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.ES_wtp3))
-        player.Trad_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.Trad_wtp3))
 
-        print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
-        pass
+        # player.ES_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('ES_wtp3')))
+        # player.Trad_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3')))
+
+        # if player.ES_wtp==3:
+        #     row = 1
+        #     indifference = True
+        # else:
+        #     indifference = False 
+        # if player.ES_wtp==2:
+        #     if player.ES_wtp1==1:
+        #         row = 1
+        #     else:
+        #         row = 0
+        # if player.ES_wtp==1:
+
+
+
+
+        # print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
+
+        # dollarValues = [1] +  C.WTP_VALUES
+
+
+
+        return {
+             'dollarValues':  json.dumps(dollarValues),
+             'row': json.dumps(3),
+             'indifference': json.dumps(False)
+             'row1': json.dumps(1),
+             'indifference1': json.dumps(True)
+         }
+
+
+class PostMPL(Page):
+    pass
 
 
 class Experience(Page):
@@ -508,6 +539,7 @@ page_sequence = [
     Cases2,
     Cases3Explain,
     Cases3,
+    ReviewStatements,
     PostMPL,
     Experience,
     Arkansas,
