@@ -490,7 +490,7 @@ class ReviewStatements(Page):
         return {
              'dollarValues':  json.dumps(dollarValues),
              'row': json.dumps(3),
-             'indifference': json.dumps(False)
+             'indifference': json.dumps(False),
              'row1': json.dumps(1),
              'indifference1': json.dumps(True)
          }
