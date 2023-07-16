@@ -477,7 +477,7 @@ class ReviewStatements(Page):
         #     else:
         #         row = 0
         # if player.ES_wtp==1
-        
+
         # print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
 
         dollarValues = [1] +  C.WTP_VALUES
@@ -488,8 +488,8 @@ class ReviewStatements(Page):
              'dollarValues':  json.dumps(dollarValues),
              'row': json.dumps(3),
              'indifference': json.dumps(False),
-             'row1': json.dumps(1),
-             'indifference1': json.dumps(True)
+             'row2': json.dumps(1),
+             'indifference2': json.dumps(True)
          }
 
 
