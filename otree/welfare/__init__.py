@@ -38,6 +38,26 @@ def creating_session(subsession: Subsession):
 class Group(BaseGroup):
     pass
 
+# def make_field(case):
+#     if case == 1:
+#         label = '<strong>Which books do you prefer Alex to receive in this case?</strong>'
+#         choices = [
+#             [1, 'Original notes'],
+#             [2, 'Fake notes'],
+#             [3, 'I am indifferent']
+#         ]
+#     else:
+#         label = '<strong>Which book and bonus do you prefer Alex to receive in this case?</strong>'
+#         choices = [
+#             [1, 'Original notes'],
+#             [2, 'Fake notes + $1'],
+#             [3, 'I am indifferent']
+#         ]
+#     return models.IntegerField(blank=True,
+#                                choices=choices,
+#                                widget=widgets.RadioSelectHorizontal,
+#                                label=label
+#                                )
 
 def learn():
     return models.IntegerField(blank=True,
@@ -66,6 +86,7 @@ class Player(BasePlayer):
                                  ])
     Trad_wtp = models.IntegerField(blank=True,
                                    widget=widgets.RadioSelectHorizontal,
+                                   # label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
                                    label='Which books do you prefer Alex to receive in this case?',
                                    choices=[  # Do we care about randomizing order of choices?
                                        [1, 'Original notes'],
@@ -319,10 +340,9 @@ class Cases(Page):
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
-            solutions = dict(
-                ES_learn=2,
-                Trad_learn=1
-            )
+            solutions = dict(ES_learn=2,
+                             Trad_learn=1
+                             )
             error_messages = dict()
             for field_name in solutions:
                 if values[field_name] is None:
@@ -456,14 +476,11 @@ class ReviewStatements(Page):
         #         row = 1
         #     else:
         #         row = 0
-        # if player.ES_wtp==1:
-
-
-
-
+        # if player.ES_wtp==1
+        
         # print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
 
-        # dollarValues = [1] +  C.WTP_VALUES
+        dollarValues = [1] +  C.WTP_VALUES
 
 
 
@@ -509,12 +526,12 @@ class Redirect(Page):
 
 
 page_sequence = [
-    # Welcome,
-    # Consent,
-    # Instructions,
-    # EconomicsFan,
-    # CQ,
-    # PostCQs,
+    Welcome,
+    Consent,
+    Instructions,
+    EconomicsFan,
+    CQ,
+    PostCQs,
     Cases,
     Cases2,
     Cases3Explain,
