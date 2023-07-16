@@ -242,7 +242,7 @@ def get_wtp_bounds(player, wtp3):
     WTP_VALUES = [0]+C.WTP_VALUES +[float('inf')]
 
     WTP_bound = (WTP_VALUES[row+1],WTP_VALUES[row+2])
-    return WTP_bound, row-2
+    return WTP_bound, row+4
 
 
 
@@ -466,13 +466,49 @@ class ReviewStatements(Page):
         # player.ES_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('ES_wtp3')))
         # player.Trad_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3')))
 
-        # if player.ES_wtp==3:
-        #     row = 1
-        #     indifference = True
-        # else:
-        #     indifference = False 
-        # if player.ES_wtp==2:
-        #     if player.ES_wtp1==1:
+        
+        if player.ES_wtp==3:
+            row = 1
+            indifference = True
+        else:
+            indifference = False 
+
+
+        if player.ES_wtp==2: # Fake preferred to Original
+            if player.ES_wtp2==1: 
+                row=1
+            elif player.ES_wtp2==2:
+                row=0
+
+        if player.ES_wtp==1:
+            if player.ES_wtp2==1: 
+                _, row = get_wtp_bounds(player, player.field_maybe_none('ES_wtp3'))
+            elif player.ES_wtp2==2:
+                row=2
+
+
+        if player.Trad_wtp==3:
+            row2 = 1
+            indifference2 = True
+        else:
+            indifference2 = False 
+
+
+        if player.Trad_wtp==2: # Fake preferred to Original
+            if player.Trad_wtp2==1: 
+                row2=1
+            elif player.Trad_wtp2==2:
+                row2=0
+
+        if player.Trad_wtp==1:
+            if player.Trad_wtp2==1: 
+                _, row2 = get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3'))
+            elif player.Trad_wtp2==2:
+                row2=2
+
+
+
+
         #         row = 1
         #     else:
         #         row = 0
@@ -486,10 +522,11 @@ class ReviewStatements(Page):
 
         return {
              'dollarValues':  json.dumps(dollarValues),
-             'row': json.dumps(3),
-             'indifference': json.dumps(False),
-             'row2': json.dumps(1),
-             'indifference2': json.dumps(True)
+
+             'row': json.dumps(row),
+             'indifference': json.dumps(indifference),
+             'row2': json.dumps(row2),
+             'indifference2': json.dumps(indifference2)
          }
 
 
