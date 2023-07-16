@@ -506,16 +506,6 @@ class ReviewStatements(Page):
             elif player.Trad_wtp2==2:
                 row2=2
 
-
-
-
-        #         row = 1
-        #     else:
-        #         row = 0
-        # if player.ES_wtp==1
-
-        # print(player.ES_wtp3_bounds,player.Trad_wtp3_bounds)
-
         dollarValues = [1] +  C.WTP_VALUES
 
 
