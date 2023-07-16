@@ -335,7 +335,7 @@ class PostCQs(Page):
 
 class Cases(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn']
+    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes']
 
     @staticmethod
     def error_message(player, values):
