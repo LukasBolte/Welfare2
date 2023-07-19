@@ -362,11 +362,11 @@ class Cases2(Page):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         if Trad_wtp == 3:
-            return ['ES_wtp2', 'ES_learn2']
+            return ['ES_wtp2', 'ES_learn2', 'ES_learn2_mistakes']
         elif ES_wtp == 3:
-            return ['Trad_wtp2', 'Trad_learn2']
+            return ['Trad_wtp2', 'Trad_learn2', 'Trad_learn2_mistakes']
         else:
-            return ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
+            return ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2', 'ES_learn2_mistakes', 'Trad_learn2_mistakes']
 
     @staticmethod
     def error_message(player, values):
