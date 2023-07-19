@@ -12,7 +12,7 @@ Introduction
 class C(BaseConstants):
     NAME_IN_URL = 'welfare'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 1
+    NUM_ROUNDS = 2
     MIN_TIME = 15  # in minutes
     MAX_TIME = 25  # in minutes
     BONUS_PER_CORRECT_TASK_PART1 = cu(0.15)
@@ -59,6 +59,7 @@ class Group(BaseGroup):
 #                                label=label
 #                                )
 
+
 def learn():
     return models.IntegerField(blank=True,
                                choices=[
@@ -76,6 +77,16 @@ def why():
 
 
 class Player(BasePlayer):
+    confirm = models.IntegerField(
+                                choices=[
+                                  [1, 'Yes, the answers above reflect what I intended to answer'],
+                                  [2, 'No, I want to give my answers again']
+                              ],
+                              widget=widgets.RadioSelect,
+                              label='Do the above answers reflect what you intended to answer or do you want to give your answers again?'
+                              )
+    
+
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
                                  label='Which books do you prefer Alex to receive in this case?',
@@ -284,19 +295,27 @@ def Trad_wtp2_error_message(player, value):
 ######################################################  PAGES   ########################################################
 
 class Welcome(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 
 class Consent(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 
 class Instructions(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 
 class EconomicsFan(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 
 class CQ(Page):
@@ -321,6 +340,10 @@ class CQ(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+        
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 class PostCQs(Page):
 
@@ -331,6 +354,10 @@ class PostCQs(Page):
         return {
              'dollarValues':  json.dumps(dollarValues)
          }
+    
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
 
 
 class Cases(Page):
@@ -457,7 +484,7 @@ class Cases3(Page):
 
 class ReviewStatements(Page):
     form_model = 'player'
-    form_fields = ['review']
+    form_fields = ['confirm']
 
     @staticmethod
     def vars_for_template(player):
@@ -519,24 +546,48 @@ class ReviewStatements(Page):
              'indifference2': json.dumps(indifference2)
          }
 
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1
+
+
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.participant.confirm = player.confirm
 
 class PostMPL(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
 
 
 class Experience(Page):
     form_model = 'player'
     form_fields = ['experience', 'experienceWhy']
 
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
+
+
 
 class Arkansas(Page):
     form_model = 'player'
     form_fields = ['arkansas', 'arkansasWhy']
+    
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
 
 
 class Warhol(Page):
     form_model = 'player'
     form_fields = ['warhol', 'warholWhy']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
+
 
 
 class End(Page):
@@ -544,12 +595,18 @@ class End(Page):
     form_fields = ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']
 
     @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
+
+    @staticmethod
     def before_next_page(player, timeout_happened):
         player.participant.finished = True
 
 
 class Redirect(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
 
 
 page_sequence = [

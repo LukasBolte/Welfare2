@@ -9,20 +9,76 @@ Please review your responses
 {{ endif }}
 
 <p>
-    [provide a summary of overall preferences; 2, 3, 4, 11, 12 or 20 sentences]
-</p> 
+    Please review your responses for the two cases. 
+</p>
+{{ if participant.switch_order }}
 
-<p>Which books do you prefer Alex to receive?</p>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes
+        </h5>
+        <div class="card-text">
+            <ol id="modalList">
+            <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+            <li>...the ones with the original or fake notes?</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
 
-<ol id="modalList">
-    <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
-    <li>...the ones with the original or fake notes?</li> -->
-</ol>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the ones with
+            the original or fake notes</h5>
+        <div class="card-text">
+            <ol id="modalList2">
+            <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+            <li>...the ones with the original or fake notes?</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
 
-<ol id="modalList2">
-    <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
-    <li>...the ones with the original or fake notes?</li> -->
-</ol>
+{{ else }}
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the ones with
+            the original or fake notes</h5>
+        
+        <div class="card-text">
+            <ol id="modalList2">
+            <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+            <li>...the ones with the original or fake notes?</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with the original or fake
+            notes
+            </h5>
+        <div class="card-text">
+            <ol id="modalList">
+            <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
+            <li>...the ones with the original or fake notes?</li> -->
+            </ol>
+        </div>
+    </div>
+</div>
+
+{{ endif}}
+
+{{ formfield 'confirm' }}
+
+<p>
+    Please click "Next" to proceed to the next page.
+</p>
+
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
 {% endblock %}
@@ -39,6 +95,13 @@ Please review your responses
 {% endblock %}
 
 {% block scripts %}
+
+<script>
+    function setValue(value) {
+        document.getElementById('inputField').value = value;
+    }
+</script>
+
 
 <script>
     // Function to generate rows in the modal based on an input list of dollar values
