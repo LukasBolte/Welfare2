@@ -379,6 +379,9 @@ class Cases(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==1 or (player.participant.confirm==player.round_number)
 
 
 class Cases2(Page):
@@ -415,7 +418,7 @@ class Cases2(Page):
     def is_displayed(player: Player):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
-        return not (ES_wtp == 3 and Trad_wtp == 3)  # if indifferent in both skip this page
+        return not (ES_wtp == 3 and Trad_wtp == 3) and (player.round_number==1 or (player.participant.confirm==player.round_number)) # if indifferent in both skip this page
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -431,7 +434,7 @@ class Cases3Explain(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         ES_wtp2 = player.field_maybe_none('ES_wtp2')
         Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
-        return (ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)
+        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and (player.round_number==1 or (player.participant.confirm==player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 
@@ -478,7 +481,7 @@ class Cases3(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         ES_wtp2 = player.field_maybe_none('ES_wtp2')
         Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
-        return (ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)
+        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and (player.round_number==1 or (player.participant.confirm==player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 
