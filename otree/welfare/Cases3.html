@@ -153,16 +153,8 @@
 		hidden_fields_name:"hidden_fields_wtp_elicitation_1"
 	}
 
-  ES_strict = JSON.parse("{{participant.ES_strict}}")
-  Trad_strict = JSON.parse("{{participant.Trad_strict}}")
-
-  if (ES_strict==false) {
-    document.getElementById("ES_id").style.display = "none"
-  }
-	
-  if (Trad_strict==false) {
-    document.getElementById("Trad_id").style.display = "none"
-  }
+  
+  
 
 	wtp_1 =new drawWTP(parameters);
 	parameters={
@@ -177,5 +169,18 @@
 	}
  
 	wtp_2 =new drawWTP(parameters);
+
+  ES_strict = JSON.parse("{{participant.ES_strict}}")
+  Trad_strict = JSON.parse("{{participant.Trad_strict}}")
+
+  if (ES_strict==false) {
+    document.getElementById("ES_id").style.display = "none"
+    document.getElementById("ES_wtp3").value="NA"
+  }
+	
+  if (Trad_strict==false) {
+    document.getElementById("Trad_id").style.display = "none"
+    document.getElementById("Trad_wtp3").value="NA"
+  }
 </script>
 {% endblock %}
