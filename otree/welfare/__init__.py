@@ -418,7 +418,9 @@ class Cases2(Page):
     def is_displayed(player: Player):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
-        return not (ES_wtp == 3 and Trad_wtp == 3) and (player.round_number==1 or (player.participant.confirm==player.round_number)) # if indifferent in both skip this page
+        return not (ES_wtp == 3 and Trad_wtp == 3) and \
+            (player.round_number == 1 or (player.participant.confirm == player.round_number))
+        # if indifferent in both skip this page
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -434,13 +436,14 @@ class Cases3Explain(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         ES_wtp2 = player.field_maybe_none('ES_wtp2')
         Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
-        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and (player.round_number==1 or (player.participant.confirm==player.round_number))
+        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and \
+            (player.round_number == 1 or (player.participant.confirm == player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 
 class Cases3(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3']
+    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3', 'ES_learn3_mistakes', 'Trad_learn3_mistakes']
 
     @staticmethod
     def error_message(player, values):
@@ -613,12 +616,12 @@ class Redirect(Page):
 
 
 page_sequence = [
-    Welcome,
-    Consent,
-    Instructions,
-    EconomicsFan,
-    CQ,
-    PostCQs,
+    # Welcome,
+    # Consent,
+    # Instructions,
+    # EconomicsFan,
+    # CQ,
+    # PostCQs,
     Cases,
     Cases2,
     Cases3Explain,

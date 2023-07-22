@@ -20,10 +20,27 @@
       <div class="card-body">
         <h5 class="card-title">Case 1: Remember, in this case, we WILL tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
-    <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-          {{ formfield "Trad_learn3" }}
 
-          <p>Please tell us which option you prefer by clicking the table below.</p>
+          {{ formfield_errors 'Trad_learn3' }}
+
+          {{ form.Trad_learn3.label }}
+                <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad1" value="1"
+                   onclick="enable('after_answeringTrad', 'id_Trad_wtp3')">
+            <label class="form-check-label" for="Trad1">Yes, they will learn</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad2" value="2"
+                   onclick="disable('after_answeringTrad', 'id_Trad_wtp3', 'Trad_learn3_mistakes')">
+            <label class="form-check-label" for="Trad2">No, they will not learn</label>
+          </div>
+
+
+          <p id="after_answeringTrad">
+              After correctly answering the question above, please tell us which option you prefer by clicking the
+              table below.
+          </p>
+
           <div id="wtp_elicitation_2"></div>
           <div id="hidden_fields_wtp_elicitation_2"></div>
           {{ formfield_errors 'Trad_wtp3' }}
@@ -37,9 +54,24 @@
         <h5 class="card-title">Case 2: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
     <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
-          {{ formfield "ES_learn3" }}
+          {{ formfield_errors 'ES_learn3' }}
 
-          <p>Please tell us which option you prefer by clicking the table below.</p>
+          {{ form.ES_learn3.label }}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ES_learn3" id="ES1" value="1"
+                   onclick="disable('after_answeringES', 'id_ES_wtp3', 'ES_learn3_mistakes')">
+            <label class="form-check-label" for="ES1">Yes, they will learn</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="ES_learn3" id="ES2" value="2"
+            onclick="enable('after_answeringES', 'id_ES_wtp3')">
+            <label class="form-check-label" for="ES2">No, they will not learn</label>
+          </div>
+
+          <p id="after_answeringES">
+              After correctly answering the question above, please tell us which option you prefer by clicking the
+              table below.
+          </p>
 
           <div id="wtp_elicitation_1"></div>
           <div id="hidden_fields_wtp_elicitation_1"></div>
@@ -57,7 +89,8 @@
     <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
           {{ formfield "ES_learn3" }}
 
-          <p>Please tell us which option you prefer by clicking the table below.</p>
+          <p>After correctly answering the question above, please tell us which option you prefer by clicking the
+              table below.</p>
 
           <div id="wtp_elicitation_1"></div>
           <div id="hidden_fields_wtp_elicitation_1"></div>
@@ -75,7 +108,8 @@
     <!--    <h6 class="card-subtitle mb-2 text-muted"></h6>-->
           {{ formfield "Trad_learn3" }}
 
-          <p>Please tell us which option you prefer by clicking the table below.</p>
+          <p>PAfter correctly answering the question above, please tell us which option you prefer by clicking the
+              table below.</p>
           <div id="wtp_elicitation_2"></div>
           <div id="hidden_fields_wtp_elicitation_2"></div>
           {{ formfield_errors 'Trad_wtp3' }}
@@ -113,6 +147,10 @@
 
 {{ formfield_errors 'ES_learn3' }}
 
+<input type="hidden" name="Trad_learn3_mistakes" id="Trad_learn3_mistakes" />
+<input type="hidden" name="ES_learn3_mistakes" id="ES_learn3_mistakes" />
+{{ formfield_errors 'Trad_learn3_mistakes' }}
+{{ formfield_errors 'ES_learn3_mistakes' }}
 
 {% endblock %}
 
@@ -128,6 +166,7 @@
     background-color: orange !important;
     }
 </style>
+
 {% endblock %}
 
 {% block scripts %}
@@ -142,6 +181,36 @@
 
 
 <script>
+    document.getElementById('Trad1').value = 1;
+    document.getElementById('Trad2').value = 2;
+    document.getElementById('ES1').value = 1;
+    document.getElementById('ES2').value = 2;
+
+  function enable(text, table) {
+    document.getElementById(text).textContent = 'Now, please tell us which option you prefer by clicking the table ' +
+        'below:';
+    document.getElementById(table).classList.remove('text-muted')
+    document.getElementById(table).classList.remove('table-secondary')
+    document.getElementById(table).style.backgroundColor = 'aquamarine';
+  }
+
+  document.getElementById('ES_learn3_mistakes').value = 0;
+  document.getElementById('Trad_learn3_mistakes').value = 0;
+  function disable(text, table, mistake) {
+    document.getElementById(text).textContent = 'After correctly answering the question above, ' +
+        'please tell us which option you prefer by clicking the table below.';
+      document.getElementById(table).classList.add('text-muted')
+      document.getElementById(table).classList.add('table-secondary')
+    document.getElementById(table).style.backgroundColor = null;
+    document.getElementById(mistake).value = parseInt(document.getElementById(mistake).value) +1;
+  }
+
+
+
+
+
+
+
 	parameters={
     playerID : "{{participant.code}}" + "{{ player.round_number }}",
 		leftHeader:"Original notes and...", 
