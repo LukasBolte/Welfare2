@@ -19,6 +19,7 @@ function drawWTP(parameters){
 
     this.drawChoices = function(base,leftHeader,rightHeader,leftBonus,rightBonus){
         var table=document.createElement("table");
+        table.setAttribute("id","id_"+this.varname)
         table.className="table table-hover";
         base.appendChild(table);
         //add header

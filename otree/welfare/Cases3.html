@@ -143,7 +143,7 @@
 
 <script>
 	parameters={
-    playerID : "{{participant.code}}",
+    playerID : "{{participant.code}}" + "{{ player.round_number }}",
 		leftHeader:"Original notes and...", 
 		rightHeader:"Fake notes and...",
 		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
@@ -158,7 +158,7 @@
 
 	wtp_1 =new drawWTP(parameters);
 	parameters={
-    playerID : "{{participant.code}}",
+    playerID : "{{participant.code}}" + "{{ player.round_number }}",
 		leftHeader:"Original notes and...", 
 		rightHeader:"Fake notes and...",
 		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
