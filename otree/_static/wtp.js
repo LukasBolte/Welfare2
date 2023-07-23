@@ -21,6 +21,7 @@ function drawWTP(parameters){
         var table=document.createElement("table");
         table.setAttribute("id","id_"+this.varname)
         table.className="table table-hover table-secondary text-muted";
+        table.style.pointerEvents = 'none';
         base.appendChild(table);
         //add header
         var thead=document.createElement("thead");

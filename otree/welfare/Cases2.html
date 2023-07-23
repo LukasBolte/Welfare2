@@ -56,26 +56,24 @@
                 <div style="text-align: center;">
 
                      <p> <strong>{{ form.Trad_wtp2.label }}</strong></p>
-                                          <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
             <label class="form-check-label" for="originalTrad">
                 Original notes {{ if Trad_wtp == 2 }}+ $1{{endif}}
-            <!--                 Improve Original notes if in case.html they chose Fake -->
             </label>
           </div>
 
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad" value="2" disabled>
             <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}
-            <!--                 Improve Fake notes if in case.html they chose Original --></label>
           </div>
           </div>
         </div>
               </div>
           {{ else }}
-    <p>For case 1 we already know how to answer the 12 questions for you.
-    You don't need to do anything else for this case.
-    You will get a chance to review your responses to the questions in Case 2 later in the study.</p>
+      <p>For case 1 we already know how to answer the 12 questions for you.
+      You don't need to do anything else for this case.
+      You will get a chance to review your responses to the questions in Case 2 later in the study.</p>
           {{ endif }}
       </div>
     </div>
@@ -112,20 +110,20 @@
           After correctly answering the question above, you will be enabled to decide which books Alex receives.
         </div>
         <br>
-          <div class="card-footer text-muted" id="ES_footer">
-                      {{ formfield_errors 'ES_wtp2' }}
-                <div style="text-align: center;">
+        <div class="card-footer text-muted" id="ES_footer">
+          {{ formfield_errors 'ES_wtp2' }}
+          <div style="text-align: center;">
 
-                     <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
+              <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
 
-                                         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
-            <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
-            <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
-          </div>
+                                  <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
+      <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
+      </div>
+      <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
+      <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
+      </div>
 
           </div>
         </div>
@@ -160,39 +158,37 @@
 
           {{ form.ES_learn2.label }}
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_learn2" id="ES1_switched" value="1"
-                   onclick="disable('after_answeringES_switched', 'originalES_switched', 'fakeES_switched',
-            'indifferentES_switched', 'ES_footer_switched', 'ES_learn2_mistakes')">
-            <label class="form-check-label" for="ES1_switched">Yes, they will learn</label>
+            <input class="form-check-input" type="radio" name="ES_learn2" id="ES1" value="1"
+                   onclick="disable('after_answeringES', 'originalES', 'fakeES', 'indifferentES',
+                   'ES_footer', 'ES_learn2_mistakes')">
+            <label class="form-check-label" for="ES1">Yes, they will learn</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_learn2" id="ES2_switched" value="2"
-            onclick="enable('after_answeringES_switched', 'originalES_switched', 'fakeES_switched',
-            'indifferentES_switched', 'ES_footer_switched')">
-            <label class="form-check-label" for="ES2_switched">No, they will not learn</label>
+            <input class="form-check-input" type="radio" name="ES_learn2" id="ES2" value="2"
+            onclick="enable('after_answeringES', 'originalES', 'fakeES', 'indifferentES',
+                   'ES_footer')">
+            <label class="form-check-label" for="ES2">No, they will not learn</label>
           </div>
+
         </div>
         <br>
-        <div id="after_answeringES_switched">
+        <div id="after_answeringES">
           After correctly answering the question above, you will be enabled to decide which books Alex receives.
         </div>
         <br>
-          <div class="card-footer text-muted" id="ES_footer_switched">
-                      {{ formfield_errors 'ES_wtp2' }}
-                <div style="text-align: center;">
+        <div class="card-footer text-muted" id="ES_footer">
+          {{ formfield_errors 'ES_wtp2' }}
+    <div style="text-align: center;">
 
-                     <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
-                <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES_switched" value="1" disabled>
-            <label class="form-check-label" for="originalES_switched">
-                Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}
-            </label>
+         <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
+
+                             <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
+          <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES_switched" value="2" disabled>
-            <label class="form-check-label" for="fakeES_switched">
-                Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}
-            </label>
+          <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
+          <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
           </div>
           </div>
         </div>
@@ -205,62 +201,64 @@
       </div>
     </div>
 
+    
     <br>
-
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with
+        <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
               <div class="card-text">
           {{ if Trad_wtp != 3 }}
+
         <div style="text-align: center;">
           <br>
           {{ formfield_errors 'Trad_learn2' }}
 
           {{ form.Trad_learn2.label }}
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad1_switched" value="1"
-                   onclick="enable('after_answeringTrad_switched', 'originalTrad_switched', 'fakeTrad_switched',
-                   'indifferentTrad_switched', 'Trad_footer_switched')">
-            <label class="form-check-label" for="Trad1_switched">Yes, they will learn</label>
+                <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad1" value="1"
+                   onclick="enable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
+                   'Trad_footer')">
+            <label class="form-check-label" for="Trad1">Yes, they will learn</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad2_switched" value="2"
-            onclick="disable('after_answeringTrad_switched', 'originalTrad_switched', 'fakeTrad_switched',
-                   'indifferentTrad_switched', 'Trad_footer_switched', 'Trad_learn2_mistakes')">
-            <label class="form-check-label" for="Trad2_switched">No, they will not learn</label>
+            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad2" value="2"
+                   onclick="disable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
+                   'Trad_footer', 'Trad_learn2_mistakes')">
+            <label class="form-check-label" for="Trad2">No, they will not learn</label>
           </div>
+
         </div>
 
+
         <br>
-        <div id="after_answeringTrad_switched">
+        <div id="after_answeringTrad">
           After correctly answering the question above, you will be enabled to decide which books Alex receives.
         </div>
                   <br>
-                     <div class="card-footer text-muted" id="Trad_footer_switched">
+                     <div class="card-footer text-muted" id="Trad_footer">
                       {{ formfield_errors 'Trad_wtp2' }}
                 <div style="text-align: center;">
 
                      <p> <strong>{{ form.Trad_wtp2.label }}</strong></p>
-                    <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad_switched" value="1" disabled>
-            <label class="form-check-label" for="originalTrad_switched">
+              <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
+            <label class="form-check-label" for="originalTrad">
                 Original notes {{ if Trad_wtp == 2 }}+ $1{{endif}}
             </label>
           </div>
+
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad_switched" value="2" disabled>
-            <label class="form-check-label" for="fakeTrad_switched">
-                Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}
-            </label>
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad" value="2" disabled>
+            <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}
           </div>
           </div>
         </div>
               </div>
           {{ else }}
-    <p>For case 2 we already know how to answer the 12 questions for you.
-    You don't need to do anything else for this case.
-    You will get a chance to review your responses to the questions in Case 2 later in the study.</p>
+      <p>For case 1 we already know how to answer the 12 questions for you.
+      You don't need to do anything else for this case.
+      You will get a chance to review your responses to the questions in Case 2 later in the study.</p>
           {{ endif }}
       </div>
     </div>
@@ -304,8 +302,8 @@
 {% endblock %}
 
 {% block scripts %}
-{{ if participant.switch_order }}
-  <script>
+
+<script>
     document.getElementById('Trad1').value = 1;
     document.getElementById('Trad2').value = 2;
     document.getElementById('originalTrad').value = 1;
@@ -316,19 +314,6 @@
     document.getElementById('originalES').value = 1;
     document.getElementById('fakeES').value = 2;
   </script>
-{{ else }}
-  <script>
-    document.getElementById('Trad1_switched').value = 1;
-    document.getElementById('Trad2_switched').value = 2;
-    document.getElementById('originalTrad_switched').value = 1;
-    document.getElementById('fakeTrad_switched').value = 2;
-
-    document.getElementById('ES1_switched').value = 1;
-    document.getElementById('ES2_switched').value = 2;
-    document.getElementById('originalES_switched').value = 1;
-    document.getElementById('fakeES_switched').value = 2;
-  </script>
-{{ endif}}
 
 <script>
   function enable(text, radio1, radio2, radio3, footer) {
