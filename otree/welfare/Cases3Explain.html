@@ -14,8 +14,18 @@
     For each row, we ask you to choose between the left and right options.
 </p>
 
-[screenshot table]
-<p>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 col-sm-8 ">
+            <div class="img-container">
+                <img src="{% static 'img/mpl_screenshot.jpg' %}"  alt="Table with questions" class="img-fluid mpl_img">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p class="mt-3">
     We assume that once you choose the right option for one row, you will choose the right option for all rows below.
     You will only need to choose the row in which you switch from preferring the left option to preferring the right
     option.
@@ -32,6 +42,16 @@
 
 {% block styles %}
 
+<style>
+    .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mpl_img {
+      /* padding: 0 0 10px 10px; */
+    }
+</style>
 {% endblock %}
 
 {% block scripts %}
