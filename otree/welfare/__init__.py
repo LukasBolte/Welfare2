@@ -493,50 +493,43 @@ class ReviewStatements(Page):
     form_fields = ['confirm']
 
     @staticmethod
-    def vars_for_template(player):
-        
-
-        # player.ES_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('ES_wtp3')))
-        # player.Trad_wtp3_bounds = json.dumps(get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3')))
-
-        
-        if player.ES_wtp==3:
+    def vars_for_template(player):        
+        if player.Trad_wtp==3:
             row = 1
             indifference = True
         else:
             indifference = False 
 
-
-        if player.ES_wtp==2: # Fake preferred to Original
-            if player.ES_wtp2==1: 
+        if player.Trad_wtp==2: # Fake preferred to Original
+            if player.Trad_wtp2==1: 
                 row=1
-            elif player.ES_wtp2==2:
+            elif player.Trad_wtp2==2:
                 row=0
 
-        if player.ES_wtp==1:
-            if player.ES_wtp2==1: 
-                _, row = get_wtp_bounds(player, player.field_maybe_none('ES_wtp3'))
-            elif player.ES_wtp2==2:
+        if player.Trad_wtp==1:
+            if player.Trad_wtp2==1: 
+                _, row = get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3'))
+            elif player.Trad_wtp2==2:
                 row=2
 
 
-        if player.Trad_wtp==3:
+        if player.ES_wtp==3:
             row2 = 1
             indifference2 = True
         else:
             indifference2 = False 
 
 
-        if player.Trad_wtp==2: # Fake preferred to Original
-            if player.Trad_wtp2==1: 
+        if player.ES_wtp==2: # Fake preferred to Original
+            if player.ES_wtp2==1: 
                 row2=1
-            elif player.Trad_wtp2==2:
+            elif player.ES_wtp2==2:
                 row2=0
 
-        if player.Trad_wtp==1:
-            if player.Trad_wtp2==1: 
-                _, row2 = get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3'))
-            elif player.Trad_wtp2==2:
+        if player.ES_wtp==1:
+            if player.ES_wtp2==1: 
+                _, row2 = get_wtp_bounds(player, player.field_maybe_none('ES_wtp3'))
+            elif player.ES_wtp2==2:
                 row2=2
 
         dollarValues = [1] +  C.WTP_VALUES
