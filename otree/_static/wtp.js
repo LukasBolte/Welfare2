@@ -169,6 +169,7 @@ function drawWTP(parameters){
     //// starting
     //storage functions
     this.load=function(){
+        console.log('I am loading')
         var keyName=this.playerID+":"+this.root+":"+this.varname;
         var savedValue=localStorage.getItem(keyName); 
         //console.log(savedValue);
@@ -176,6 +177,7 @@ function drawWTP(parameters){
             var output=JSON.parse(savedValue);
             this.selectedCutoff = output["cutoff"]
             this.cutoffHistory = output["history"]
+            console.log(this.selectedCutoff)
             this.highlight(this.selectedCutoff,"darkorange");
             document.getElementById(this.varname).value=JSON.stringify({"history":this.cutoffHistory,"cutoff":this.selectedCutoff});   
         }

@@ -26,7 +26,7 @@
           {{ form.Trad_learn3.label }}
                 <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad1" value="1"
-                   onclick="enable('after_answeringTrad', 'id_Trad_wtp3')">
+                   onclick="enable('after_answeringTrad', 'id_Trad_wtp3',wtp_2)">
             <label class="form-check-label" for="Trad1">Yes, they will learn</label>
           </div>
           <div class="form-check form-check-inline">
@@ -64,7 +64,7 @@
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="ES_learn3" id="ES2" value="2"
-            onclick="enable('after_answeringES', 'id_ES_wtp3')">
+            onclick="enable('after_answeringES', 'id_ES_wtp3',wtp_1)">
             <label class="form-check-label" for="ES2">No, they will not learn</label>
           </div>
 
@@ -97,7 +97,7 @@
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="ES_learn3" id="ES2" value="2"
-        onclick="enable('after_answeringES', 'id_ES_wtp3')">
+        onclick="enable('after_answeringES', 'id_ES_wtp3',wtp_1)">
         <label class="form-check-label" for="ES2">No, they will not learn</label>
       </div>
 
@@ -124,7 +124,7 @@
           {{ form.Trad_learn3.label }}
                 <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad1" value="1"
-                   onclick="enable('after_answeringTrad', 'id_Trad_wtp3')">
+                   onclick="enable('after_answeringTrad', 'id_Trad_wtp3',wtp_2)">
             <label class="form-check-label" for="Trad1">Yes, they will learn</label>
           </div>
           <div class="form-check form-check-inline">
@@ -189,10 +189,10 @@
 
 <style>
   .orange{
-    background-color: #FFCF9E !important;
+    background-color: #fa8e00 !important;
     }
   .darkorange{
-    background-color: orange !important;
+    background-color: #fa8e00 !important;
     }
 </style>
 
@@ -221,13 +221,15 @@
 
 
 <script>
-  function enable(text, table) {
+  function enable(text, table,wtp) {
     document.getElementById(text).textContent = 'Now, please tell us which option you prefer by clicking the table ' +
         'below:';
     document.getElementById(table).classList.remove('text-muted')
     document.getElementById(table).classList.remove('table-secondary')
-    document.getElementById(table).style.backgroundColor = 'aquamarine';
+    document.getElementById(table).style.backgroundColor = 'navajowhite';
     document.getElementById(table).style.pointerEvents = '';
+    wtp.load();
+    console.log(wtp)
   }
 
   document.getElementById('ES_learn3_mistakes').value = 0;
@@ -240,6 +242,36 @@
     document.getElementById(table).classList.add('table-secondary')
     document.getElementById(table).style.pointerEvents = 'none';
     document.getElementById(table).style.backgroundColor = null;
+
+
+    function removeClassFromElementAndDescendants(element, className) {
+      element.classList.remove(className);
+      const children = element.children;
+      for (const child of children) {
+        removeClassFromElementAndDescendants(child, className);
+      }
+    }
+
+    function removeAllClassFromTable(table, className) {
+      if (!table) {
+        console.error(`Table not found.`);
+        return;
+      }
+
+      const allChildren = table.querySelectorAll('*');
+      allChildren.forEach((element) => {
+        removeClassFromElementAndDescendants(element, className);
+      });
+    }
+
+    // Usage:
+    const tableId = 'myTable';
+    const classNameToRemove = 'remove-me';
+
+    removeAllClassFromTable(document.getElementById(table), 'orange');
+    removeAllClassFromTable(document.getElementById(table), 'darkorange');
+
+
     document.getElementById(mistake).value = parseInt(document.getElementById(mistake).value) +1;
   }
 
