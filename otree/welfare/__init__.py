@@ -13,8 +13,8 @@ class C(BaseConstants):
     NAME_IN_URL = 'welfare'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 2
-    MIN_TIME = 15  # in minutes
-    MAX_TIME = 25  # in minutes
+    MIN_TIME = 10  # in minutes
+    MAX_TIME = 20  # in minutes
     # MAX_BONUS = cu(4.5)
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
@@ -605,11 +605,11 @@ class Redirect(Page):
 
 
 page_sequence = [
-    # Welcome,
-    # Consent,
-    # Instructions,
-    # EconomicsFan,
-    # CQ,
+    Welcome,
+    Consent,
+    Instructions,
+    EconomicsFan,
+    CQ,
     PostCQs,
     Cases,
     Cases2,
