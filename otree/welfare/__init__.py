@@ -479,9 +479,10 @@ class Cases(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1 or (player.participant.confirm==player.round_number)
+        return player.round_number == 1 or (player.participant.confirm == player.round_number)
 
 
 class Cases2(Page):
@@ -529,6 +530,7 @@ class Cases2(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         return dict(ES_wtp=ES_wtp,
                     Trad_wtp=Trad_wtp)
+
 
 class Cases3Explain(Page):
     @staticmethod
@@ -579,7 +581,6 @@ class Cases3(Page):
              'WTP_VALUES':  json.dumps(C.WTP_VALUES),
              'WTP_VALUES_ZEROES':  json.dumps(zeroes_list)
          }
-        
 
     @staticmethod
     def is_displayed(player: Player):
@@ -587,7 +588,8 @@ class Cases3(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         ES_wtp2 = player.field_maybe_none('ES_wtp2')
         Trad_wtp2 = player.field_maybe_none('Trad_wtp2')
-        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and (player.round_number==1 or (player.participant.confirm==player.round_number))
+        return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and \
+            (player.round_number == 1 or (player.participant.confirm == player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
 
 
@@ -597,43 +599,41 @@ class ReviewStatements(Page):
 
     @staticmethod
     def vars_for_template(player):        
-        if player.Trad_wtp==3:
+        if player.Trad_wtp == 3:
             row = 1
             indifference = True
         else:
             indifference = False 
 
-        if player.Trad_wtp==2: # Fake preferred to Original
-            if player.Trad_wtp2==1: 
-                row=1
-            elif player.Trad_wtp2==2:
-                row=0
+        if player.Trad_wtp == 2:  # Fake preferred to Original
+            if player.Trad_wtp2 == 1:
+                row = 1
+            elif player.Trad_wtp2 == 2:
+                row = 0
 
-        if player.Trad_wtp==1:
-            if player.Trad_wtp2==1: 
+        if player.Trad_wtp == 1:
+            if player.Trad_wtp2 == 1:
                 _, row = get_wtp_bounds(player, player.field_maybe_none('Trad_wtp3'))
-            elif player.Trad_wtp2==2:
-                row=2
+            elif player.Trad_wtp2 == 2:
+                row = 2
 
-
-        if player.ES_wtp==3:
+        if player.ES_wtp == 3:
             row2 = 1
             indifference2 = True
         else:
             indifference2 = False 
 
+        if player.ES_wtp == 2:  # Fake preferred to Original
+            if player.ES_wtp2 == 1:
+                row2 = 1
+            elif player.ES_wtp2 == 2:
+                row2 = 0
 
-        if player.ES_wtp==2: # Fake preferred to Original
-            if player.ES_wtp2==1: 
-                row2=1
-            elif player.ES_wtp2==2:
-                row2=0
-
-        if player.ES_wtp==1:
-            if player.ES_wtp2==1: 
+        if player.ES_wtp == 1:
+            if player.ES_wtp2 == 1:
                 _, row2 = get_wtp_bounds(player, player.field_maybe_none('ES_wtp3'))
-            elif player.ES_wtp2==2:
-                row2=2
+            elif player.ES_wtp2 == 2:
+                row2 = 2
 
         dollarValues = [1] + C.WTP_VALUES
 
@@ -658,7 +658,7 @@ class ReviewStatements(Page):
 class PostMPL(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.participant.confirm == player.round_number
 
 
 class Experience(Page):
