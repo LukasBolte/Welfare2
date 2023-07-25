@@ -207,38 +207,38 @@
       <div class="card-body">
         <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
-              <div class="card-text">
+          <div class="card-text">
           {{ if Trad_wtp != 3 }}
 
-        <div style="text-align: center;">
-          <br>
-          {{ formfield_errors 'Trad_learn2' }}
+            <div style="text-align: center;">
+            <br>
+            {{ formfield_errors 'Trad_learn2' }}
 
-          {{ form.Trad_learn2.label }}
-                <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad1" value="1"
-                   onclick="enable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
-                   'Trad_footer')">
-            <label class="form-check-label" for="Trad1">Yes, they will learn</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad2" value="2"
-                   onclick="disable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
-                   'Trad_footer', 'Trad_learn2_mistakes')">
-            <label class="form-check-label" for="Trad2">No, they will not learn</label>
-          </div>
+            {{ form.Trad_learn2.label }}
+              <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad1" value="1"
+                    onclick="enable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
+                    'Trad_footer')">
+              <label class="form-check-label" for="Trad1">Yes, they will learn</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Trad_learn2" id="Trad2" value="2"
+                      onclick="disable('after_answeringTrad', 'originalTrad', 'fakeTrad', 'indifferentTrad',
+                      'Trad_footer', 'Trad_learn2_mistakes')">
+                <label class="form-check-label" for="Trad2">No, they will not learn</label>
+              </div>
 
-        </div>
+            </div>
 
 
-        <br>
-        <div id="after_answeringTrad">
-          After correctly answering the question above, you will be enabled to decide which books Alex receives.
-        </div>
-                  <br>
-                     <div class="card-footer text-muted" id="Trad_footer">
-                      {{ formfield_errors 'Trad_wtp2' }}
-                <div style="text-align: center;">
+            <br>
+            <div id="after_answeringTrad">
+              After correctly answering the question above, you will be enabled to decide which books Alex receives.
+            </div>
+            <br>
+            <div class="card-footer text-muted" id="Trad_footer">
+              {{ formfield_errors 'Trad_wtp2' }}
+              <div style="text-align: center;">
 
                      <p> <strong>{{ form.Trad_wtp2.label }}</strong></p>
               <div class="form-check form-check-inline">
@@ -304,16 +304,29 @@
 {% block scripts %}
 
 <script>
-    document.getElementById('Trad1').value = 1;
-    document.getElementById('Trad2').value = 2;
-    document.getElementById('originalTrad').value = 1;
-    document.getElementById('fakeTrad').value = 2;
 
-    document.getElementById('ES1').value = 1;
-    document.getElementById('ES2').value = 2;
-    document.getElementById('originalES').value = 1;
-    document.getElementById('fakeES').value = 2;
-  </script>
+
+function setValueById(id, value) {
+  const element = document.getElementById(id);
+
+  // Check if the element exists before setting its value
+  if (element) {
+    element.value = value;
+  } else {
+    console.log(`Element with ID "${id}" not found.`);
+  }
+}
+setValueById('Trad1',1)
+setValueById('Trad2',2)
+setValueById('originalTrad',1)
+setValueById('fakeTrad',2)
+
+setValueById('ES1',1)
+setValueById('ES2',2)
+setValueById('originalES',1)
+setValueById('fakeES',2)
+
+</script>
 
 <script>
   function enable(text, radio1, radio2, radio3, footer) {

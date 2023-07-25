@@ -19,7 +19,7 @@ class C(BaseConstants):
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
     DETAIL = 'welfare/Review-detail.html'
-    WTP_VALUES = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    WTP_VALUES = [5, 10, 15, 20, 25, 30, 35, 40, 45]
 
 
 class Subsession(BaseSubsession):
@@ -196,28 +196,123 @@ class Player(BasePlayer):
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What do your answers determine?</strong>')
+    
+    gender = models.PositiveIntegerField(
+        blank=True,
+        label='Gender: Which gender identity do you most identify with?',
+                                         choices=[[0, 'Female'],
+                                                  [1, 'Male'],
+                                                  [2, 'Transgender female'],
+                                                  [3, 'Transgender male'],
+                                                  [4, 'Gender variant/Non-conforming'],
+                                                  [5, 'Not listed'],
+                                                  [6, 'Prefer not to answer']],
+                                         widget=widgets.RadioSelect)
+    ethnic = models.PositiveIntegerField(
+        blank=True,
+        label='Race: Which race do you most identify with?',
+                                         choices=[[0, 'White or Caucasian'],
+                                                  [1, 'Black or African American'],
+                                                  [2, 'Hispanic or Latino'],
+                                                  [3, 'Asian or Asian American'],
+                                                  [4, 'American Indian or Alaska Native'],
+                                                  [5, 'Native Hawaiian or Pacific Islander'],
+                                                  [6, 'Other'],
+                                                  [7, 'Prefer not to answer']],
+                                         widget=widgets.RadioSelect)
+    age = models.PositiveIntegerField(
+        blank=True,
+        label='Age: What is your age?',
+        choices=[[0, '18-25 years old'],
+                [1, '26-35 years old'],
+                [2, '36-45 years old'],
+                [3, '46-55 years old'],
+                [4, '56-65 years old'],
+                [5, 'Above 65 years old'],
+                [6, 'Prefer not to answer']],
+        widget=widgets.RadioSelect)
+    education = models.PositiveIntegerField(
+        blank=True,
+        label='Education: What is the highest level of school you have completed or the highest degree you have received?',
+        choices=[[1, 'Some high school'],
+                    [2, 'High school diploma (or equivalent, including GED)'],
+                    [3, "Some college"],
+                    [4, "Associate's degree in 2-year college"],
+                    [5, "Bachelor's degree in 4-year college"],
+                    [6, "Master's degree"],
+                    [7, "Doctoral degree (PhD)"],
+                    [8, "Professional doctorate (JD, MD)"],
+                    [9, "Prefer not to answer"]],
+        widget=widgets.RadioSelect)
+    marital = models.PositiveIntegerField(
+        blank=True,
+        label='What is your marital status?',
+        choices=[
+            [0, 'Single, never married'],
+            [1, 'Married or domestic partnership'],
+            [2, 'Widowed'],
+            [3, 'Divorced'],
+            [4, 'Separated'],
+            [5, 'Prefer not to answer']],
+    widget=widgets.RadioSelect)
+    income = models.PositiveIntegerField(
+        blank=True,
+        label='What is the annual income of your household? This includes money from jobs, net income from business, farm or rent, pensions, dividends, interest, social security payments and any other monetary income.',
+        choices=[[0, 'Less than $10,000'],
+                [1, '$10,000 to $29,999'],
+                [2, '$30,000 to $49,999'],
+                [3, '$50,000 to $69,999'],
+                [4, '$70,000 to $99,999'],
+                [5, '$100,000 to $149,999'],
+                [6, '$150,000 to $199,999'],
+                [7, 'More than $200,000'],
+                [8, 'Prefer not to answer']],
+        widget=widgets.RadioSelect)
+    percentProlific = models.PositiveIntegerField(
+        blank=True,
+        label='How much of your total personal income comes from work on Prolific?',
+        choices=[[0, 'A little bit'],
+                [1, 'A substantial share but less than half'],
+                [2, 'Most of my income'],
+                [3, 'All of my income'],
+                [4, 'Prefer not to answer']],
+        widget=widgets.RadioSelect)
+    
+    state = models.PositiveIntegerField(
+        blank=True,
+        choices=[[0, 'Not USA'], [1, 'Alabama'], [2, 'Alaska'], [3, 'Arizona'], [4, 'Arkansas'], [5, 'California'],
+                 [6, 'Colorado'], [7, 'Connecticut'], [8, 'Delaware'], [9, 'Florida'], [10, 'Georgia'], [11, 'Hawaii'],
+                 [12, 'Idaho'], [13, 'Illinois'], [14, 'Indiana'], [15, 'Iowa'], [16, 'Kansas'], [17, 'Kentucky'],
+                 [18, 'Louisiana'], [19, 'Maine'], [20, 'Maryland'], [21, 'Massachusetts'], [22, 'Michigan'],
+                 [23, 'Minnesota'], [24, 'Mississippi'], [25, 'Missouri'], [26, 'Montana'], [27, 'Nebraska'],
+                 [28, 'Nevada'], [29, 'New Hampshire'], [30, 'New Jersey'], [31, 'New Mexico'], [32, 'New York'],
+                 [33, 'North Carolina'], [34, 'North Dakota'], [35, 'Ohio'], [36, 'Oklahoma'], [37, 'Oregon'],
+                 [38, 'Pennsylvania'], [39, 'Rhode Island'], [40, 'South Carolina'], [41, 'South Dakota'],
+                 [42, 'Tennessee'], [43, 'Texas'], [44, 'Utah'], [45, 'Vermont'], [46, 'Virginia'], [47, 'Washington'],
+                 [48, 'West Virginia'], [49, 'Wisconsin'], [50, 'Wyoming']], label='Which state do you live in?')
+
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How difficult were the instructions? Please answer on a scale of 1 "
                                                    "to 10 with 10 being the most difficult",
-                                             blank=True,
+                                                   blank=True,
                                              choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                              widget=widgets.RadioSelectHorizontal)
     feedbackUnderstanding = models.IntegerField(label="How well did you understand what you were asked to do?"
                                                       " Please answer on a scale of 1 to 10 with 10 being the case when"
                                                       " you understood perfectly",
-                                                blank=True,
+                                                      blank=True,
                                                 choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                                 widget=widgets.RadioSelectHorizontal)
     feedbackSatisfied = models.IntegerField(label="How satisfied are you with this study overall?"
                                                   " Please answer on a scale of 1 to 10 with 10 being the most "
                                                   "satisfied",
-                                            blank=True,
+                                                  blank=True,
                                             choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                             widget=widgets.RadioSelectHorizontal)
     feedbackPay = models.IntegerField(label="How appropriate do you think the payment for this study is relative to "
                                             "other ones on Prolific? Please answer on a scale of 1 to 10 with 10 being "
                                             "the most appropriate",
-                                      blank=True,
+                                            blank=True,
                                       choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                       widget=widgets.RadioSelectHorizontal)
     for j in range(1, 6):
@@ -406,12 +501,13 @@ class Cases2(Page):
                              )
             error_messages = dict()
             for field_name in solutions:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please, answer the question'
-                elif values[field_name] != solutions[field_name]:
-                    error_messages[field_name] = 'Please, correct your answer!'
-                    name = 'player.' + str(field_name) + '_mistakes'
-                    exec("%s += 1" % name)
+                if field_name in values.keys():
+                    if values[field_name] is None:
+                        error_messages[field_name] = 'Please, answer the question'
+                    elif values[field_name] != solutions[field_name]:
+                        error_messages[field_name] = 'Please, correct your answer!'
+                        name = 'player.' + str(field_name) + '_mistakes'
+                        exec("%s += 1" % name)
             return error_messages
 
     @staticmethod
@@ -453,12 +549,14 @@ class Cases3(Page):
                              )
             error_messages = dict()
             for field_name in solutions:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please, answer the question'
-                elif values[field_name] != solutions[field_name]:
-                    error_messages[field_name] = 'Please, correct your answer!'
-                    name = 'player.' + str(field_name) + '_mistakes'
-                    exec("%s += 1" % name)
+                if (field_name == 'ES_learn3' and json.loads(player.participant.ES_strict)) or (field_name == 'Trad_learn3' and json.loads(player.participant.Trad_strict)):
+                    if values[field_name] is None:
+                        error_messages[field_name] = 'Please, answer the question'
+                    elif values[field_name] != solutions[field_name]:
+                        error_messages[field_name] = 'Please, correct your answer!'
+                        name = 'player.' + str(field_name) + '_mistakes'
+                        exec("%s += 1" % name)
+            print(error_messages)
             return error_messages
 
     @staticmethod
@@ -563,6 +661,18 @@ class Experience(Page):
     form_fields = ['experience', 'experienceWhy']
 
     @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            
+            error_messages = {}
+            for field_name in ['experience', 'experienceWhy']:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please answer the question.'
+                      
+            return error_messages
+        
+
+    @staticmethod
     def is_displayed(player: Player):
         return player.participant.confirm == player.round_number
 
@@ -571,6 +681,18 @@ class Arkansas(Page):
     form_model = 'player'
     form_fields = ['arkansas', 'arkansasWhy']
     
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            
+            error_messages = {}
+            for field_name in ['arkansas', 'arkansasWhy']:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please answer the question.'
+                      
+            return error_messages
+        
     @staticmethod
     def is_displayed(player: Player):
         return player.participant.confirm==player.round_number
@@ -581,6 +703,37 @@ class Warhol(Page):
     form_fields = ['warhol', 'warholWhy']
 
     @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            
+            error_messages = {}
+            for field_name in ['warhol', 'warholWhy']:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please answer the question.'
+                      
+            return error_messages
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.confirm==player.round_number
+
+
+class Demographics(Page):
+    form_model = 'player'
+    form_fields = ['gender', 'ethnic', 'age','education', 'marital', 'income', 'percentProlific','state']
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            
+            error_messages = {}
+            for field_name in ['gender', 'ethnic', 'age','education', 'marital', 'income', 'percentProlific','state']:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please answer the question.'
+                      
+            return error_messages
+    
+    @staticmethod
     def is_displayed(player: Player):
         return player.participant.confirm==player.round_number
 
@@ -589,6 +742,15 @@ class End(Page):
     form_model = 'player'
     form_fields = ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']
 
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+            error_messages = dict()
+            for field_name in ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']:
+                if values[field_name] is None:
+                    error_messages[field_name] = 'Please, answer the question'
+            return error_messages
+        
     @staticmethod
     def is_displayed(player: Player):
         return player.participant.confirm==player.round_number
@@ -620,6 +782,7 @@ page_sequence = [
     Experience,
     Arkansas,
     Warhol,
+    Demographics,
     End,
     Redirect
 ]
