@@ -70,23 +70,22 @@ def learn():
                                      'original handwritten notes or the fake ones?'
                                )
 
+
 def why():
     return models.LongStringField(blank=True,
                                   label="Why? Answer in approximately 1-2 sentences.")
 
 
 class Player(BasePlayer):
-    confirm = models.IntegerField(
-                                choices=[
-                                  [1, 'Yes, the answers above reflect what I intended to answer'],
-                                  [2, 'No, I want to give my answers again']
-                              ],
-                              widget=widgets.RadioSelect,
-                              label='<b>Do the above answers reflect what you intended to answer or do you want to give'
-                                    ' your answers again?</b>'
-                              )
-    
-
+    confirm = models.IntegerField(blank=True,
+                                  choices=[
+                                      [1, 'Yes, the answers above reflect what I intended to answer'],
+                                      [2, 'No, I want to give my answers again']
+                                  ],
+                                  widget=widgets.RadioSelect,
+                                  label='<b>Do the above answers reflect what you intended to answer or do you want to '
+                                        'give your answers again?</b>'
+                                  )
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
                                  label='Which books do you prefer Alex to receive in this case?',
@@ -254,7 +253,7 @@ class Player(BasePlayer):
             [3, 'Divorced'],
             [4, 'Separated'],
             [5, 'Prefer not to answer']],
-    widget=widgets.RadioSelect)
+        widget=widgets.RadioSelect)
     income = models.PositiveIntegerField(
         blank=True,
         label='What is the annual income of your household? This includes money from jobs, net income from business, farm or rent, pensions, dividends, interest, social security payments and any other monetary income.',
@@ -324,12 +323,7 @@ class Player(BasePlayer):
     Trad_learn2_mistakes = models.IntegerField(blank=True, initial=0)
     ES_learn3_mistakes = models.IntegerField(blank=True, initial=0)
     Trad_learn3_mistakes = models.IntegerField(blank=True, initial=0)
-    review = models.BooleanField(blank=True,
-                                 label='Do the statements above accurately reflect what you intended to answer?',
-                                 choices=[
-                                     [True, 'Yes'],
-                                     [False, 'No, I want to change my answers']
-                                 ])
+
 ###############################################  FUNCTIONS   ###########################################################
 
 
@@ -351,7 +345,6 @@ def get_wtp_bounds(player, wtp3):
     return WTP_bound, row+4
 
 
-
 def ES_wtp2_choices(player):
     if player.ES_wtp == 1:
         choices = [[1, 'Original notes'],
@@ -362,6 +355,7 @@ def ES_wtp2_choices(player):
     # random.shuffle(choices)
     return choices
 
+
 def Trad_wtp2_choices(player):
     if player.Trad_wtp == 1:
         choices = [[1, 'Original notes'],
@@ -371,21 +365,32 @@ def Trad_wtp2_choices(player):
                    [2, 'Fake notes']]
     return choices
 
+
 def ES_wtp_error_message(player, value):
     if not player.session.config['development'] and value is None:
         return 'Please, answer the question.'
+
 
 def Trad_wtp_error_message(player, value):
     if not player.session.config['development'] and value is None:
         return 'Please, answer the question.'
 
+
 def ES_wtp2_error_message(player, value):
     if not player.session.config['development'] and value is None:
         return 'Please, answer the question.'
 
+
 def Trad_wtp2_error_message(player, value):
     if not player.session.config['development'] and value is None:
         return 'Please, answer the question.'
+
+
+def confirm_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        value = 2
+        return 'Please, answer the question.'
+
 
 ######################################################  PAGES   ########################################################
 
@@ -643,7 +648,7 @@ class ReviewStatements(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -663,15 +668,15 @@ class Experience(Page):
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
-            
+
             error_messages = {}
-            for field_name in ['experience', 'experienceWhy']:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please answer the question.'
-                      
+            if values['experience'] is None:
+                error_messages['experience'] = 'Please answer the question.'
+            if values['experienceWhy'] == '':
+                error_messages['experienceWhy'] = 'Please answer the question.'
+
             return error_messages
         
-
     @staticmethod
     def is_displayed(player: Player):
         return player.participant.confirm == player.round_number
@@ -681,16 +686,16 @@ class Arkansas(Page):
     form_model = 'player'
     form_fields = ['arkansas', 'arkansasWhy']
     
-
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
-            
+
             error_messages = {}
-            for field_name in ['arkansas', 'arkansasWhy']:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please answer the question.'
-                      
+            if values['arkansas'] is None:
+                error_messages['arkansas'] = 'Please answer the question.'
+            if values['arkansasWhy'] == '':
+                error_messages['arkansasWhy'] = 'Please answer the question.'
+
             return error_messages
         
     @staticmethod
@@ -707,15 +712,16 @@ class Warhol(Page):
         if not player.session.config['development']:
             
             error_messages = {}
-            for field_name in ['warhol', 'warholWhy']:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please answer the question.'
+            if values['warhol'] is None:
+                error_messages['warhol'] = 'Please answer the question.'
+            if values['warholWhy'] == '':
+                error_messages['warholWhy'] = 'Please answer the question.'
                       
             return error_messages
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.participant.confirm == player.round_number
 
 
 class Demographics(Page):
@@ -767,11 +773,11 @@ class Redirect(Page):
 
 
 page_sequence = [
-    Welcome,
-    Consent,
-    Instructions,
-    EconomicsFan,
-    CQ,
+    # Welcome,
+    # Consent,
+    # Instructions,
+    # EconomicsFan,
+    # CQ,
     PostCQs,
     Cases,
     Cases2,
