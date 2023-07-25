@@ -119,9 +119,9 @@ class Player(BasePlayer):
     ES_learn3 = learn()
     Trad_learn3 = learn()
 
-    ES_wtp3_bounds = models.StringField()
+    # ES_wtp3_bounds = models.StringField()
 
-    Trad_wtp3_bounds = models.StringField()
+    # Trad_wtp3_bounds = models.StringField()
     
     experience = models.BooleanField(blank=True,
                                      label="<strong>Would you go into the machine?</strong>",
@@ -771,11 +771,11 @@ class Redirect(Page):
 
 
 page_sequence = [
-    # Welcome,
-    # Consent,
-    # Instructions,
-    # EconomicsFan,
-    # CQ,
+    Welcome,
+    Consent,
+    Instructions,
+    EconomicsFan,
+    CQ,
     PostCQs,
     Cases,
     Cases2,
