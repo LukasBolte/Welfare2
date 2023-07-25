@@ -30,8 +30,10 @@ Well Done!
             <div class="modal-body">
                 <p>Which books do you prefer Alex to receive?</p>
                 <ol id="modalList">
-                    <li>...the ones with the original notes <span class='bold'>and $1</span> or fake notes?</li>
-                    <li>...the ones with the original notes or fake notes?</li>
+                    <li>...the ones with the <span style="color: blue">original notes</span>
+                        <span class='bold'>and $1</span> or <span style="color: chocolate">fake notes</span>?</li>
+                    <li>...the ones with the <span style="color: blue">original notes</span> or
+                        <span style="color: chocolate">fake notes</span>?</li>
                 </ol>
             </div>
             <div class="modal-footer">
@@ -82,7 +84,7 @@ function generateModalRows(dollarValues) {
         boldPlus.textContent += dollarValues[i];
 
         var listItem = document.createElement("li");
-        listItem.innerHTML = "...the ones with the original notes or the ones with fake notes ";
+        listItem.innerHTML = "...the ones with the <span style=\"color: blue\">original notes</span> or the ones with <span style=\"color: chocolate\">fake notes</span> ";
         listItem.appendChild(boldPlus.cloneNode(true));
         listItem.innerHTML += "?";
         modalList.appendChild(listItem);

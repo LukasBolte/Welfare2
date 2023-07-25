@@ -15,17 +15,16 @@ class C(BaseConstants):
     NUM_ROUNDS = 2
     MIN_TIME = 15  # in minutes
     MAX_TIME = 25  # in minutes
-    BONUS_PER_CORRECT_TASK_PART1 = cu(0.15)
-    OUTSIDE_OPTION = cu(2.2)
     # MAX_BONUS = cu(4.5)
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
     DETAIL = 'welfare/Review-detail.html'
-    WTP_VALUES = [5,10,15,20,25,30,35,40,45,50]
+    WTP_VALUES = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
 
 
 class Subsession(BaseSubsession):
     pass
+
 
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
@@ -83,7 +82,8 @@ class Player(BasePlayer):
                                   [2, 'No, I want to give my answers again']
                               ],
                               widget=widgets.RadioSelect,
-                              label='Do the above answers reflect what you intended to answer or do you want to give your answers again?'
+                              label='<b>Do the above answers reflect what you intended to answer or do you want to give'
+                                    ' your answers again?</b>'
                               )
     
 
@@ -532,9 +532,7 @@ class ReviewStatements(Page):
             elif player.ES_wtp2==2:
                 row2=2
 
-        dollarValues = [1] +  C.WTP_VALUES
-
-
+        dollarValues = [1] + C.WTP_VALUES
 
         return {
              'dollarValues':  json.dumps(dollarValues),
@@ -549,10 +547,10 @@ class ReviewStatements(Page):
     def is_displayed(player: Player):
         return player.round_number==1
 
-
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.participant.confirm = player.confirm
+
 
 class PostMPL(Page):
     @staticmethod
@@ -566,8 +564,7 @@ class Experience(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
-
+        return player.participant.confirm == player.round_number
 
 
 class Arkansas(Page):
@@ -588,7 +585,6 @@ class Warhol(Page):
         return player.participant.confirm==player.round_number
 
 
-
 class End(Page):
     form_model = 'player'
     form_fields = ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']
@@ -605,7 +601,7 @@ class End(Page):
 class Redirect(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.participant.confirm == player.round_number
 
 
 page_sequence = [
@@ -614,7 +610,7 @@ page_sequence = [
     # Instructions,
     # EconomicsFan,
     # CQ,
-    # PostCQs,
+    PostCQs,
     Cases,
     Cases2,
     Cases3Explain,
