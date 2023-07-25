@@ -1,5 +1,5 @@
 {% block title %}
-Please review your responses
+    Please review your responses for the two cases
 {% endblock %}
 
 {% block content %}
@@ -8,9 +8,6 @@ Please review your responses
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
 
-<p>
-    Please review your responses for the two cases. 
-</p>
 {{ if participant.switch_order }}
 
 <div class="card">
@@ -19,7 +16,7 @@ Please review your responses
         notes
         </h5>
         <div class="card-text">
-            <ol id="modalList">
+            <ol id="modalList"  class="mb-0">
             <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
             <li>...the ones with the original or fake notes?</li> -->
             </ol>
@@ -32,7 +29,7 @@ Please review your responses
         <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the ones with
             the original or fake notes</h5>
         <div class="card-text">
-            <ol id="modalList2">
+            <ol id="modalList2" class="mb-0">
             <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
             <li>...the ones with the original or fake notes?</li> -->
             </ol>
@@ -49,7 +46,7 @@ Please review your responses
             the original or fake notes</h5>
         
         <div class="card-text">
-            <ol id="modalList2">
+            <ol id="modalList2" class="mb-0">
             <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
             <li>...the ones with the original or fake notes?</li> -->
             </ol>
@@ -63,7 +60,7 @@ Please review your responses
             notes
             </h5>
         <div class="card-text">
-            <ol id="modalList">
+            <ol id="modalList" class="mb-0">
             <!-- <li>...the ones with the original <span class='bold'>and $1</span> or fake notes?</li>
             <li>...the ones with the original or fake notes?</li> -->
             </ol>
@@ -118,10 +115,13 @@ Please review your responses
         var leftList = []
         var rightList = []
         for (var i = 0; i< fakeBonuses.length; i++){
-            leftList.push('I prefer Alex to receive the ones with the original notes'+originalBonuses[i]+' over the ones with the fake notes'+fakeBonuses[i])
-            rightList.push('I prefer Alex to receive the ones with the fake notes'+fakeBonuses[i]+' over the ones with the original notes'+originalBonuses[i])     
+            leftList.push('I prefer Alex to receive the ones with the <span style="color: blue">original notes</span>'
+                +originalBonuses[i]+' over the ones with the <span style="color: chocolate">fake notes</span>'+fakeBonuses[i])
+            rightList.push('I prefer Alex to receive the ones with the <span style="color: chocolate">fake notes</span>'
+                +fakeBonuses[i]+' over the ones with the <span style="color: blue">original notes</span>'+originalBonuses[i])
         }
-        var indifferent='I am indifferent between Alex receiving the ones with the original notes or the ones with the fake notes'
+        var indifferent='I am indifferent between Alex receiving the ones with the ' +
+            '<span style="color: blue">original notes</span> or the ones with the <span style="color: chocolate">fake notes</span>'
 
          // the participant's preferences are coded in x
 
