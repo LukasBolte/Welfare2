@@ -19,7 +19,7 @@ class C(BaseConstants):
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
     DETAIL = 'welfare/Review-detail.html'
-    WTP_VALUES = [5, 10, 15, 20, 25, 30, 35, 40, 45]
+    WTP_VALUES = [2, 3, 4, 5, 7, 10, 15, 25, 50]
 
 
 class Subsession(BaseSubsession):
@@ -31,7 +31,6 @@ def creating_session(subsession: Subsession):
         switch_orders = itertools.cycle([True, False])
         for p in subsession.get_players():
             p.participant.switch_order = next(switch_orders)
-
 
 
 class Group(BaseGroup):
@@ -446,18 +445,17 @@ class CQ(Page):
         return player.round_number==1
 
 class PostCQs(Page):
-
     @staticmethod
     def vars_for_template(player):
 
-        dollarValues = [1] +  C.WTP_VALUES
+        dollarValues = [1] + C.WTP_VALUES
         return {
              'dollarValues':  json.dumps(dollarValues)
          }
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
 
 
 class Cases(Page):
@@ -788,7 +786,7 @@ page_sequence = [
     Experience,
     Arkansas,
     Warhol,
-    Demographics,
+    # Demographics,
     End,
     Redirect
 ]
