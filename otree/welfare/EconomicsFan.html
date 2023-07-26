@@ -48,8 +48,9 @@ href="https://clipchamp.com/watch/tRsY6JnyDhY?utm_source=embed&utm_medium=embed&
 src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></iframe>-->
 <!--        </div>-->
 
-            <img src="{% static 'img/discovering.gif' %}"  alt="Handwritten Notes Book 1" class="img-fluid book-image">
-            <img src="{% static 'img/who.gif' %}" alt="Handwritten Notes Book 2" class="img-fluid book-image">
+            <img src="{% static 'img/discovering.gif' %}"  alt="Handwritten Notes Book 1" class="img-fluid gif-image">
+            <img src="{% static 'img/who.gif' %}" alt="Handwritten Notes Book 2" class="img-fluid gif-image">
+
         </div>
             <br>
 
@@ -77,7 +78,6 @@ src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></i
 {% block styles %}
 
 <style>
-
     .container {
       padding: 0; /* Remove padding */
     }
@@ -93,8 +93,13 @@ src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></i
         margin: 0 0 10px 10px;
     }
     .book-image {
-      width: 49%; /* Adjust image width */
-      padding: 0 0 10px 10px;
+        width: 49%; /* Adjust image width */
+        padding: 0 0 10px 10px;
+    }
+    .gif-image {
+        width: 49%; /* Adjust image width */
+        padding: 0 0 10px 10px;
+        height: 310px;
     }
 </style>
 
