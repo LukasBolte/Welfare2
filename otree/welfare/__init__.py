@@ -19,6 +19,8 @@ class C(BaseConstants):
     PRE_VIDEO = 'welfare/Review-pre-vid.html'
     POST_VIDEO = 'welfare/Review-post-vid.html'
     DETAIL = 'welfare/Review-detail.html'
+    BONUS = 'welfare/Review-bonus.html'
+    MPL = 'welfare/Review-MPL.html'
     WTP_VALUES = [2, 3, 4, 5, 7, 10, 15, 25, 50]
 
 
@@ -36,36 +38,15 @@ def creating_session(subsession: Subsession):
 class Group(BaseGroup):
     pass
 
-# def make_field(case):
-#     if case == 1:
-#         label = '<strong>Which books do you prefer Alex to receive in this case?</strong>'
-#         choices = [
-#             [1, 'Original notes'],
-#             [2, 'Fake notes'],
-#             [3, 'I am indifferent']
-#         ]
-#     else:
-#         label = '<strong>Which book and bonus do you prefer Alex to receive in this case?</strong>'
-#         choices = [
-#             [1, 'Original notes'],
-#             [2, 'Fake notes + $1'],
-#             [3, 'I am indifferent']
-#         ]
-#     return models.IntegerField(blank=True,
-#                                choices=choices,
-#                                widget=widgets.RadioSelectHorizontal,
-#                                label=label
-#                                )
-
 
 def learn():
     return models.IntegerField(blank=True,
                                choices=[
-                                   [1, 'Yes, they will learn'],
-                                   [2, 'No, they will not learn'],
+                                   [1, 'Yes, he will learn'],
+                                   [2, 'No, he will not learn'],
                                ],
                                widget=widgets.RadioSelectHorizontal,
-                               label='In this case, will Alex ever learn whether they have the books with the '
+                               label='In this case, will Alex ever learn whether he has the books with the '
                                      'original handwritten notes or the fake ones?'
                                )
 
@@ -135,8 +116,8 @@ class Player(BasePlayer):
                                    label="<strong>Does the government raising taxes to provide financial relief make "
                                          "John better or worse off?</strong>",
                                    choices=[
-                                       [True, 'Better Off'],
-                                       [False, 'Worse Off']
+                                       [True, 'Better off'],
+                                       [False, 'Worse off']
                                    ],
                                    )
     arkansasWhy = why()
@@ -290,8 +271,8 @@ class Player(BasePlayer):
                  [48, 'West Virginia'], [49, 'Wisconsin'], [50, 'Wyoming']], label='Which state do you live in?')
 
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
-    feedbackDifficulty = models.IntegerField(label="How difficult were the instructions? Please answer on a scale of 1 "
-                                                   "to 10 with 10 being the most difficult",
+    feedbackDifficulty = models.IntegerField(label="How clear were the instructions? Please answer on a scale of 1 "
+                                                   "to 10 with 10 being the clearest",
                                                    blank=True,
                                              choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                              widget=widgets.RadioSelectHorizontal)
@@ -407,19 +388,25 @@ class Welcome(Page):
 class Consent(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
 
 
 class Instructions(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
 
 
 class EconomicsFan(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
+
+
+class YourTask(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
 
 
 class CQ(Page):
@@ -781,6 +768,7 @@ page_sequence = [
     Consent,
     Instructions,
     EconomicsFan,
+    YourTask,
     CQ,
     PostCQs,
     Cases,
