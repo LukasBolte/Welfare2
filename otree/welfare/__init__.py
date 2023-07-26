@@ -152,7 +152,7 @@ class Player(BasePlayer):
     cq3 = models.IntegerField(blank=True,
                               choices=[
                                   [1, 'We will keep them for ourselves'],
-                                  [2, 'We will return them to Professor Roth and Milgrom'],
+                                  [2, 'We will return them to Professors Milgrom and Roth'],
                                   [3, 'We will destroy them']
                               ],
                               widget=widgets.RadioSelect,
@@ -757,6 +757,13 @@ class End(Page):
         player.participant.finished = True
 
 
+class Finished(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number==2
+    
+
+
 class Redirect(Page):
     @staticmethod
     def is_displayed(player: Player):
@@ -782,5 +789,6 @@ page_sequence = [
     Warhol,
     # Demographics,
     End,
-    Redirect
+    # Redirect,
+    Finished
 ]
