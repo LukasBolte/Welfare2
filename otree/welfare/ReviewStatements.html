@@ -64,6 +64,8 @@
     </div>
 </div>
 
+
+
 {{ endif}}
 
 {{ formfield 'confirm' }}
@@ -73,6 +75,9 @@
 </p>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+<input type="hidden" name="timeSpentReview" id="timeSpentReview" />
+
 
 {% endblock %}
 
@@ -88,6 +93,19 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+  let pageTimeElapsed = 0;
+  let pageTimerID = -1;
+  function pageTick() {
+    pageTimeElapsed++
+    document.getElementById("timeSpentReview").value = pageTimeElapsed;
+  }
+  window.onload = function() {
+    if(pageTimerID === -1){
+      pageTimerID = setInterval(pageTick, 100);  //calls pageTick every 100 milliseconds (decimals of a second)
+    }
+  };
+</script>
 
 <script>
     function setValue(value) {

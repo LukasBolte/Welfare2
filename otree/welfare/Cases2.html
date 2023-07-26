@@ -297,6 +297,8 @@
 {{ formfield_errors 'Trad_learn2_mistakes' }}
 {{ formfield_errors 'ES_learn2_mistakes' }}
 
+<input type="hidden" name="timeSpentCases2" id="timeSpentCases2" />
+
 {% endblock %}
 
 {% block styles %}
@@ -350,5 +352,18 @@ setValueById('fakeES',2)
     document.getElementById(footer).style.backgroundColor = null;
     document.getElementById(mistake).value = parseInt(document.getElementById(mistake).value) +1;
   }
+</script>
+<script>
+  let pageTimeElapsed = 0;
+  let pageTimerID = -1;
+  function pageTick() {
+    pageTimeElapsed++
+    document.getElementById("timeSpentCases2").value = pageTimeElapsed;
+  }
+  window.onload = function() {
+    if(pageTimerID === -1){
+      pageTimerID = setInterval(pageTick, 100);  //calls pageTick every 100 milliseconds (decimals of a second)
+    }
+  };
 </script>
 {% endblock %}

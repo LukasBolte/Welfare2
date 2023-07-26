@@ -281,6 +281,9 @@
 {{ formfield_errors 'Trad_learn_mistakes' }}
 {{ formfield_errors 'ES_learn_mistakes' }}
 
+<input type="hidden" name="timeSpentCases" id="timeSpentCases" />
+
+
 {% endblock %}
 
 {% block styles %}
@@ -352,5 +355,17 @@
     document.getElementById(mistake).value = parseInt(document.getElementById(mistake).value) +1;
   }
 </script>
-
+<script>
+  let pageTimeElapsed = 0;
+  let pageTimerID = -1;
+  function pageTick() {
+    pageTimeElapsed++
+    document.getElementById("timeSpentCases").value = pageTimeElapsed;
+  }
+  window.onload = function() {
+    if(pageTimerID === -1){
+      pageTimerID = setInterval(pageTick, 100);  //calls pageTick every 100 milliseconds (decimals of a second)
+    }
+  };
+</script>
 {% endblock %}

@@ -303,7 +303,10 @@ class Player(BasePlayer):
     Trad_learn2_mistakes = models.IntegerField(blank=True, initial=0)
     ES_learn3_mistakes = models.IntegerField(blank=True, initial=0)
     Trad_learn3_mistakes = models.IntegerField(blank=True, initial=0)
-
+    timeSpentCases = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
+    timeSpentCases2 = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
+    timeSpentCases3 = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
+    timeSpentReview = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
 ###############################################  FUNCTIONS   ###########################################################
 
 
@@ -452,7 +455,8 @@ class PostCQs(Page):
 
 class Cases(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes']
+    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes',
+                   'timeSpentCases']
 
     @staticmethod
     def error_message(player, values):
@@ -482,12 +486,13 @@ class Cases2(Page):
     def get_form_fields(player):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
+        my_fields = ['ES_learn2_mistakes', 'Trad_learn2_mistakes', 'timeSpentCases2']
         if Trad_wtp == 3:
-            return ['ES_wtp2', 'ES_learn2', 'ES_learn2_mistakes', 'Trad_learn2_mistakes']
+            return my_fields + ['ES_wtp2', 'ES_learn2']
         elif ES_wtp == 3:
-            return ['Trad_wtp2', 'Trad_learn2', 'Trad_learn2_mistakes', 'ES_learn2_mistakes']
+            return my_fields + ['Trad_wtp2', 'Trad_learn2']
         else:
-            return ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2', 'ES_learn2_mistakes', 'Trad_learn2_mistakes']
+            return my_fields + ['ES_wtp2', 'Trad_wtp2', 'ES_learn2', 'Trad_learn2']
 
     @staticmethod
     def error_message(player, values):
@@ -536,7 +541,8 @@ class Cases3Explain(Page):
 
 class Cases3(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3', 'ES_learn3_mistakes', 'Trad_learn3_mistakes']
+    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3', 'ES_learn3_mistakes', 'Trad_learn3_mistakes',
+                   'timeSpentCases3']
 
     @staticmethod
     def error_message(player, values):
@@ -585,7 +591,7 @@ class Cases3(Page):
 
 class ReviewStatements(Page):
     form_model = 'player'
-    form_fields = ['confirm']
+    form_fields = ['confirm', 'timeSpentReview']
 
     @staticmethod
     def vars_for_template(player):        
@@ -648,7 +654,7 @@ class ReviewStatements(Page):
 class PostMPL(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
 
 class Experience(Page):
@@ -669,7 +675,7 @@ class Experience(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
 
 class Arkansas(Page):
