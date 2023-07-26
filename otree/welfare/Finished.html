@@ -9,11 +9,7 @@ The study is now finished
 {{ endif }}
 
 <p>
-    {{ payment_message }}
-</p>
-
-<p>
-    Thank you for participating. Your total payment will soon be transferred to your account. 
+    Thank you for participating. Your total payment of <b>{{ session.config.participation_fee }}</b> will soon be transferred to your account. 
 </p>
 
 <p class="text-danger h4">
