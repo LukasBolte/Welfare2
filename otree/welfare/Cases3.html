@@ -25,12 +25,12 @@
                 <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad1" value="1"
                    onclick="enable('after_answeringTrad', 'id_Trad_wtp3',wtp_2)">
-            <label class="form-check-label" for="Trad1">Yes, they will learn</label>
+            <label class="form-check-label" for="Trad1">Yes, he will learn</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad2" value="2"
                    onclick="disable('after_answeringTrad', 'id_Trad_wtp3', 'Trad_learn3_mistakes')">
-            <label class="form-check-label" for="Trad2">No, they will not learn</label>
+            <label class="form-check-label" for="Trad2">No, he will not learn</label>
           </div>
 
 
@@ -72,12 +72,12 @@
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="ES_learn3" id="ES1" value="1"
                    onclick="disable('after_answeringES', 'id_ES_wtp3', 'ES_learn3_mistakes')">
-            <label class="form-check-label" for="ES1">Yes, they will learn</label>
+            <label class="form-check-label" for="ES1">Yes, he will learn</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="ES_learn3" id="ES2" value="2"
             onclick="enable('after_answeringES', 'id_ES_wtp3',wtp_1)">
-            <label class="form-check-label" for="ES2">No, they will not learn</label>
+            <label class="form-check-label" for="ES2">No, he will not learn</label>
           </div>
 
           <p id="after_answeringES">
@@ -134,12 +134,12 @@
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="ES_learn3" id="ES1" value="1"
                onclick="disable('after_answeringES', 'id_ES_wtp3', 'ES_learn3_mistakes')">
-        <label class="form-check-label" for="ES1">Yes, they will learn</label>
+        <label class="form-check-label" for="ES1">Yes, he will learn</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="ES_learn3" id="ES2" value="2"
         onclick="enable('after_answeringES', 'id_ES_wtp3',wtp_1)">
-        <label class="form-check-label" for="ES2">No, they will not learn</label>
+        <label class="form-check-label" for="ES2">No, he will not learn</label>
       </div>
 
       <p id="after_answeringES">
@@ -180,12 +180,12 @@
                 <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad1" value="1"
                    onclick="enable('after_answeringTrad', 'id_Trad_wtp3',wtp_2)">
-            <label class="form-check-label" for="Trad1">Yes, they will learn</label>
+            <label class="form-check-label" for="Trad1">Yes, he will learn</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_learn3" id="Trad2" value="2"
                    onclick="disable('after_answeringTrad', 'id_Trad_wtp3', 'Trad_learn3_mistakes')">
-            <label class="form-check-label" for="Trad2">No, they will not learn</label>
+            <label class="form-check-label" for="Trad2">No, he will not learn</label>
           </div>
 
 
@@ -216,7 +216,10 @@
       <div class="modal-body">
           {{ include C.PRE_VIDEO }}
           {{ include C.POST_VIDEO }}
+          {{ include C.BONUS }}
           {{ include C.DETAIL }}
+          <br>
+          {{ include C.MPL }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

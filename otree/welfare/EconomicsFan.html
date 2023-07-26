@@ -20,7 +20,16 @@ We are giving a present to someone!
 
     {{ include C.PRE_VIDEO }}
 
-        <div class="video-container">
+                <div class="text-center">
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample" id="AdditionalInstructions">
+    Read more about the original and fake notes
+  </button>
+            </div>
+<div class="collapse" id="collapseExample">
+
+
+            <div class="video-container">
             <div class="text-center">Here are videos of the professors writing the notes</div>
 
 <!--        <div style="position:relative;width:fit-content;height:fit-content;">-->
@@ -52,6 +61,8 @@ src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></i
 
 
         <button style="float: right" class="btn btn-primary btn-large">Next</button>
+    </div>
+
 
       </div>
       
@@ -60,32 +71,6 @@ src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></i
     </div>
   </div>
 
-<!-- 
-<p>
-    The fake versions of the handwritten notes are indistinguishable from the original ones.
-    Professors Roth and Milgrom themselves could not tell which is which!
-</p> --> 
-
-<!--[Pictures of the two handwritten notes, so 2x2 pictures with ‘original’ and ‘fake’ headers +-->
-<!--GIF (video/picture of them signing, equivalent with copier)-->
-<!--We do either 4x1 or 2x2, videos on endless loop with 5 seconds (or so) showing a picture of-->
-<!--the notes.-->
-<!--“To Alex: I hope you enjoy reading about auctions! PM” “Dear Alex: I wish this inspires-->
-<!--the way you think about markets. AR” - Let’s try and copy them ourselves and if we fail-->
-<!--we can go back to Paul/Al and ask them to copy themselves and be sneaky about deception.-->
-<!--We buy 6 copies and have them handwritten two copies each, and then we decide what to do.-->
-<!--Plan A is to copy ourselves and Plan B.]-->
-
-<!-- <p>
-    Alex will receive two books, either the two with the original handwritten notes or the two with the fake ones.
-    We will return the two books that we do not give to Alex back to Professors Roth and Milgrom.
-    They will never know whether the books they get have the fake or the original notes in them.
-</p>
-<p>
-    In addition to the books, Alex may also receive a surprise bonus.
-    The answers you give will determine: - which two books (original or fake) he receives - the surprise bonus
-</p>
- -->
 
 {% endblock %}
 
@@ -117,5 +102,9 @@ src="https://clipchamp.com/watch/tRsY6JnyDhY/embed" width="200" height="360"></i
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+        $("#AdditionalInstructions").click(function () {
+        $("#AdditionalInstructions").css("display", "none");
+    });
+    </script>
 {% endblock %}

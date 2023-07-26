@@ -1,5 +1,5 @@
 {% block title %}
-Thank you for your responses
+Your task
 {% endblock %}
 
 {% block content %}
@@ -8,10 +8,13 @@ Thank you for your responses
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
 
+<div class="alert alert-info" role="alert">
+    {{ include C.BONUS }}
+</div>
+
 <p>
-    In the remaining pages we will present you with scenarios and ask you questions about them.
-    Your responses are very important for our study, please think about the scenarios and answer carefully.
-</p> 
+    When ready, click "Next."
+</p>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
