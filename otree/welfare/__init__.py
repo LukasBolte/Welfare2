@@ -1,7 +1,7 @@
 import random
 import json
 import itertools
-
+import time
 from otree.api import *
 
 doc = """
@@ -395,6 +395,11 @@ def confirm_error_message(player, value):
 
 class Welcome(Page):
     @staticmethod
+    def vars_for_template(player):
+        player.participant.start_time = time.time()
+        pass
+
+    @staticmethod
     def is_displayed(player: Player):
         return player.round_number==1
 
@@ -656,7 +661,7 @@ class ReviewStatements(Page):
 class PostMPL(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm == player.round_number
+        return player.round_number==2
 
 
 class Experience(Page):
@@ -677,7 +682,7 @@ class Experience(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm == player.round_number
+        return player.round_number==2
 
 
 class Arkansas(Page):
@@ -698,7 +703,7 @@ class Arkansas(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.round_number==2
 
 
 class Warhol(Page):
@@ -719,7 +724,7 @@ class Warhol(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm == player.round_number
+        return player.round_number==2
 
 
 class Demographics(Page):
@@ -739,7 +744,7 @@ class Demographics(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.round_number==2
 
 
 class End(Page):
@@ -757,17 +762,18 @@ class End(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm==player.round_number
+        return player.round_number==2
 
     @staticmethod
     def before_next_page(player, timeout_happened):
+        player.participant.end_time = time.time()
         player.participant.finished = True
 
 
 class Redirect(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.confirm == player.round_number
+        return player.round_number==2
 
 
 page_sequence = [
