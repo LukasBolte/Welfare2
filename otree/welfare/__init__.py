@@ -21,7 +21,7 @@ class C(BaseConstants):
     DETAIL = 'welfare/Review-detail.html'
     BONUS = 'welfare/Review-bonus.html'
     MPL = 'welfare/Review-MPL.html'
-    WTP_VALUES = [2, 3, 4, 5, 7, 10, 15, 25, 50]
+    WTP_VALUES = [2, 3, 5, 7, 10, 15, 25, 45, 70, 100, 140, 200]
 
 
 class Subsession(BaseSubsession):
