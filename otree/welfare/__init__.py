@@ -303,10 +303,11 @@ class Player(BasePlayer):
     Trad_learn2_mistakes = models.IntegerField(blank=True, initial=0)
     ES_learn3_mistakes = models.IntegerField(blank=True, initial=0)
     Trad_learn3_mistakes = models.IntegerField(blank=True, initial=0)
-    timeSpentCases = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
-    timeSpentCases2 = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
-    timeSpentCases3 = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
-    timeSpentReview = models.FloatField()  # one unit is 100 milliseconds (a decimal of a second): 96 means 9.6 secs
+
+    for el in ['PostCQs', 'Cases', 'Cases2', 'Cases3Explain', 'Cases3', 'ReviewStatements', 'PostMPL']:
+        locals()['timeSubmitted_' + el] = models.FloatField()
+    del el
+    
 ###############################################  FUNCTIONS   ###########################################################
 
 
@@ -449,14 +450,17 @@ class PostCQs(Page):
          }
     
     @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_PostCQs = time.time()
+
+    @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
 
 
 class Cases(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes',
-                   'timeSpentCases']
+    form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes']
 
     @staticmethod
     def error_message(player, values):
@@ -473,6 +477,9 @@ class Cases(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_Cases = time.time()
 
     @staticmethod
     def is_displayed(player: Player):
@@ -486,7 +493,7 @@ class Cases2(Page):
     def get_form_fields(player):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
-        my_fields = ['ES_learn2_mistakes', 'Trad_learn2_mistakes', 'timeSpentCases2']
+        my_fields = ['ES_learn2_mistakes', 'Trad_learn2_mistakes']
         if Trad_wtp == 3:
             return my_fields + ['ES_wtp2', 'ES_learn2']
         elif ES_wtp == 3:
@@ -525,6 +532,10 @@ class Cases2(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         return dict(ES_wtp=ES_wtp,
                     Trad_wtp=Trad_wtp)
+    
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_Cases2 = time.time()
 
 
 class Cases3Explain(Page):
@@ -537,12 +548,14 @@ class Cases3Explain(Page):
         return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and \
             (player.round_number == 1 or (player.participant.confirm == player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_Cases3Explain = time.time()
 
 
 class Cases3(Page):
     form_model = 'player'
-    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3', 'ES_learn3_mistakes', 'Trad_learn3_mistakes',
-                   'timeSpentCases3']
+    form_fields = ['ES_wtp3', 'Trad_wtp3', 'ES_learn3', 'Trad_learn3', 'ES_learn3_mistakes', 'Trad_learn3_mistakes']
 
     @staticmethod
     def error_message(player, values):
@@ -588,10 +601,14 @@ class Cases3(Page):
             (player.round_number == 1 or (player.participant.confirm == player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
 
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_Cases3 = time.time()
+
 
 class ReviewStatements(Page):
     form_model = 'player'
-    form_fields = ['confirm', 'timeSpentReview']
+    form_fields = ['confirm']
 
     @staticmethod
     def vars_for_template(player):        
@@ -649,12 +666,19 @@ class ReviewStatements(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.participant.confirm = player.confirm
+        player.timeSubmitted_ReviewStatements = time.time()
+
+    
 
 
 class PostMPL(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
+    
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.timeSubmitted_PostMPL = time.time()
 
 
 class Experience(Page):
@@ -676,6 +700,8 @@ class Experience(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
+    
+  
 
 
 class Arkansas(Page):

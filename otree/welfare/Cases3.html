@@ -239,8 +239,6 @@
 {{ formfield_errors 'Trad_learn3_mistakes' }}
 {{ formfield_errors 'ES_learn3_mistakes' }}
 
-<input type="hidden" name="timeSpentCases3" id="timeSpentCases3" />
-
 {% endblock %}
 
 {% block styles %}
@@ -277,20 +275,6 @@
     document.getElementById('ES1').value = 1;
     document.getElementById('ES2').value = 2;
   </script>
-
-<script>
-  let pageTimeElapsed = 0;
-  let pageTimerID = -1;
-  function pageTick() {
-    pageTimeElapsed++
-    document.getElementById("timeSpentCases3").value = pageTimeElapsed;
-  }
-  window.onload = function() {
-    if(pageTimerID === -1){
-      pageTimerID = setInterval(pageTick, 100);  //calls pageTick every 100 milliseconds (decimals of a second)
-    }
-  };
-</script>
 
 <script>
   function enable(text, table,wtp) {
