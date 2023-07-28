@@ -383,7 +383,7 @@ def confirm_error_message(player, value):
         value = 2
         return 'Please, answer the question.'
 
-def WTPWhy_error_message(player, value):
+def MPLWhy_error_message(player, value):
     if not player.session.config['development'] and value is None:
         value = 2
         return 'Please, answer the question.'
@@ -435,6 +435,9 @@ class CQ(Page):
     form_fields = ['cq1', 'cq2', 'cq3', 'cq4', 'cq5']
 
     @staticmethod
+    def vars_for_template(player: Player):
+        return dict(one_minus_MS=100-C.MS)
+    @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
             solutions = dict(cq1=1,
@@ -480,6 +483,11 @@ class Cases(Page):
     form_model = 'player'
     form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes']
 
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(one_minus_MS=100-C.MS)
+    
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
@@ -507,6 +515,7 @@ class Cases(Page):
 class Cases2(Page):
     form_model = 'player'
 
+    
     @staticmethod
     def get_form_fields(player):
         ES_wtp = player.field_maybe_none('ES_wtp')
@@ -549,7 +558,8 @@ class Cases2(Page):
         ES_wtp = player.field_maybe_none('ES_wtp')
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         return dict(ES_wtp=ES_wtp,
-                    Trad_wtp=Trad_wtp)
+                    Trad_wtp=Trad_wtp,
+                    one_minus_MS=100-C.MS)
     
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -606,7 +616,8 @@ class Cases3(Page):
         zeroes_list = [0] * len(C.WTP_VALUES)
         return {
              'WTP_VALUES':  json.dumps(C.WTP_VALUES),
-             'WTP_VALUES_ZEROES':  json.dumps(zeroes_list)
+             'WTP_VALUES_ZEROES':  json.dumps(zeroes_list),
+             'one_minus_MS':100-C.MS
          }
 
     @staticmethod
@@ -692,6 +703,16 @@ class ReviewStatements(Page):
 class PostMPL(Page):
     form_model = 'player'
     form_fields = ['MPLWhy']
+
+    @staticmethod
+    def error_message(player, values):
+        if not player.session.config['development']:
+
+            error_messages = {}
+            if values['MPLWhy'] == '':
+                error_messages['MPLWhy'] = 'Please answer the question.'
+
+            return error_messages
 
     @staticmethod
     def is_displayed(player: Player):
