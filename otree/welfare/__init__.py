@@ -22,7 +22,7 @@ class C(BaseConstants):
     BONUS = 'welfare/Review-bonus.html'
     MPL = 'welfare/Review-MPL.html'
     WTP_VALUES = [2, 3, 5, 7, 10, 15, 25, 45, 70, 100, 140, 200]
-
+    MS = 75
 
 class Subsession(BaseSubsession):
     pass
@@ -30,9 +30,16 @@ class Subsession(BaseSubsession):
 
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        switch_orders = itertools.cycle([True, False])
+        switcheroo = [True, False]
+        # random.shuffle(switcheroo)
+        switch_orders = itertools.cycle(switcheroo)
+
+        treatments_shuffled = ['low', 'middle', 'high']
+        # random.shuffle(treatments_shuffled)
+        treatments = itertools.cycle(treatments_shuffled)
         for p in subsession.get_players():
             p.participant.switch_order = next(switch_orders)
+            p.participant.treatment = next(treatments)
 
 
 class Group(BaseGroup):
@@ -383,6 +390,7 @@ def WTPWhy_error_message(player, value):
     
 ######################################################  PAGES   ########################################################
 
+
 class Welcome(Page):
     @staticmethod
     def vars_for_template(player):
@@ -414,6 +422,10 @@ class EconomicsFan(Page):
 
 class YourTask(Page):
     @staticmethod
+    def vars_for_template(player: Player):
+        return dict(one_minus_MS=100-C.MS)
+
+    @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
 
@@ -443,7 +455,8 @@ class CQ(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
+
 
 class PostCQs(Page):
     @staticmethod

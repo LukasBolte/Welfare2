@@ -14,19 +14,6 @@
   </button>
 </div>
 <br>
-<div class="alert alert-info" role="alert">
-  {{ include C.DETAIL }}
-</div>
-
-                <div class="text-center">
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-          aria-expanded="false" aria-controls="collapseExample" id="AdditionalInstructions">
-    Click here to make your choices
-  </button>
-            </div>
-<div class="collapse" id="collapseExample">
-
-
 {{ if participant.switch_order }}
 
   <div class="card">
@@ -253,7 +240,6 @@
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
-</div>
 
 
    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -267,6 +253,7 @@
           {{ include C.PRE_VIDEO }}
                 {{ include C.POST_VIDEO }}
                   {{ include C.BONUS }}
+        {{ include C.DETAIL }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -294,11 +281,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-          $("#AdditionalInstructions").click(function () {
-        $("#AdditionalInstructions").css("display", "none");
-    });
-</script>
+
 {{ if participant.switch_order }}
   <script>
     document.getElementById('Trad1').value = 1;

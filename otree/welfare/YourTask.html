@@ -12,11 +12,23 @@ Your task
     {{ include C.BONUS }}
 </div>
 
+                <div class="text-center">
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample" id="AdditionalInstructions">
+      One more important detail
+  </button>
+            </div>
+<div class="collapse" id="collapseExample">
+
+  {{ include C.DETAIL }}
+
 <p>
     When ready, click "Next."
 </p>
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
+
+</div>
 
 {% endblock %}
 
@@ -25,5 +37,9 @@ Your task
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+        $("#AdditionalInstructions").click(function () {
+        $("#AdditionalInstructions").css("display", "none");
+    });
+    </script>
 {% endblock %}

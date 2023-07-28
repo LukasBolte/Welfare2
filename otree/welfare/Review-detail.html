@@ -4,8 +4,92 @@
     There is one more important detail:
     <strong>
         We might or might not tell Alex whether the two books he gets are the ones with the original or fake notes.
-        We ask you to make your choices for each case.
     </strong>
-    We will then choose randomly whether to tell Alex and implement your answers for that case.
-    So choose carefully because your decisions can determine what Alex gets!
 </p>
+
+ <br>
+
+{{ if participant.switch_order }}
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes</h5>
+      <div class="card-text">
+              {{ if participant.treatment == 'high'}}
+        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+          {{ elif participant.treatment == 'low'}}
+        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+        {{endif}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+      <div class="card-text">
+            {{ if participant.treatment == 'high'}}
+        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+          {{ elif participant.treatment == 'low'}}
+        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+        {{endif}}
+      </div>
+    </div>
+  </div>
+
+{{ else }}
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</h5>
+      <div class="card-text">
+            {{ if participant.treatment == 'high'}}
+        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+          {{ elif participant.treatment == 'low'}}
+        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+        {{endif}}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes</h5>
+      <div class="card-text">
+             {{ if participant.treatment == 'high'}}
+        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+          {{ elif participant.treatment == 'low'}}
+        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
+          <strong>you will determine which books he gets.</strong>
+        {{endif}}
+      </div>
+    </div>
+  </div>
+
+{{ endif }}
+
+  <br>
+
+    <p>
+            We ask you to make your choices for each case.
+    We will then choose a case randomly and implement that case.
+    </p>
+
+    {{ if participant.treatment != 'middle'}}
+<div class="alert alert-info" role="alert">
+    Alex knows about this whole process exactly.
+ This means that if he gets the books and we don't tell him whether they are the ones with the original or fake notes,
+ he should believe the books have the original handwritten notes with X% chance.</div>
+    {{endif}}
