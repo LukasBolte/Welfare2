@@ -100,6 +100,9 @@ class Player(BasePlayer):
     ES_learn3 = learn()
     Trad_learn3 = learn()
 
+    MPLWhy = models.LongStringField(blank=True,
+                                  label="Please tell us in approximately 1-3 sentences.")
+
     # ES_wtp3_bounds = models.StringField()
 
     # Trad_wtp3_bounds = models.StringField()
@@ -122,9 +125,7 @@ class Player(BasePlayer):
                                    )
     arkansasWhy = why()
     warhol = models.BooleanField(blank=True,
-                                 label="<strong> Someone got the original Andy Warhol drawing without knowing about it."
-                                       " Is this person better off by getting the original one instead of a copy?"
-                                       "</strong>",
+                                 label="<strong>Is this person better off by getting the original one instead of a copy?</strong>",
                                  choices=[
                                      [True, 'Yes'],
                                      [False, 'No']
@@ -375,7 +376,11 @@ def confirm_error_message(player, value):
         value = 2
         return 'Please, answer the question.'
 
-
+def WTPWhy_error_message(player, value):
+    if not player.session.config['development'] and value is None:
+        value = 2
+        return 'Please, answer the question.'
+    
 ######################################################  PAGES   ########################################################
 
 class Welcome(Page):
@@ -672,6 +677,9 @@ class ReviewStatements(Page):
 
 
 class PostMPL(Page):
+    form_model = 'player'
+    form_fields = ['MPLWhy']
+
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
