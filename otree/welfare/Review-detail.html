@@ -89,15 +89,24 @@
 
     {{ if participant.treatment == 'high'}}
     <div class="alert alert-info" role="alert">
-      Alex knows about this whole process exactly.
+        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
    This means that if he gets the books and we don't tell him whether they are the ones with the original or fake notes,
-   he should believe the books have the original handwritten notes with at least {{ C.MS }}% chance.</div>
+   he should believe the books have the original handwritten notes with at least {{ C.MS }}% chance.
+    </div>
 
     {{ elif participant.treatment == 'low'}}
 
     <div class="alert alert-info" role="alert">
-      Alex knows about this whole process exactly.
+        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
    This means that if he gets the books and we don't tell him whether they are the ones with the original or fake notes,
-   he should believe the books have the fake notes with at least {{ C.MS }}% chance.</div>
-        {{endif}}
+   he should believe the books have the fake notes with at least {{ C.MS }}% chance.
+    </div>
+
+    {{ else }}
+
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
+    </div>
+
+        {{ endif }}
 
