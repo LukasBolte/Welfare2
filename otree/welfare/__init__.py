@@ -24,6 +24,7 @@ class C(BaseConstants):
     WTP_VALUES = [2, 3, 5, 7, 10, 15, 25, 45, 70, 100, 140, 200]
     MS = 75
 
+
 class Subsession(BaseSubsession):
     pass
 
@@ -93,8 +94,8 @@ class Player(BasePlayer):
     ES_learn = learn()
     Trad_learn = learn()
     ES_wtp2 = models.IntegerField(blank=True,
-                                   widget=widgets.RadioSelectHorizontal,
-                                   label='Which books do you prefer Alex to receive in this case?'
+                                  widget=widgets.RadioSelectHorizontal,
+                                  label='Which books do you prefer Alex to receive in this case?'
                                   )
     Trad_wtp2 = models.IntegerField(blank=True,
                                     widget=widgets.RadioSelectHorizontal,
@@ -108,12 +109,12 @@ class Player(BasePlayer):
     Trad_learn3 = learn()
 
     MPLWhy = models.LongStringField(blank=True,
-                                  label="Please tell us in approximately 1-3 sentences.")
+                                    label="Please tell us in approximately 1-3 sentences.")
 
     # ES_wtp3_bounds = models.StringField()
 
     # Trad_wtp3_bounds = models.StringField()
-    
+
     experience = models.BooleanField(blank=True,
                                      label="<strong>Would you go into the machine?</strong>",
                                      choices=[
@@ -132,7 +133,8 @@ class Player(BasePlayer):
                                    )
     arkansasWhy = why()
     warhol = models.BooleanField(blank=True,
-                                 label="<strong>Is this person better off by getting the original one instead of a copy?</strong>",
+                                 label="<strong>Is this person better off by getting the original one instead of a "
+                                       "copy?</strong>",
                                  choices=[
                                      [True, 'Yes'],
                                      [False, 'No']
@@ -198,29 +200,31 @@ class Player(BasePlayer):
                                             [2, 'No']
                                         ],
                                         widget=widgets.RadioSelect,
-                                        label='<strong>If we do not tell Alex which books he got, does he know whether he got the ones with the original notes or those with the fake ones?</strong>')
+                                        label='<strong>If we do not tell Alex which books he got, does he know whether '
+                                              'he got the ones with the original notes or those with the fake ones?'
+                                              '</strong>')
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How clear were the instructions? Please answer on a scale of 1 "
                                                    "to 10 with 10 being the clearest",
-                                                   blank=True,
+                                             blank=True,
                                              choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                              widget=widgets.RadioSelectHorizontal)
     feedbackUnderstanding = models.IntegerField(label="How well did you understand what you were asked to do?"
                                                       " Please answer on a scale of 1 to 10 with 10 being the case when"
                                                       " you understood perfectly",
-                                                      blank=True,
+                                                blank=True,
                                                 choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                                 widget=widgets.RadioSelectHorizontal)
     feedbackSatisfied = models.IntegerField(label="How satisfied are you with this study overall?"
                                                   " Please answer on a scale of 1 to 10 with 10 being the most "
                                                   "satisfied",
-                                                  blank=True,
+                                            blank=True,
                                             choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                             widget=widgets.RadioSelectHorizontal)
     feedbackPay = models.IntegerField(label="How appropriate do you think the payment for this study is relative to "
                                             "other ones on Prolific? Please answer on a scale of 1 to 10 with 10 being "
                                             "the most appropriate",
-                                            blank=True,
+                                      blank=True,
                                       choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                       widget=widgets.RadioSelectHorizontal)
     for j in range(1, 6):
@@ -238,12 +242,13 @@ class Player(BasePlayer):
     for el in ['PostCQs', 'Cases', 'Cases2', 'Cases3Explain', 'Cases3', 'ReviewStatements', 'PostMPL']:
         locals()['timeSubmitted_' + el] = models.FloatField()
     del el
-    
+
+
 ###############################################  FUNCTIONS   ###########################################################
 
 
-def get_wtp_bounds(player, wtp3): 
-    if wtp3==None:
+def get_wtp_bounds(player, wtp3):
+    if wtp3 == None:
         return "WTP is None"
     cutoff = json.loads(wtp3)['cutoff']
     parts = cutoff.split(":")
@@ -251,13 +256,13 @@ def get_wtp_bounds(player, wtp3):
     row = int(parts[1])
 
     if side == "right":
-        row = row-1
-        side="left"
+        row = row - 1
+        side = "left"
 
-    WTP_VALUES = [0]+C.WTP_VALUES +[float('inf')]
+    WTP_VALUES = [0] + C.WTP_VALUES + [float('inf')]
 
-    WTP_bound = (WTP_VALUES[row+1],WTP_VALUES[row+2])
-    return WTP_bound, row+4
+    WTP_bound = (WTP_VALUES[row + 1], WTP_VALUES[row + 2])
+    return WTP_bound, row + 4
 
 
 def ES_wtp2_choices(player):
@@ -311,7 +316,8 @@ def MPLWhy_error_message(player, value):
     if not player.session.config['development'] and value is None:
         value = 2
         return 'Please, answer the question.'
-    
+
+
 ######################################################  PAGES   ########################################################
 
 
@@ -347,7 +353,7 @@ class EconomicsFan(Page):
 class YourTask(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(one_minus_MS=100-C.MS)
+        return dict(one_minus_MS=100 - C.MS)
 
     @staticmethod
     def is_displayed(player: Player):
@@ -367,7 +373,7 @@ class CQ(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(one_minus_MS=100-C.MS)
+        return dict(one_minus_MS=100 - C.MS)
 
     @staticmethod
     def error_message(player, values):
@@ -393,7 +399,7 @@ class CQ(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
-        
+
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
@@ -402,12 +408,11 @@ class CQ(Page):
 class PostCQs(Page):
     @staticmethod
     def vars_for_template(player):
-
         dollarValues = [1] + C.WTP_VALUES
         return {
-             'dollarValues':  json.dumps(dollarValues)
-         }
-    
+            'dollarValues': json.dumps(dollarValues)
+        }
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_PostCQs = time.time()
@@ -421,11 +426,10 @@ class Cases(Page):
     form_model = 'player'
     form_fields = ['ES_wtp', 'Trad_wtp', 'ES_learn', 'Trad_learn', 'ES_learn_mistakes', 'Trad_learn_mistakes']
 
-
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(one_minus_MS=100-C.MS)
-    
+        return dict(one_minus_MS=100 - C.MS)
+
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
@@ -441,6 +445,7 @@ class Cases(Page):
                     name = 'player.' + str(field_name) + '_mistakes'
                     exec("%s += 1" % name)
             return error_messages
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_Cases = time.time()
@@ -496,8 +501,8 @@ class Cases2(Page):
         Trad_wtp = player.field_maybe_none('Trad_wtp')
         return dict(ES_wtp=ES_wtp,
                     Trad_wtp=Trad_wtp,
-                    one_minus_MS=100-C.MS)
-    
+                    one_minus_MS=100 - C.MS)
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_Cases2 = time.time()
@@ -531,7 +536,8 @@ class Cases3(Page):
                              )
             error_messages = dict()
             for field_name in solutions:
-                if (field_name == 'ES_learn3' and json.loads(player.participant.ES_strict)) or (field_name == 'Trad_learn3' and json.loads(player.participant.Trad_strict)):
+                if (field_name == 'ES_learn3' and json.loads(player.participant.ES_strict)) or (
+                        field_name == 'Trad_learn3' and json.loads(player.participant.Trad_strict)):
                     if values[field_name] is None:
                         error_messages[field_name] = 'Please, answer the question'
                     elif values[field_name] != solutions[field_name]:
@@ -550,13 +556,13 @@ class Cases3(Page):
 
         player.participant.ES_strict = json.dumps(ES_wtp == 1 and ES_wtp2 == 1)
         player.participant.Trad_strict = json.dumps(Trad_wtp == 1 and Trad_wtp2 == 1)
-        
+
         zeroes_list = [0] * len(C.WTP_VALUES)
         return {
-             'WTP_VALUES':  json.dumps(C.WTP_VALUES),
-             'WTP_VALUES_ZEROES':  json.dumps(zeroes_list),
-             'one_minus_MS': 100-C.MS
-         }
+            'WTP_VALUES': json.dumps(C.WTP_VALUES),
+            'WTP_VALUES_ZEROES': json.dumps(zeroes_list),
+            'one_minus_MS': 100 - C.MS
+        }
 
     @staticmethod
     def is_displayed(player: Player):
@@ -578,12 +584,12 @@ class ReviewStatements(Page):
     form_fields = ['confirm']
 
     @staticmethod
-    def vars_for_template(player):        
+    def vars_for_template(player):
         if player.Trad_wtp == 3:
             row = 1
             indifference = True
         else:
-            indifference = False 
+            indifference = False
 
         if player.Trad_wtp == 2:  # Fake preferred to Original
             if player.Trad_wtp2 == 1:
@@ -601,7 +607,7 @@ class ReviewStatements(Page):
             row2 = 1
             indifference2 = True
         else:
-            indifference2 = False 
+            indifference2 = False
 
         if player.ES_wtp == 2:  # Fake preferred to Original
             if player.ES_wtp2 == 1:
@@ -618,13 +624,13 @@ class ReviewStatements(Page):
         dollarValues = [1] + C.WTP_VALUES
 
         return {
-             'dollarValues':  json.dumps(dollarValues),
+            'dollarValues': json.dumps(dollarValues),
 
-             'row': json.dumps(row),
-             'indifference': json.dumps(indifference),
-             'row2': json.dumps(row2),
-             'indifference2': json.dumps(indifference2)
-         }
+            'row': json.dumps(row),
+            'indifference': json.dumps(indifference),
+            'row2': json.dumps(row2),
+            'indifference2': json.dumps(indifference2)
+        }
 
     @staticmethod
     def is_displayed(player: Player):
@@ -635,7 +641,6 @@ class ReviewStatements(Page):
         player.participant.confirm = player.confirm
         player.timeSubmitted_ReviewStatements = time.time()
 
-    
 
 class PostMPL(Page):
     form_model = 'player'
@@ -654,7 +659,7 @@ class PostMPL(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
-    
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_PostMPL = time.time()
@@ -675,18 +680,16 @@ class Experience(Page):
                 error_messages['experienceWhy'] = 'Please answer the question.'
 
             return error_messages
-        
+
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
-    
-  
 
 
 class Arkansas(Page):
     form_model = 'player'
     form_fields = ['arkansas', 'arkansasWhy']
-    
+
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
@@ -698,10 +701,10 @@ class Arkansas(Page):
                 error_messages['arkansasWhy'] = 'Please answer the question.'
 
             return error_messages
-        
+
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
 
 class Warhol(Page):
@@ -711,19 +714,18 @@ class Warhol(Page):
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
-            
+
             error_messages = {}
             if values['warhol'] is None:
                 error_messages['warhol'] = 'Please answer the question.'
             if values['warholWhy'] == '':
                 error_messages['warholWhy'] = 'Please answer the question.'
-                      
+
             return error_messages
 
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
-
 
 
 class End(Page):
@@ -734,11 +736,12 @@ class End(Page):
     def error_message(player, values):
         if not player.session.config['development']:
             error_messages = dict()
-            for field_name in ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied', 'feedbackPay']:
+            for field_name in ['feedback', 'feedbackDifficulty', 'feedbackUnderstanding', 'feedbackSatisfied',
+                               'feedbackPay']:
                 if values[field_name] is None:
                     error_messages[field_name] = 'Please, answer the question'
             return error_messages
-        
+
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
@@ -752,14 +755,13 @@ class End(Page):
 class Finished(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
-    
+        return player.round_number == 2
 
 
 class Redirect(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
 
 page_sequence = [
