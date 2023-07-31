@@ -198,8 +198,7 @@ class Player(BasePlayer):
                                             [2, 'No']
                                         ],
                                         widget=widgets.RadioSelect,
-                                        label='<strong>If we do not tell Alex which books he got, does he know that he '
-                                              'might have gotten the ones with the original or fake notes?</strong>')
+                                        label='<strong>If we do not tell Alex which books he got, does he know whether he got the ones with the original notes or those with the fake ones?</strong>')
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How clear were the instructions? Please answer on a scale of 1 "
                                                    "to 10 with 10 being the clearest",
@@ -380,7 +379,7 @@ class CQ(Page):
                              cq5=3
                              )
             if player.participant.treatment == 'middle':
-                solutions['cq6_ambiguous'] = 1
+                solutions['cq6_ambiguous'] = 2
             elif player.participant.treatment == 'high':
                 solutions['cq6_treatments'] = 1
             else:
