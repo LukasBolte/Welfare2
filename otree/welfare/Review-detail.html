@@ -87,26 +87,22 @@
     We will then choose a case randomly and implement that case.
     </p>
 
+     <div class="alert alert-info" role="alert">
+
     {{ if participant.treatment == 'high'}}
-    <div class="alert alert-info" role="alert">
-        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
-   This means that if he gets the books and we don't tell him whether they are the ones with the original or fake notes,
-   he should believe the books have the original handwritten notes with at least {{ C.MS }}% chance.
-    </div>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
+                     75% chance that they are the ones with the original notes</h6>
+
 
     {{ elif participant.treatment == 'low'}}
-
-    <div class="alert alert-info" role="alert">
-        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
-   This means that if he gets the books and we don't tell him whether they are the ones with the original or fake notes,
-   he should believe the books have the fake notes with at least {{ C.MS }}% chance.
-    </div>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
+                     75% chance that they are the ones with the fake notes</h6>
 
     {{ else }}
 
-    <div class="alert alert-info" role="alert">
-        <h5 class="alert-title">Alex knows about this whole process exactly</h5>
-    </div>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, he may have got the ones
+             with the original or the fake notes.</h6>
 
         {{ endif }}
 
+    </div>

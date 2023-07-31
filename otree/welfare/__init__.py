@@ -183,14 +183,23 @@ class Player(BasePlayer):
                               ],
                               widget=widgets.RadioSelect,
                               label='<strong>What do your answers determine?</strong>')
-    cq6 = models.IntegerField(blank=True,
-                              choices=[
-                                  [1, 'The ones with the original notes'],
-                                  [2, 'The ones with the fake notes']
-                              ],
-                              widget=widgets.RadioSelect,
-                              label='<strong>If we do not tell Alex which books he got, which ones should he believe'
-                                    ' he is more likely to have according to the instructions we gave him?</strong>')
+    cq6_treatments = models.IntegerField(blank=True,
+                                         choices=[
+                                             [1, 'The ones with the original notes'],
+                                             [2, 'The ones with the fake notes']
+                                         ],
+                                         widget=widgets.RadioSelect,
+                                         label='<strong>If we do not tell Alex which books he got, which ones should he'
+                                               ' believe he is more likely to have according to the instructions we '
+                                               'gave him?</strong>')
+    cq6_ambiguous = models.IntegerField(blank=True,
+                                        choices=[
+                                            [1, 'Yes'],
+                                            [2, 'No']
+                                        ],
+                                        widget=widgets.RadioSelect,
+                                        label='<strong>If we do not tell Alex which books he got, does he know that he '
+                                              'might have gotten the ones with the original or fake notes?</strong>')
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How clear were the instructions? Please answer on a scale of 1 "
                                                    "to 10 with 10 being the clearest",
@@ -296,6 +305,7 @@ def confirm_error_message(player, value):
         value = 2
         return 'Please, answer the question.'
 
+
 def MPLWhy_error_message(player, value):
     if not player.session.config['development'] and value is None:
         value = 2
@@ -345,11 +355,19 @@ class YourTask(Page):
 
 class CQ(Page):
     form_model = 'player'
-    form_fields = ['cq1', 'cq2', 'cq3', 'cq4', 'cq5']
+
+    @staticmethod
+    def get_form_fields(player):
+        my_fields = ['cq1', 'cq2', 'cq3', 'cq4', 'cq5']
+        if player.participant.treatment == 'middle':
+            return my_fields + ['cq6_ambiguous']
+        else:
+            return my_fields + ['cq6_treatments']
 
     @staticmethod
     def vars_for_template(player: Player):
         return dict(one_minus_MS=100-C.MS)
+
     @staticmethod
     def error_message(player, values):
         if not player.session.config['development']:
