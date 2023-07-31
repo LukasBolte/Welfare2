@@ -91,12 +91,12 @@
 
     {{ if participant.treatment == 'high'}}
          <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
-                     75% chance that they are the ones with the original notes</h6>
+                     {{ C.MS }}% chance that they are the ones with the original notes</h6>
 
 
     {{ elif participant.treatment == 'low'}}
          <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
-                     75% chance that they are the ones with the fake notes</h6>
+                     {{ C.MS }}% chance that they are the ones with the fake notes</h6>
 
     {{ else }}
 

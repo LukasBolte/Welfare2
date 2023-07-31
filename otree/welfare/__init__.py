@@ -227,6 +227,8 @@ class Player(BasePlayer):
     for j in range(1, 6):
         locals()['cq' + str(j) + '_mistakes'] = models.IntegerField(blank=True, initial=0)
     del j
+    cq6_ambiguous_mistakes = models.IntegerField(blank=True, initial=0)
+    cq6_treatments_mistakes = models.IntegerField(blank=True, initial=0)
     ES_learn_mistakes = models.IntegerField(blank=True, initial=0)
     Trad_learn_mistakes = models.IntegerField(blank=True, initial=0)
     ES_learn2_mistakes = models.IntegerField(blank=True, initial=0)
@@ -322,7 +324,7 @@ class Welcome(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==1
+        return player.round_number == 1
 
 
 class Consent(Page):
@@ -377,6 +379,12 @@ class CQ(Page):
                              cq4=2,
                              cq5=3
                              )
+            if player.participant.treatment == 'middle':
+                solutions['cq6_ambiguous'] = 1
+            elif player.participant.treatment == 'high':
+                solutions['cq6_treatments'] = 1
+            else:
+                solutions['cq6_treatments'] = 2
             error_messages = dict()
             for field_name in solutions:
                 if values[field_name] is None:
@@ -446,7 +454,6 @@ class Cases(Page):
 class Cases2(Page):
     form_model = 'player'
 
-    
     @staticmethod
     def get_form_fields(player):
         ES_wtp = player.field_maybe_none('ES_wtp')
@@ -507,6 +514,7 @@ class Cases3Explain(Page):
         return ((ES_wtp == 1 and ES_wtp2 == 1) or (Trad_wtp == 1 and Trad_wtp2 == 1)) and \
             (player.round_number == 1 or (player.participant.confirm == player.round_number))
         #  the above says we only show this page for those who have always preferred Original in either case.
+
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_Cases3Explain = time.time()
@@ -548,7 +556,7 @@ class Cases3(Page):
         return {
              'WTP_VALUES':  json.dumps(C.WTP_VALUES),
              'WTP_VALUES_ZEROES':  json.dumps(zeroes_list),
-             'one_minus_MS':100-C.MS
+             'one_minus_MS': 100-C.MS
          }
 
     @staticmethod
@@ -629,7 +637,6 @@ class ReviewStatements(Page):
         player.timeSubmitted_ReviewStatements = time.time()
 
     
-
 
 class PostMPL(Page):
     form_model = 'player'
@@ -716,27 +723,8 @@ class Warhol(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
-
-class Demographics(Page):
-    form_model = 'player'
-    form_fields = ['gender', 'ethnic', 'age','education', 'marital', 'income', 'percentProlific','state']
-
-    @staticmethod
-    def error_message(player, values):
-        if not player.session.config['development']:
-            
-            error_messages = {}
-            for field_name in ['gender', 'ethnic', 'age','education', 'marital', 'income', 'percentProlific','state']:
-                if values[field_name] is None:
-                    error_messages[field_name] = 'Please answer the question.'
-                      
-            return error_messages
-    
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.round_number==2
 
 
 class End(Page):
@@ -754,7 +742,7 @@ class End(Page):
         
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number==2
+        return player.round_number == 2
 
     @staticmethod
     def before_next_page(player, timeout_happened):
