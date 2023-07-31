@@ -16,7 +16,7 @@
 
     <div class="card" id="Trad_id">
       <div class="card-body">
-        <h5 class="card-title">Case 1: Remember, in this case, we WILL tell Alex whether the books he got are the
+        <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
 
           {{ formfield_errors 'Trad_learn3' }}
@@ -49,7 +49,7 @@
       {{ if participant.Trad_strict == 'false' }}
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Case 1: Remember, in this case, we WILL tell Alex whether the books he got are the
+            <h5 class="card-title">Case 1: we WILL tell Alex whether the books he got are the
         ones with the original or fake notes</h5>
             For case 1 we already know how to answer the 15 questions for you. 
         You don't need to do anything else for this case. 
@@ -63,8 +63,13 @@
 
     <div class="card" id="ES_id">
       <div class="card-body">
-        <h5 class="card-title">Case 2: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+        <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
+      {{ if participant.treatment != 'middle'}}
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+            {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
+            determine which books he gets otherwise.</h6>
+      {{ endif }}
 
       {{ formfield_errors 'ES_learn3' }}
 
@@ -95,8 +100,13 @@
     {{if participant.ES_strict == 'false' }}
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Case 2: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+        <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
+      {{ if participant.treatment != 'middle'}}
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+            {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
+            determine which books he gets otherwise.</h6>
+      {{ endif }}
         For case 2 we already know how to answer the 15 questions for you. 
     You don't need to do anything else for this case. 
     You will get a chance to review your responses to the questions in case 2 later in the study.
@@ -113,8 +123,13 @@
     {{if participant.ES_strict == 'false' }}
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+        <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
+      {{ if participant.treatment != 'middle'}}
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+            {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
+            determine which books he gets otherwise.</h6>
+      {{ endif }}
         For case 1 we already know how to answer the 15 questions for you. 
     You don't need to do anything else for this case. 
     You will get a chance to review your responses to the questions in case 1 later in the study.
@@ -125,8 +140,13 @@
 
     <div class="card" id="ES_id">
       <div class="card-body">
-        <h5 class="card-title">Case 1: Remember, in this case, we WILL NOT tell Alex whether the books he got are the
+        <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the
       ones with the original or fake notes</h5>
+      {{ if participant.treatment != 'middle'}}
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+            {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
+            determine which books he gets otherwise.</h6>
+      {{ endif }}
       
       {{ formfield_errors 'ES_learn3' }}
 
@@ -160,7 +180,7 @@
     {{ if participant.Trad_strict == 'false' }}
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
+        <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
         For case 2 we already know how to answer the 15 questions for you. 
     You don't need to do anything else for this case. 
@@ -172,7 +192,7 @@
 
     <div class="card" id="Trad_id">
       <div class="card-body">
-        <h5 class="card-title">Case 2: Remember, in this case, we WILL tell Alex whether the books he got are the
+        <h5 class="card-title">Case 2: we WILL tell Alex whether the books he got are the
     ones with the original or fake notes</h5>
     {{ formfield_errors 'Trad_learn3' }}
 
