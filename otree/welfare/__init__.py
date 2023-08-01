@@ -108,8 +108,7 @@ class Player(BasePlayer):
     ES_learn3 = learn()
     Trad_learn3 = learn()
 
-    MPLWhy = models.LongStringField(blank=True,
-                                    label="Please tell us in approximately 1-3 sentences.")
+    MPLWhy = models.LongStringField(blank=True)
 
     # ES_wtp3_bounds = models.StringField()
 
@@ -314,7 +313,7 @@ def confirm_error_message(player, value):
 
 def MPLWhy_error_message(player, value):
     if not player.session.config['development'] and value is None:
-        value = 2
+        value = 'blank'
         return 'Please, answer the question.'
 
 

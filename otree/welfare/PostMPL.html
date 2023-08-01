@@ -8,29 +8,39 @@ Thank you for your responses
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
 
-<p>
-    Did you respond the same in Case 1 (when we tell Alex which books he gets) and Case 2 (when we do not tell him)?
+     <div class="alert alert-info" role="alert">
+         <h6 class="alert-heading">Reminder:</h6>
+{{ if participant.switch_order }}
+         <ul class="mb-0">
+             <li>
+             Case 1: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes
+         </li>
+             <li>Case 2: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</li>
+         </ul>
 
-    Yes
-    No
+{{else}}
+         <ul class="mb-0">
+             <li>Case 1: we WILL NOT tell Alex whether the books he got are the ones with
+        the original or fake notes</li>
+             <li>Case 2: we WILL tell Alex whether the books he got are the ones with the original or fake
+        notes</li>
+         </ul>
+{{endif}}
+     </div>
 
-    Why or why not? 
+{{ if == }}
 
-    Textfield
-
+    {{ formfield 'MPLWhy' label="<b>You gave different responses in Case 1 and Case 2. Why?</b> Please tell us in approximately 1-3 sentences. <br> (There is nothing wrong with your answers! We are just interested in your reasoning)" }}
+{{ else }}
+    {{ formfield 'MPLWhy' label="You gave the same responses in Case 1 and Case 2. Why? Please tell us in approximately 1-3 sentences. (there is nothing wrong with your answers! We are just interested in your reasoning)" }}
+{{ endif}}
+<!-- Classification: do people give answers that are consistent with the instructions? Yes, sort of, No. We do not classify by whether people consider something we had not thought of, as long as it is consistent with the instructions. -->
     
-    You gave different responses in Case 1 (when we tell Alex which books he gets) and Case 2 (when we do not tell him). Why? (there is nothing wrong with your answers! We are just interested in your reasoning)
-    
-    You gave the same responses in Case 1 (when we tell Alex which books he gets) and Case 2 (when we do not tell him). Why? (there is nothing wrong with your answers! We are just interested in your reasoning)
-    
-    Textfield
+<!-- We want to understand why you made your choice in the way you did. In particular, how did whether Alex will or will not learn about which notes he got affect your responses?  -->
 
-    <!-- Classification: do people give answers that are consistent with the instructions? Yes, sort of, No. We do not classify by whether people consider something we had not thought of, as long as it is consistent with the instructions. -->
-    
-    <!-- We want to understand why you made your choice in the way you did. In particular, how did whether Alex will or will not learn about which notes he got affect your responses?  -->
-</p>
 
-{{ formfields }}
 
 
 <p>
