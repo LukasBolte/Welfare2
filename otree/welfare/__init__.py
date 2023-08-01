@@ -622,6 +622,8 @@ class ReviewStatements(Page):
 
         dollarValues = [1] + C.WTP_VALUES
 
+        player.participant.WTP_same = ((row == row2) and (indifference == indifference2))
+        
         return {
             'dollarValues': json.dumps(dollarValues),
 
