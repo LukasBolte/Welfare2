@@ -30,18 +30,17 @@ Thank you for your responses
 {{endif}}
      </div>
 
-{{ if == }}
-
-    {{ formfield 'MPLWhy' label="<b>You gave different responses in Case 1 and Case 2. Why?</b> Please tell us in approximately 1-3 sentences. <br> (There is nothing wrong with your answers! We are just interested in your reasoning)" }}
-{{ else }}
-    {{ formfield 'MPLWhy' label="You gave the same responses in Case 1 and Case 2. Why? Please tell us in approximately 1-3 sentences. (there is nothing wrong with your answers! We are just interested in your reasoning)" }}
+{{ if participant.WTP_same }}
+    {{ formfield 'MPLWhy' label="<b>You gave the same responses in Case 1 and Case 2. Why?</b> Please tell us in approximately 1-3 sentences.<br> (There is nothing wrong with your answers! We are just interested in your reasoning)" }}
+{{else}}
+    {{ formfield 'MPLWhy' label="<b>You gave different responses in Case 1 and Case 2. Why?</b> Please tell us in approximately 1-3 sentences.<br> (There is nothing wrong with your answers! We are just interested in your reasoning)" }}
 {{ endif}}
 <!-- Classification: do people give answers that are consistent with the instructions? Yes, sort of, No. We do not classify by whether people consider something we had not thought of, as long as it is consistent with the instructions. -->
     
 <!-- We want to understand why you made your choice in the way you did. In particular, how did whether Alex will or will not learn about which notes he got affect your responses?  -->
 
 
-
+<br>
 
 <p>
     In the remaining pages we will present you with scenarios and ask you questions about them.
