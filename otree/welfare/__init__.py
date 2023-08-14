@@ -34,13 +34,15 @@ def creating_session(subsession: Subsession):
         switcheroo = [True, False]
         # random.shuffle(switcheroo)
         switch_orders = itertools.cycle(switcheroo)
-
         treatments_shuffled = ['low', 'middle', 'high']
         # random.shuffle(treatments_shuffled)
         treatments = itertools.cycle(treatments_shuffled)
         for p in subsession.get_players():
             p.participant.switch_order = next(switch_orders)
             p.participant.treatment = next(treatments)
+            random.shuffle(switcheroo)
+            # pick random number from 1 to 6
+            p.participant.choices_orders = random.randint(1, 6)
 
 
 class Group(BaseGroup):
@@ -77,20 +79,12 @@ class Player(BasePlayer):
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
                                  label='Which books do you prefer Alex to receive in this case?',
-                                 choices=[  # Do we care about randomizing order of choices?
-                                     [1, 'Original notes'],
-                                     [2, 'Fake notes'],
-                                     [3, 'I am indifferent']
-                                 ])
+                                 )
     Trad_wtp = models.IntegerField(blank=True,
                                    widget=widgets.RadioSelectHorizontal,
                                    # label='<strong>Which books do you prefer Alex to receive in this case?</strong>',
                                    label='Which books do you prefer Alex to receive in this case?',
-                                   choices=[  # Do we care about randomizing order of choices?
-                                       [1, 'Original notes'],
-                                       [2, 'Fake notes'],
-                                       [3, 'I am indifferent']
-                                   ])
+                                   )
     ES_learn = learn()
     Trad_learn = learn()
     ES_wtp2 = models.IntegerField(blank=True,
@@ -111,7 +105,6 @@ class Player(BasePlayer):
     MPLWhy = models.LongStringField(blank=True)
 
     # ES_wtp3_bounds = models.StringField()
-
     # Trad_wtp3_bounds = models.StringField()
 
     experience = models.BooleanField(blank=True,
@@ -244,10 +237,78 @@ class Player(BasePlayer):
 
 
 ###############################################  FUNCTIONS   ###########################################################
+def ES_wtp_choices(player):
+    choices_orders = player.participant.choices_orders
+    if choices_orders == 1:
+        choices = [
+            [1, 'Original notes'],
+            [2, 'Fake notes'],
+            [3, 'I am indifferent']]
+    elif choices_orders == 2:
+        choices = [
+            [2, 'Fake notes'],
+            [1, 'Original notes'],
+            [3, 'I am indifferent']]
+    elif choices_orders == 3:
+        choices = [
+            [1, 'Original notes'],
+            [3, 'I am indifferent'],
+            [2, 'Fake notes']]
+    if choices_orders == 4:
+        choices = [
+            [2, 'Fake notes'],
+            [3, 'I am indifferent'],
+            [1, 'Original notes']]
+    elif choices_orders == 5:
+        choices = [
+            [3, 'I am indifferent'],
+            [2, 'Fake notes'],
+            [1, 'Original notes']]
+    elif choices_orders == 6:
+        choices = [
+            [3, 'I am indifferent'],
+            [1, 'Original notes'],
+            [2, 'Fake notes']]
+    return choices
+
+
+def Trad_wtp_choices(player):
+    choices_orders = player.participant.choices_orders
+    if choices_orders == 1:
+        choices = [
+            [1, 'Original notes'],
+            [2, 'Fake notes'],
+            [3, 'I am indifferent']]
+    elif choices_orders == 2:
+        choices = [
+            [2, 'Fake notes'],
+            [1, 'Original notes'],
+            [3, 'I am indifferent']]
+    elif choices_orders == 3:
+        choices = [
+            [1, 'Original notes'],
+            [3, 'I am indifferent'],
+            [2, 'Fake notes']]
+    if choices_orders == 4:
+        choices = [
+            [2, 'Fake notes'],
+            [3, 'I am indifferent'],
+            [1, 'Original notes']]
+    elif choices_orders == 5:
+        choices = [
+            [3, 'I am indifferent'],
+            [2, 'Fake notes'],
+            [1, 'Original notes']]
+    elif choices_orders == 6:
+        choices = [
+            [3, 'I am indifferent'],
+            [1, 'Original notes'],
+            [2, 'Fake notes']]
+    return choices
 
 
 def get_wtp_bounds(player, wtp3):
-    if wtp3 == None:
+    if wtp3 is None:
         return "WTP is None"
     cutoff = json.loads(wtp3)['cutoff']
     parts = cutoff.split(":")
@@ -266,22 +327,47 @@ def get_wtp_bounds(player, wtp3):
 
 def ES_wtp2_choices(player):
     if player.ES_wtp == 1:
-        choices = [[1, 'Original notes'],
-                   [2, 'Fake notes + $1']]
+        og = 'Original notes'
+        fake = 'Fake notes + $1'
+        # choices = [[1, 'Original notes'],
+        #            [2, 'Fake notes + $1']]
     else:
-        choices = [[1, 'Original notes + $1'],
-                   [2, 'Fake notes']]
-    # random.shuffle(choices)
+        og = 'Original notes + $1'
+        fake = 'Fake notes'
+        # choices = [[1, 'Original notes + $1'],
+        #            [2, 'Fake notes']]
+    choices_orders = player.participant.choices_orders
+    if choices_orders in [1, 3, 6]:
+        choices = [
+            [1, og],
+            [2, fake]]
+    else:
+        choices = [
+            [2, fake],
+            [1, og]]
     return choices
 
 
 def Trad_wtp2_choices(player):
     if player.Trad_wtp == 1:
-        choices = [[1, 'Original notes'],
-                   [2, 'Fake notes + $1']]
+        og = 'Original notes'
+        fake = 'Fake notes + $1'
+        # choices = [[1, 'Original notes'],
+        #            [2, 'Fake notes + $1']]
     else:
-        choices = [[1, 'Original notes + $1'],
-                   [2, 'Fake notes']]
+        og = 'Original notes + $1'
+        fake = 'Fake notes'
+        # choices = [[1, 'Original notes + $1'],
+        #            [2, 'Fake notes']]
+    choices_orders = player.participant.choices_orders
+    if choices_orders in [1, 3, 6]:
+        choices = [
+            [1, og],
+            [2, fake]]
+    else:
+        choices = [
+            [2, fake],
+            [1, og]]
     return choices
 
 

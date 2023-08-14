@@ -25,7 +25,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['finished', 'Trad_strict', 'ES_strict', 'switch_order', 'confirm', 'start_time', 'end_time',
-                      'treatment','WTP_same']
+                      'treatment', 'WTP_same', 'choices_orders']
 SESSION_FIELDS = ['prolific_completion_url']
 
 # ISO-639 code
