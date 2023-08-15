@@ -352,8 +352,8 @@
 
 	parameters={
     playerID : "{{participant.code}}" + "{{ player.round_number }}",
-		leftHeader:"Original notes and...", 
-		rightHeader:"Fake notes and...",
+		leftHeader:"{{leftHeader}}", 
+		rightHeader:"{{rightHeader}}", 
 		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
 		rightBonus: {{ WTP_VALUES|safe }},
 		varname:"ES_wtp3", //variable name on oTree  ES_wtp3', '',
@@ -367,8 +367,8 @@
 	wtp_1 =new drawWTP(parameters);
 	parameters={
     playerID : "{{participant.code}}" + "{{ player.round_number }}",
-		leftHeader:"Original notes and...", 
-		rightHeader:"Fake notes and...",
+		leftHeader:"{{leftHeader}}", 
+		rightHeader:"{{rightHeader}}", 
 		leftBonus: {{ WTP_VALUES_ZEROES|safe }},
 		rightBonus: {{ WTP_VALUES|safe }},
 		varname:"Trad_wtp3", //variable name on oTree 

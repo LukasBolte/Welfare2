@@ -5,6 +5,7 @@
     For each row, we ask you to choose between the original notes, and fake notes with a bonus for Alex.
 </p>
 
+{{  if original_first }}
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-md-6 col-sm-8 ">
@@ -14,8 +15,17 @@
         </div>
     </div>
 </div>
-
-
+{{ else }}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 col-sm-8 ">
+            <div class="img-container">
+                <img src="{% static 'img/mpl_screenshot_switched.jpg' %}"  alt="Table with questions" class="img-fluid mpl_img">
+            </div>
+        </div>
+    </div>
+</div>
+{{ endif }}
 <p class="mt-3">
     We assume that once you choose the fake notes for one row, you will choose the fake notes for all rows below,
     because the rows below simply make the fake notes better by increasing the bonus.

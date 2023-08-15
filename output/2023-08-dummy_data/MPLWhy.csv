@@ -1,0 +1,8 @@
+label,Trad_wtp3_bounds,ES_wtp3_bounds,treatment,MPLWhy
+,"(7, 10)","(7, 10)",middle,d
+,"(15, 25)","(7, 10)",middle,d
+,"(5, 7)","(10, 15)",low,d
+,"(45, 70)","(70, 100)",middle,2
+,"(45, 70)","(70, 100)",middle,oi
+,"(45, 70)","(70, 100)",middle,s
+,"(45, 70)","(70, 100)",high,j

@@ -30,11 +30,7 @@ Well done!
             <div class="modal-body">
                 <p>Which books do you prefer Alex to receive?</p>
                 <ol id="modalList">
-                    <li>...the ones with the <span style="color: blue">original notes</span>
-                        <span class='bold'>and $1</span> or with the <span style="color: chocolate">fake notes</span>?
-                    </li>
-                    <li>...the ones with the <span style="color: blue">original notes</span> or with the
-                        <span style="color: chocolate">fake notes</span>?</li>
+                    
                 </ol>
             </div>
             <div class="modal-footer">
@@ -73,30 +69,60 @@ Well done!
 <script>
 // Function to generate rows in the modal based on an input list of dollar values
 
+
+
 function generateModalRows(dollarValues) {
-      var modalList = document.getElementById("modalList");
+    var modalList = document.getElementById("modalList");
 
+    if ("{{original_first|safe}}" == "True"){
 
-      // Loop through the dollar values and create list items for each value
-      for (var i = 0; i < dollarValues.length; i++) {
-        var boldPlus = document.createElement("span");
-        boldPlus.className = "bold";
-        boldPlus.textContent = "and $";
-        boldPlus.textContent += dollarValues[i];
+        modalList.innerHTML= `<li>...the ones with the <span style="color: blue">original notes</span>
+                        <span class='bold'>and $1</span> or with the <span style="color: chocolate">fake notes</span>?
+                    </li>
+                    <li>...the ones with the <span style="color: blue">original notes</span> or with the
+                        <span style="color: chocolate">fake notes</span>?</li>`
 
-        var listItem = document.createElement("li");
-        listItem.innerHTML = "...the ones with the <span style=\"color: blue\">original notes</span> or the ones with the" +
-            " <span style=\"color: chocolate\">fake notes</span> ";
-        listItem.appendChild(boldPlus.cloneNode(true));
-        listItem.innerHTML += "?";
-        modalList.appendChild(listItem);
-      }
+        // Loop through the dollar values and create list items for each value
+        for (var i = 0; i < dollarValues.length; i++) {
+            var boldPlus = document.createElement("span");
+            boldPlus.className = "bold";
+            boldPlus.textContent = "and $";
+            boldPlus.textContent += dollarValues[i];
+
+            var listItem = document.createElement("li");
+            listItem.innerHTML = "...the ones with the <span style=\"color: blue\">original notes</span> or the ones with the" +
+                " <span style=\"color: chocolate\">fake notes</span> ";
+            listItem.appendChild(boldPlus.cloneNode(true));
+            listItem.innerHTML += "?";
+            modalList.appendChild(listItem);
+        }
+    } else if ("{{original_first|safe}}" == "False"){
+        modalList.innerHTML= `<li>...the ones with the <span style="color: blue">fake notes</span>
+                            or with the <span style="color: chocolate">original notes</span> <span class='bold'>and $1</span>?
+                        </li>
+                        <li>...the ones with the <span style="color: blue">fake notes</span> or with the
+                            <span style="color: chocolate">original notes</span>?</li>`
+
+        // Loop through the dollar values and create list items for each value
+        for (var i = 0; i < dollarValues.length; i++) {
+            var boldPlus = document.createElement("span");
+            boldPlus.className = "bold";
+            boldPlus.textContent = "and $";
+            boldPlus.textContent += dollarValues[i];
+
+            var listItem = document.createElement("li");
+            listItem.innerHTML = "...the ones with the <span style=\"color: blue\">fake notes</span> " 
+            listItem.appendChild(boldPlus.cloneNode(true));
+            listItem.innerHTML += " or the ones with the <span style=\"color: chocolate\">original notes</span>?";
+            modalList.appendChild(listItem);
+        }
     }
+}
 
-    // Call the generateModalRows function with the input list
-    var dollarValues = {{ dollarValues|safe }}
-    generateModalRows(dollarValues);
-
+// Call the generateModalRows function with the input list
+var dollarValues = {{ dollarValues|safe }}
+generateModalRows(dollarValues);
+    
 </script>
 
 {% endblock %}

@@ -32,17 +32,19 @@ class Subsession(BaseSubsession):
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         switcheroo = [True, False]
-        # random.shuffle(switcheroo)
-        switch_orders = itertools.cycle(switcheroo)
         treatments_shuffled = ['low', 'middle', 'high']
-        # random.shuffle(treatments_shuffled)
-        treatments = itertools.cycle(treatments_shuffled)
+        choices_orders = [1, 2, 3, 4, 5, 6]
+        arrays = [switcheroo,treatments_shuffled,choices_orders]
+        treatments = list(itertools.product(*arrays))
+        random.shuffle(treatments)
+        treatments = itertools.cycle(treatments)
         for p in subsession.get_players():
-            p.participant.switch_order = next(switch_orders)
-            p.participant.treatment = next(treatments)
-            random.shuffle(switcheroo)
-            # pick random number from 1 to 6
-            p.participant.choices_orders = random.randint(1, 6)
+            el = next(treatments)
+            p.participant.switch_order = el[0]
+            p.participant.treatment = el[1]
+            p.participant.choices_orders = el[2]
+            
+
 
 
 class Group(BaseGroup):
@@ -315,6 +317,9 @@ def get_wtp_bounds(player, wtp3):
     side = parts[0]
     row = int(parts[1])
 
+    print(player.participant.choices_orders,'myPrint')
+    if not player.participant.choices_orders in [1, 3, 6]:
+        side = {"right":"left","left":"right"}[side]
     if side == "right":
         row = row - 1
         side = "left"
@@ -494,8 +499,11 @@ class PostCQs(Page):
     @staticmethod
     def vars_for_template(player):
         dollarValues = [1] + C.WTP_VALUES
+        choices_orders = player.participant.choices_orders
+        original_first = choices_orders in [1, 3, 6]
         return {
-            'dollarValues': json.dumps(dollarValues)
+            'dollarValues': json.dumps(dollarValues),
+            'original_first': original_first
         }
 
     @staticmethod
@@ -605,6 +613,15 @@ class Cases3Explain(Page):
         #  the above says we only show this page for those who have always preferred Original in either case.
 
     @staticmethod
+    def vars_for_template(player):
+        choices_orders = player.participant.choices_orders
+        original_first = choices_orders in [1, 3, 6]
+        
+        return {
+            'original_first': original_first
+        }
+        
+    @staticmethod
     def before_next_page(player, timeout_happened):
         player.timeSubmitted_Cases3Explain = time.time()
 
@@ -643,11 +660,32 @@ class Cases3(Page):
         player.participant.Trad_strict = json.dumps(Trad_wtp == 1 and Trad_wtp2 == 1)
 
         zeroes_list = [0] * len(C.WTP_VALUES)
-        return {
-            'WTP_VALUES': json.dumps(C.WTP_VALUES),
-            'WTP_VALUES_ZEROES': json.dumps(zeroes_list),
-            'one_minus_MS': 100 - C.MS
-        }
+
+
+        choices_orders = player.participant.choices_orders
+        original_first = choices_orders in [1, 3, 6]
+      
+        leftHeader="Original notes and..."
+        rightHeader="Fake notes and..."
+
+        if original_first:
+            return {
+                'WTP_VALUES': json.dumps(C.WTP_VALUES),
+                'WTP_VALUES_ZEROES': json.dumps(zeroes_list),
+                'one_minus_MS': 100 - C.MS,
+                'leftHeader': leftHeader,
+                'rightHeader': rightHeader,
+                'original_first': original_first
+            }
+        else:
+            return {
+                'WTP_VALUES': json.dumps(zeroes_list),
+                'WTP_VALUES_ZEROES': json.dumps(C.WTP_VALUES),
+                'one_minus_MS': 100 - C.MS,
+                'leftHeader': rightHeader,
+                'rightHeader': leftHeader,
+                'original_first': original_first
+            }
 
     @staticmethod
     def is_displayed(player: Player):
@@ -710,7 +748,11 @@ class ReviewStatements(Page):
 
         player.participant.WTP_same = ((row == row2) and (indifference == indifference2))
         
+        choices_orders = player.participant.choices_orders
+        original_first = choices_orders in [1, 3, 6]
+
         return {
+            'original_first': original_first,
             'dollarValues': json.dumps(dollarValues),
 
             'row': json.dumps(row),
