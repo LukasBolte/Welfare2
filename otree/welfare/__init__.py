@@ -317,9 +317,9 @@ def get_wtp_bounds(player, wtp3):
     side = parts[0]
     row = int(parts[1])
 
-    print(player.participant.choices_orders,'myPrint')
+    print(player.participant.choices_orders, 'myPrint')
     if not player.participant.choices_orders in [1, 3, 6]:
-        side = {"right":"left","left":"right"}[side]
+        side = {"right": "left", "left": "right"}[side]
     if side == "right":
         row = row - 1
         side = "left"
