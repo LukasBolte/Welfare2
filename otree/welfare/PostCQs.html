@@ -41,9 +41,7 @@ Well done!
 </div>
 
 <p>
-    We will randomly pick one of the questions and implement whatever option you choose.
-    This means that any question can be the one that determines what Alex gets so please answer
-    them carefully.
+    We will randomly pick one of the questions and implement whatever option you choose. This means that any question can be the one that determines what Alex gets, so please answer    them carefully.
 </p>
 
 <p>
@@ -77,9 +75,9 @@ function generateModalRows(dollarValues) {
     if ("{{original_first|safe}}" == "True"){
 
         modalList.innerHTML= `<li>...the ones with the <span style="color: blue">original notes</span>
-                        <span class='bold'>and $1</span> or with the <span style="color: chocolate">fake notes</span>?
+                        <span class='bold'>and $1</span> or the ones with the <span style="color: chocolate">fake notes</span>?
                     </li>
-                    <li>...the ones with the <span style="color: blue">original notes</span> or with the
+                    <li>...the ones with the <span style="color: blue">original notes</span> or the ones with the
                         <span style="color: chocolate">fake notes</span>?</li>`
 
         // Loop through the dollar values and create list items for each value
@@ -98,9 +96,9 @@ function generateModalRows(dollarValues) {
         }
     } else if ("{{original_first|safe}}" == "False"){
         modalList.innerHTML= `<li>...the ones with the <span style="color: blue">fake notes</span>
-                            or with the <span style="color: chocolate">original notes</span> <span class='bold'>and $1</span>?
+                            or the ones with the <span style="color: chocolate">original notes</span> <span class='bold'>and $1</span>?
                         </li>
-                        <li>...the ones with the <span style="color: blue">fake notes</span> or with the
+                        <li>...the ones with the <span style="color: blue">fake notes</span> or the ones with the
                             <span style="color: chocolate">original notes</span>?</li>`
 
         // Loop through the dollar values and create list items for each value

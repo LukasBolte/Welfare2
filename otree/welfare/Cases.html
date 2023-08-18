@@ -150,7 +150,7 @@
       <h5 class="card-title">Case 2: we WILL NOT tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
       {{ if participant.treatment != 'middle'}}
-          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance, he will get the books with
             {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
             determine which books he gets otherwise.</h6>
       {{ endif }}
@@ -284,7 +284,7 @@
       <h5 class="card-title">Case 1: we WILL NOT tell Alex whether the books he got are the ones with
         the original or fake notes</h5>
       {{ if participant.treatment != 'middle'}}
-          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance he will get the books with
+          <h6 class="card-subtitle mb-2 text-muted">He knows that with {{ C.MS }}% chance, he will get the books with
             {{ if participant.treatment == 'high' }}original notes{{ else }}fake notes{{ endif }}; you now
             determine which books he gets otherwise.</h6>
       {{ endif }}
@@ -566,6 +566,7 @@
           {{ include C.PRE_VIDEO }}
                 {{ include C.POST_VIDEO }}
                   {{ include C.BONUS }}
+                  <br>
         {{ include C.DETAIL }}
       </div>
       <div class="modal-footer">

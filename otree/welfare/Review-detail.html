@@ -17,11 +17,9 @@
         notes</h5>
       <div class="card-text">
               {{ if participant.treatment == 'high'}}
-        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the original notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
           {{ elif participant.treatment == 'low'}}
-        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the fake notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
         {{endif}}
       </div>
     </div>
@@ -33,11 +31,9 @@
         the original or fake notes</h5>
       <div class="card-text">
             {{ if participant.treatment == 'high'}}
-        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the original notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
           {{ elif participant.treatment == 'low'}}
-        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the fake notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
         {{endif}}
       </div>
     </div>
@@ -51,11 +47,9 @@
         the original or fake notes</h5>
       <div class="card-text">
             {{ if participant.treatment == 'high'}}
-        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the original notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
           {{ elif participant.treatment == 'low'}}
-        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the fake notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
         {{endif}}
       </div>
     </div>
@@ -68,11 +62,9 @@
         notes</h5>
       <div class="card-text">
              {{ if participant.treatment == 'high'}}
-        With a {{ C.MS }}% chance Alex will get the books with the original notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the original notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
           {{ elif participant.treatment == 'low'}}
-        With a {{ C.MS }}% chance Alex will get the books with the fake notes and with a {{one_minus_MS}}% chance
-          <strong>you will determine which books he gets.</strong>
+        With a {{ C.MS }}% chance, Alex will get the books with the fake notes, and with a {{one_minus_MS}}% chance, <strong>you will determine which books he gets.</strong>
         {{endif}}
       </div>
     </div>
@@ -90,18 +82,15 @@
      <div class="alert alert-info" role="alert">
 
     {{ if participant.treatment == 'high'}}
-         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
-                     {{ C.MS }}% chance that they are the ones with the original notes</h6>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a {{ C.MS }}% chance that they are the ones with the original notes.</h6>
 
 
     {{ elif participant.treatment == 'low'}}
-         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a
-                     {{ C.MS }}% chance that they are the ones with the fake notes</h6>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, there is at least a {{ C.MS }}% chance that they are the ones with the fake notes.</h6>
 
     {{ else }}
 
-         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, he may have got the ones
-             with the original or the fake notes.</h6>
+         <h6 class="alert-title">Alex knows that if we don't tell him which books he got, he may have got the ones with the original or the fake notes.</h6>
 
         {{ endif }}
 

@@ -7,6 +7,7 @@ function drawWTP(parameters){
     this.rightBonus=parameters.rightBonus
     this.varname=parameters.varname
     this.root=parameters.root
+    this.color_switched=parameters.color_switched
     this.hidden_fields_name=parameters.hidden_fields_name
     this.playerID=parameters.playerID
     this.tdList={};
@@ -98,11 +99,17 @@ function drawWTP(parameters){
             $(this.tdList[c][0]).removeClass("darkorange");
             $(this.tdList[c][1]).removeClass("orange");
             $(this.tdList[c][1]).removeClass("darkorange");
+            var color_dummy = 0;
+            if (this.color_switched) {
+                color_dummy = 1;
+                console.log('color switched')
+            };
+
             if (cf<cutoffNum){
-                $(this.tdList[c][0]).addClass(color);
+                $(this.tdList[c][color_dummy]).addClass(color);
             }
             if (cf>cutoffNum){
-                $(this.tdList[c][1]).addClass(color);
+                $(this.tdList[c][1-color_dummy]).addClass(color);
             }
             if (cf==cutoffNum){
                 switch(choiceFrags[0]){

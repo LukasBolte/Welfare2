@@ -40,10 +40,11 @@ def creating_session(subsession: Subsession):
         treatments = itertools.cycle(treatments)
         for p in subsession.get_players():
             el = next(treatments)
+            
             p.participant.switch_order = el[0]
             p.participant.treatment = el[1]
             p.participant.choices_orders = el[2]
-            print(p.participant.choices_orders)
+            print(f"participant's treatmentassignments: \n choice_orders: {p.participant.choices_orders} \n treatment: {p.participant.treatment} \n switch_order: {p.participant.switch_order}")
             
 
 
@@ -76,8 +77,7 @@ class Player(BasePlayer):
                                       [2, 'No, I want to give my answers again']
                                   ],
                                   widget=widgets.RadioSelect,
-                                  label='<b>Do the above answers reflect what you intended to answer or do you want to '
-                                        'give your answers again?</b>'
+                                  label='<b>Do the above answers reflect what you intended to answer, or do you want to give your answers again?</b>'
                                   )
     ES_wtp = models.IntegerField(blank=True,
                                  widget=widgets.RadioSelectHorizontal,
@@ -200,25 +200,25 @@ class Player(BasePlayer):
                                               '</strong>')
     feedback = models.LongStringField(label='<strong>Feedback:</strong>', blank=True)
     feedbackDifficulty = models.IntegerField(label="How clear were the instructions? Please answer on a scale of 1 "
-                                                   "to 10 with 10 being the clearest",
+                                                   "to 10, with 10 being the clearest.",
                                              blank=True,
                                              choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                              widget=widgets.RadioSelectHorizontal)
     feedbackUnderstanding = models.IntegerField(label="How well did you understand what you were asked to do?"
-                                                      " Please answer on a scale of 1 to 10 with 10 being the case when"
-                                                      " you understood perfectly",
+                                                      " Please answer on a scale of 1 to 10, with 10 being the case when"
+                                                      " you understood perfectly.",
                                                 blank=True,
                                                 choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                                 widget=widgets.RadioSelectHorizontal)
     feedbackSatisfied = models.IntegerField(label="How satisfied are you with this study overall?"
-                                                  " Please answer on a scale of 1 to 10 with 10 being the most "
-                                                  "satisfied",
+                                                  " Please answer on a scale of 1 to 10, with 10 being the most "
+                                                  "satisfied.",
                                             blank=True,
                                             choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                             widget=widgets.RadioSelectHorizontal)
     feedbackPay = models.IntegerField(label="How appropriate do you think the payment for this study is relative to "
-                                            "other ones on Prolific? Please answer on a scale of 1 to 10 with 10 being "
-                                            "the most appropriate",
+                                            "other ones on Prolific? Please answer on a scale of 1 to 10, with 10 being "
+                                            "the most appropriate.",
                                       blank=True,
                                       choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                                       widget=widgets.RadioSelectHorizontal)
@@ -782,7 +782,7 @@ class PostMPL(Page):
 
             error_messages = {}
             if values['MPLWhy'] == '':
-                error_messages['MPLWhy'] = 'Please answer the question.'
+                error_messages['MPLWhy'] = 'Please, answer the question.'
 
             return error_messages
 
@@ -805,9 +805,9 @@ class Experience(Page):
 
             error_messages = {}
             if values['experience'] is None:
-                error_messages['experience'] = 'Please answer the question.'
+                error_messages['experience'] = 'Please, answer the question.'
             if values['experienceWhy'] == '':
-                error_messages['experienceWhy'] = 'Please answer the question.'
+                error_messages['experienceWhy'] = 'Please, answer the question.'
 
             return error_messages
 
@@ -826,9 +826,9 @@ class Arkansas(Page):
 
             error_messages = {}
             if values['arkansas'] is None:
-                error_messages['arkansas'] = 'Please answer the question.'
+                error_messages['arkansas'] = 'Please, answer the question.'
             if values['arkansasWhy'] == '':
-                error_messages['arkansasWhy'] = 'Please answer the question.'
+                error_messages['arkansasWhy'] = 'Please, answer the question.'
 
             return error_messages
 
@@ -847,9 +847,9 @@ class Warhol(Page):
 
             error_messages = {}
             if values['warhol'] is None:
-                error_messages['warhol'] = 'Please answer the question.'
+                error_messages['warhol'] = 'Please, answer the question.'
             if values['warholWhy'] == '':
-                error_messages['warholWhy'] = 'Please answer the question.'
+                error_messages['warholWhy'] = 'Please, answer the question.'
 
             return error_messages
 
