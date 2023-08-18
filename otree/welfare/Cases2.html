@@ -54,6 +54,9 @@
                 <div style="text-align: center;">
 
                      <p> <strong>{{ form.Trad_wtp2.label }}</strong></p>
+
+             {{ if participant.choices_orders == 1 or participant.choices_orders == 3 or participant.choices_orders == 6 }}
+
               <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
             <label class="form-check-label" for="originalTrad">
@@ -65,6 +68,20 @@
             <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad" value="2" disabled>
               <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}</label>
           </div>
+               {{ else }}
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad" value="2" disabled>
+              <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}</label>
+          </div>
+              <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
+            <label class="form-check-label" for="originalTrad">
+                Original notes {{ if Trad_wtp == 2 }}+ $1{{endif}}
+            </label>
+          </div>
+                              {{ endif }}
+
           </div>
         </div>
           {{ else }}
@@ -119,6 +136,8 @@
 
               <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
 
+          {{ if participant.choices_orders == 1 or participant.choices_orders == 3 or participant.choices_orders == 6 }}
+
                                   <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
       <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
@@ -127,6 +146,19 @@
       <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
       <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
       </div>
+
+              {{ else }}
+
+               <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
+      <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
+      </div>
+                    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
+      <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
+      </div>
+
+                {{ endif }}
 
           </div>
         </div>
@@ -190,14 +222,31 @@
 
          <p> <strong>{{ form.ES_wtp2.label }}</strong></p>
 
+          {{ if participant.choices_orders == 1 or participant.choices_orders == 3 or participant.choices_orders == 6 }}
+
                              <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
           <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
           </div>
+
           <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
           <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
           </div>
+
+                 {{ else }}
+         <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="ES_wtp2" id="fakeES" value="2" disabled>
+          <label class="form-check-label" for="fakeES">Fake notes {{ if ES_wtp == 1 }}+ $1{{endif}}</label>
+          </div>
+
+                       <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="ES_wtp2" id="originalES" value="1" disabled>
+          <label class="form-check-label" for="originalES">Original notes {{ if ES_wtp == 2 }}+ $1{{endif}}</label>
+          </div>
+
+                    {{ endif }}
+
           </div>
         </div>
          {{ else }}
@@ -250,6 +299,8 @@
 
                   <p> <strong>{{ form.Trad_wtp2.label }}</strong></p>
 
+            {{ if participant.choices_orders == 1 or participant.choices_orders == 3 or participant.choices_orders == 6 }}
+
                   <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
             <label class="form-check-label" for="originalTrad">
@@ -261,6 +312,23 @@
             <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}
                             </label>
           </div>
+
+                  {{ else }}
+
+             <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="fakeTrad" value="2" disabled>
+            <label class="form-check-label" for="fakeTrad">Fake notes {{ if Trad_wtp == 1 }}+ $1{{endif}}
+                            </label>
+          </div>
+
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Trad_wtp2" id="originalTrad" value="1" disabled>
+            <label class="form-check-label" for="originalTrad">
+                Original notes {{ if Trad_wtp == 2 }}+ $1{{endif}}
+            </label>
+          </div>
+
+                {{ endif }}
 
               </div>
              </div>

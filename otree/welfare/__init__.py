@@ -43,6 +43,7 @@ def creating_session(subsession: Subsession):
             p.participant.switch_order = el[0]
             p.participant.treatment = el[1]
             p.participant.choices_orders = el[2]
+            print(p.participant.choices_orders)
             
 
 
