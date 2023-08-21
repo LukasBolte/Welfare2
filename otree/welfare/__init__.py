@@ -48,7 +48,6 @@ def creating_session(subsession: Subsession):
             
 
 
-
 class Group(BaseGroup):
     pass
 
@@ -71,6 +70,7 @@ def why():
 
 
 class Player(BasePlayer):
+    browser = models.StringField()
     confirm = models.IntegerField(blank=True,
                                   choices=[
                                       [1, 'Yes, the answers above reflect what I intended to answer'],
@@ -413,6 +413,9 @@ def MPLWhy_error_message(player, value):
 
 
 class Welcome(Page):
+    form_model = 'player'
+    form_fields = ['browser']
+
     @staticmethod
     def vars_for_template(player):
         player.participant.start_time = time.time()

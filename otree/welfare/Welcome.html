@@ -1,5 +1,7 @@
 {% block title %}
+<div id="notsorry_title" style="display: none">
 Welcome
+</div>
 {% endblock %}
 
 {% block content %}
@@ -7,7 +9,13 @@ Welcome
 {{ if session.config.development }}
     <button class="btn btn-danger otree-btn-next" style="float: right;">Skip</button>
 {{ endif }}
+<h2 id="sorry" style="display: none">Sorry, you cannot complete this study using this browser.
+        Please use a recent version of Chrome (85 or up), Edge (85 or up) or
+        Safari.
+        Otherwise, please return the study.
+</h2>
 
+<div id="notsorry" style="display: none">
 <p>
     You are invited to participate in a <b>research study</b> jointly run by Stanford University and Carnegie Mellon
     University.
@@ -29,6 +37,11 @@ Welcome
 
 <button style="float: right" class="btn btn-primary btn-large">Next</button>
 
+</div>
+
+
+<input type="hidden" name="browser" id="browser" />
+
 {% endblock %}
 
 {% block styles %}
@@ -36,5 +49,19 @@ Welcome
 {% endblock %}
 
 {% block scripts %}
-
+<script src="{% static 'browserDetection.js' %}"></script>
+<script>
+    const parser = new UAParser();
+    const version = parser.getBrowser();
+    console.log(version.name,version.major);
+    document.getElementById('browser').value = version.name + " " + version.major;
+    if (!((version.name==="Chrome" && version.major>=85)|| (version.name==="Edge" && version.major>=85)||
+        (version.name==="Safari" && version.major>=12)))
+    {
+        document.getElementById('sorry').style.display = 'block';
+    } else {
+        document.getElementById('notsorry').style.display = 'block';
+        document.getElementById('notsorry_title').style.display = 'block';
+    }
+</script>
 {% endblock %}
