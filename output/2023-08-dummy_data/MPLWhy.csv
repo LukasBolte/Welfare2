@@ -1,11 +1,2 @@
 label,Trad_wtp3_bounds,ES_wtp3_bounds,treatment,mistakes_total,MPLWhy
-,"(0, 0)","(-1, 0)",low,21,No reason.
-,"(0, 1)","(0, 0)",high,0,u
-,"(100, 140)","(25, 45)",high,0,j
-,"(140, 200)","(2, 3)",high,1,d
-,"(5, 7)","(2, 3)",low,0,e
-,"(15, 25)","(0, 1)",middle,1,R
-,"(15, 25)","(25, 45)",low,1,s
-,"(15, 25)","(25, 45)",high,0,ewarqqwerawedfa
-,"(15, 25)","(25, 45)",high,1,adsfasdfa
 ,"(-inf, 0)","(5, 7)",low,0,
