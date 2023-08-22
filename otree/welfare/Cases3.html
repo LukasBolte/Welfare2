@@ -360,7 +360,7 @@
 		varname:"ES_wtp3", //variable name on oTree  ES_wtp3', '',
 		root:"wtp_elicitation_1",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_1",
-    color_switched: true
+    color_switched: {{ color_switched|safe }}
 	}
 
   
@@ -376,7 +376,7 @@
 		varname:"Trad_wtp3", //variable name on oTree 
 		root:"wtp_elicitation_2",
 		hidden_fields_name:"hidden_fields_wtp_elicitation_2",
-    color_switched: true
+    color_switched: {{ color_switched|safe }}
 	}
  
 	wtp_2 =new drawWTP(parameters);

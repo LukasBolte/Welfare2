@@ -679,7 +679,8 @@ class Cases3(Page):
                 'one_minus_MS': 100 - C.MS,
                 'leftHeader': leftHeader,
                 'rightHeader': rightHeader,
-                'original_first': original_first
+                'original_first': original_first,
+                'color_switched': json.dumps(False)
             }
         else:
             return {
@@ -688,7 +689,8 @@ class Cases3(Page):
                 'one_minus_MS': 100 - C.MS,
                 'leftHeader': rightHeader,
                 'rightHeader': leftHeader,
-                'original_first': original_first
+                'original_first': original_first,
+                'color_switched': json.dumps(True)
             }
 
     @staticmethod
