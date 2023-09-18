@@ -32,7 +32,8 @@ class Subsession(BaseSubsession):
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         switcheroo = [True, False]
-        treatments_shuffled = ['low', 'middle', 'high']
+        # treatments_shuffled = ['low', 'middle', 'high']
+        treatments_shuffled = ['middle']
         choices_orders = [1, 2, 3, 4, 5, 6]
         arrays = [switcheroo,treatments_shuffled,choices_orders]
         treatments = list(itertools.product(*arrays))
